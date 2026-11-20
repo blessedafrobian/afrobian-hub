@@ -48,7 +48,7 @@ export const creators: Creator[] = [
     accent: "#FF7900",
     tags: ["Dance", "Afro-house", "Freestyle"],
     socials: pending(["instagram", "tiktok"]),
-    picks: ["concrete-sun-heavy-hoodie", "atlas-cargo-pant", "hub-logo-cap"],
+    picks: ["bloock-that-guyyy-heavy-hoodie", "bloock-cargo-pant", "bloock-that-guyyy-cap"],
     stats: [
       { label: "Discipline", value: "Dance" },
       { label: "Format", value: "Short-form video" },
@@ -71,7 +71,7 @@ export const creators: Creator[] = [
     accent: "#F2EEE7",
     tags: ["Styling", "Fit checks", "Thrift x new"],
     socials: pending(["instagram", "tiktok"]),
-    picks: ["signal-cropped-hoodie", "dune-wide-leg-cargo", "night-market-baby-tee"],
+    picks: ["bloock-that-guyyy-cropped-hoodie", "bloock-wide-leg-cargo", "bloock-that-pitch-baby-tee"],
     stats: [
       { label: "Discipline", value: "Styling" },
       { label: "Format", value: "Fit videos" },
@@ -94,7 +94,7 @@ export const creators: Creator[] = [
     accent: "#FF7900",
     tags: ["Photography", "Street portraits", "Film"],
     socials: pending(["instagram"]),
-    picks: ["medina-track-jacket", "asphalt-boxy-tee", "courier-tote"],
+    picks: ["bloock-that-pitch-track-jacket", "bloock-that-pitch-tee", "bloock-that-pitch-tote"],
     stats: [
       { label: "Discipline", value: "Photography" },
       { label: "Format", value: "Photo series" },
@@ -117,7 +117,7 @@ export const creators: Creator[] = [
     accent: "#FF7900",
     tags: ["DJ", "Amapiano", "Production"],
     socials: pending(["instagram", "tiktok", "youtube"]),
-    picks: ["orbit-puffer-vest", "sahara-static-tee", "zellige-rib-beanie"],
+    picks: ["blocked-puffer-vest", "bloock-that-guyyy-tee", "blocked-beanie"],
     stats: [
       { label: "Discipline", value: "Music" },
       { label: "Format", value: "Mixes & live sets" },
@@ -140,7 +140,7 @@ export const creators: Creator[] = [
     accent: "#FF7900",
     tags: ["Skate", "Edits", "Spots"],
     socials: pending(["instagram", "youtube"]),
-    picks: ["rooftop-nylon-short", "asphalt-boxy-tee", "hub-logo-cap"],
+    picks: ["blocked-icon-tee", "bloock-cargo-pant", "bloock-that-pitch-cap"],
     stats: [
       { label: "Discipline", value: "Skate" },
       { label: "Format", value: "Clips & edits" },
@@ -163,7 +163,7 @@ export const creators: Creator[] = [
     accent: "#FF7900",
     tags: ["Commentary", "Diaspora", "Podcast"],
     socials: pending(["instagram", "tiktok"]),
-    picks: ["heatwave-cropped-hoodie", "riad-baby-tee", "courier-tote"],
+    picks: ["bloock-that-pitch-cropped-hoodie", "blocked-baby-tee", "bloock-that-pitch-tote"],
     stats: [
       { label: "Discipline", value: "Commentary" },
       { label: "Format", value: "Talks & podcast" },

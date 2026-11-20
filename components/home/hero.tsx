@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, Ban } from "lucide-react";
 import { ButtonLink, Container, Sticker } from "@/components/ui/primitives";
 import { WhatsAppIcon } from "@/components/ui/brand-icons";
 import { generalWhatsappLink } from "@/lib/order";
@@ -50,7 +50,7 @@ export function Hero() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease, delay: 0.6 }}>
             <p className="label mb-5 flex items-center gap-3 text-bone/70">
               <span className="inline-block size-2 animate-pulse rounded-full bg-blaze" />
-              Drop 01 — Concrete Sun · Out now
+              Drop 01 — Bloock That Guyyy · Out now
             </p>
             <p className="font-serif text-4xl leading-[1.02] text-bone sm:text-5xl">
               Streetwear from <em className="text-blaze">Morocco,</em>
@@ -112,7 +112,7 @@ export function Hero() {
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: "spring", stiffness: 120, damping: 14, delay: 1 }}
           >
-            <Sticker text="Order via WhatsApp ✺ Drop 01 ✺ Concrete Sun ✺ " className="size-24 sm:size-32" center="01" />
+            <Sticker text="Bloock that guyyy ✺ Bloock that pitch ✺ " className="size-24 sm:size-32" center={<Ban className="size-8 sm:size-10" strokeWidth={2.75} />} />
           </motion.div>
         </div>
 

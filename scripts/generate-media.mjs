@@ -9,7 +9,7 @@
  *
  * Run: node scripts/generate-media.mjs
  */
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -31,7 +31,16 @@ const C = {
   skinC: "#7A4E33",
 };
 
-const DISPLAY = "Impact, 'Anton', 'Arial Narrow Bold', 'Arial Black', sans-serif";
+// Anton (SIL Open Font License), subset to Latin caps/digits and embedded so
+// slogans render identically on every device, even inside <img> tags.
+const FONT_B64 = readFileSync(join(dirname(fileURLToPath(import.meta.url)), "assets", "anton-sub.woff2")).toString("base64");
+const FONT_CSS = `<style>@font-face{font-family:'AFB Display';src:url(data:font/woff2;base64,${FONT_B64}) format('woff2');}</style>`;
+const DISPLAY = "'AFB Display', Impact, 'Arial Narrow Bold', sans-serif";
+
+const SLOGANS = {
+  guy: ["BLOOCK", "THAT", "GUYYY"],
+  pitch: ["BLOOCK", "THAT", "PITCH"],
+};
 const MONO = "'JetBrains Mono', 'Courier New', monospace";
 
 function write(rel, svg) {
@@ -46,6 +55,7 @@ function write(rel, svg) {
 function defs(id, { grain = 0.12, dots = C.ink } = {}) {
   return `
   <defs>
+    ${FONT_CSS}
     <filter id="grain-${id}" x="0" y="0" width="100%" height="100%">
       <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="n"/>
       <feColorMatrix type="saturate" values="0"/>
@@ -91,6 +101,22 @@ function rib(x1, y1, x2, y2, n, color) {
   return s;
 }
 
+/** The "block" button: circle with a diagonal slash. */
+function blockIcon(color, r = 50, sw = r * 0.26) {
+  const d = r * 0.7;
+  return `<circle r="${r}" fill="none" stroke="${color}" stroke-width="${sw}"/><line x1="${-d}" y1="${d}" x2="${d}" y2="${-d}" stroke="${color}" stroke-width="${sw}" stroke-linecap="round"/>`;
+}
+
+/** Stacked, justified slogan block (every line forced to the same width). */
+function stack(lines, color, width, size, gap = 0.94) {
+  return lines
+    .map(
+      (l, i) =>
+        `<text x="${-width / 2}" y="${i * size * gap}" font-family="${DISPLAY}" font-size="${size}" fill="${color}" textLength="${width}" lengthAdjust="spacingAndGlyphs">${l}</text>`,
+    )
+    .join("");
+}
+
 function chestPrint(kind, x, y, color, scale = 1) {
   const t = `translate(${x} ${y}) scale(${scale})`;
   switch (kind) {
@@ -109,6 +135,19 @@ function chestPrint(kind, x, y, color, scale = 1) {
       return `<g transform="${t}"><rect x="-22" y="-12" width="44" height="24" rx="3" fill="${color}"/><text x="0" y="6" font-family="${MONO}" font-size="13" font-weight="700" fill="${C.ink}" text-anchor="middle">AFB</text></g>`;
     case "star":
       return `<g transform="${t}"><path d="M0 -60 L14 -14 L60 0 L14 14 L0 60 L-14 14 L-60 0 L-14 -14 Z" fill="${color}"/></g>`;
+    case "guy":
+    case "pitch":
+      return `<g transform="${t}">${stack(SLOGANS[kind], color, 220, 66)}</g>`;
+    case "guy-small":
+    case "pitch-small":
+      return `<g transform="${t}">${stack(SLOGANS[kind.split("-")[0]], color, 84, 26)}</g>`;
+    case "blocked-guy":
+    case "blocked-pitch": {
+      const line = SLOGANS[kind.split("-")[1]].join(" ");
+      return `<g transform="${t}"><g transform="translate(0 -20)">${blockIcon(color, 62)}</g><text x="-125" y="92" font-family="${DISPLAY}" font-size="36" fill="${color}" textLength="250" lengthAdjust="spacingAndGlyphs">${line}</text></g>`;
+    }
+    case "icon":
+      return `<g transform="${t}">${blockIcon(color, 30)}</g>`;
     default:
       return "";
   }
@@ -121,14 +160,14 @@ const GARMENTS = {
     <path d="M335 200 Q400 240 465 200 Q455 222 400 232 Q345 222 335 200 Z" fill="#000" fill-opacity="0.35"/>
     <path d="M250 235 L335 200 Q400 240 465 200 L550 235 L645 335 L578 392 L548 360 L548 772 Q400 790 252 772 L252 360 L222 392 L155 335 Z" fill="url(#shade-${id})"/>
     <path d="M300 520 Q330 600 310 700 M500 470 Q470 560 492 680" stroke="#000" stroke-opacity="0.12" stroke-width="5" fill="none"/>
-    ${chestPrint(print, 400, 380, accent)}`;
+    ${chestPrint(print, 400, print === "guy" || print === "pitch" ? 350 : 380, accent)}`;
   },
   babytee({ fill, accent, print }, id) {
     return `
     <path d="M285 250 L350 222 Q400 255 450 222 L515 250 L585 320 L540 362 L515 342 Q505 470 520 640 Q400 662 280 640 Q295 470 285 342 L260 362 L215 320 Z" fill="${fill}"/>
     <path d="M350 222 Q400 255 450 222 Q442 240 400 248 Q358 240 350 222 Z" fill="#000" fill-opacity="0.35"/>
     <path d="M285 250 L350 222 Q400 255 450 222 L515 250 L585 320 L540 362 L515 342 Q505 470 520 640 Q400 662 280 640 Q295 470 285 342 L260 362 L215 320 Z" fill="url(#shade-${id})"/>
-    ${chestPrint(print, 400, 380, accent, 0.75)}`;
+    ${chestPrint(print, 400, print === "guy" || print === "pitch" ? 340 : 380, accent, 0.72)}`;
   },
   hoodie({ fill, accent, print, cropped }, id) {
     const hem = cropped ? 630 : 775;
@@ -146,7 +185,7 @@ const GARMENTS = {
     ${cropped ? "" : `<path d="M300 580 L500 580 L540 ${hem - 52} L260 ${hem - 52} Z" fill="#000" fill-opacity="0.14"/>`}
     <line x1="378" y1="255" x2="370" y2="345" stroke="${accent}" stroke-width="6" stroke-linecap="round"/>
     <line x1="422" y1="255" x2="430" y2="345" stroke="${accent}" stroke-width="6" stroke-linecap="round"/>
-    ${chestPrint(print, 400, cropped ? 450 : 450, accent, cropped ? 0.8 : 1)}`;
+    ${chestPrint(print, 400, print === "guy" || print === "pitch" ? 372 : 450, accent, cropped ? 0.85 : 1)}`;
   },
   jacket({ fill, accent, print }, id) {
     return `
@@ -158,9 +197,9 @@ const GARMENTS = {
     <line x1="404" y1="262" x2="404" y2="780" stroke="#fff" stroke-opacity="0.25" stroke-width="2" stroke-dasharray="4 5"/>
     <rect x="244" y="735" width="312" height="40" fill="#000" fill-opacity="0.25"/>
     <path d="M280 560 L345 560 M455 560 L520 560" stroke="#000" stroke-opacity="0.45" stroke-width="5"/>
-    ${chestPrint(print, 470, 340, accent, 0.5)}`;
+    ${chestPrint(print, 470, 330, accent)}`;
   },
-  vest({ fill, accent }, id) {
+  vest({ fill, accent, print = "icon" }, id) {
     let quilts = "";
     for (let y = 330; y < 760; y += 62) quilts += `<path d="M262 ${y} Q400 ${y + 16} 538 ${y}" stroke="#000" stroke-opacity="0.28" stroke-width="4" fill="none"/>`;
     return `
@@ -169,9 +208,9 @@ const GARMENTS = {
     <path d="M318 200 L400 236 L482 200 L486 222 L400 260 L314 222 Z" fill="#000" fill-opacity="0.35"/>
     ${quilts}
     <line x1="400" y1="250" x2="400" y2="785" stroke="#000" stroke-opacity="0.5" stroke-width="5"/>
-    ${chestPrint("tab", 470, 330, accent)}`;
+    ${chestPrint(print, 470, 330, accent, print.endsWith("small") ? 1 : 0.9)}`;
   },
-  cargo({ fill, accent, wide }, id) {
+  cargo({ fill, accent, wide, print }, id) {
     const flare = wide ? 60 : 0;
     return `
     <path d="M282 180 L518 180 L${545 + flare} 840 L${440 + flare / 3} 852 L405 360 L395 360 L${360 - flare / 3} 852 L${255 - flare} 840 Z" fill="${fill}"/>
@@ -182,7 +221,8 @@ const GARMENTS = {
     <path d="M${262 - flare / 2} 470 L340 470 L340 500 L${261 - flare / 2} 500 Z M${538 + flare / 2} 470 L460 470 L460 500 L${539 + flare / 2} 500 Z" fill="#000" fill-opacity="0.2"/>
     <path d="M395 225 L395 340" stroke="#000" stroke-opacity="0.35" stroke-width="4"/>
     <path d="M330 700 Q340 760 330 830 M470 700 Q460 760 470 830" stroke="#000" stroke-opacity="0.15" stroke-width="5" fill="none"/>
-    <rect x="${(255 - flare) + 10}" y="815" width="${80 + flare / 2}" height="12" fill="${accent}"/>`;
+    <rect x="${(255 - flare) + 10}" y="815" width="${80 + flare / 2}" height="12" fill="${accent}"/>
+    ${print ? `<g transform="translate(${490 + flare / 3} 640) rotate(-90)"><text x="0" y="0" font-family="${DISPLAY}" font-size="30" fill="${accent}" textLength="160" lengthAdjust="spacingAndGlyphs">${SLOGANS[print].join(" ")}</text></g>` : ""}`;
   },
   shorts({ fill, accent }, id) {
     return `
@@ -195,7 +235,7 @@ const GARMENTS = {
     <line x1="412" y1="336" x2="422" y2="420" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
     ${chestPrint("tab", 500, 560, accent)}`;
   },
-  cap({ fill, accent }, id) {
+  cap({ fill, accent, print = "guy" }, id) {
     return `
     <path d="M230 560 Q236 340 400 322 Q564 340 570 560 Z" fill="${fill}"/>
     <path d="M230 560 Q236 340 400 322 Q564 340 570 560 Z" fill="url(#shade-${id})"/>
@@ -203,10 +243,11 @@ const GARMENTS = {
     <circle cx="400" cy="326" r="14" fill="${fill}" stroke="#000" stroke-opacity="0.3" stroke-width="3"/>
     <path d="M210 562 Q400 520 590 562 Q610 610 560 640 Q400 600 240 640 Q190 610 210 562 Z" fill="${fill}"/>
     <path d="M210 562 Q400 520 590 562 Q610 610 560 640 Q400 600 240 640 Q190 610 210 562 Z" fill="#000" fill-opacity="0.3"/>
-    <rect x="340" y="415" width="120" height="78" rx="6" fill="${accent}"/>
-    <text x="400" y="472" font-family="${DISPLAY}" font-size="52" fill="${C.ink}" text-anchor="middle">A/H</text>`;
+    ${print === "icon"
+      ? `<g transform="translate(400 450)">${blockIcon(accent, 46)}</g>`
+      : `<g transform="translate(400 402)">${stack(SLOGANS[print], accent, 150, 46)}</g>`}`;
   },
-  beanie({ fill, accent }, id) {
+  beanie({ fill, accent, print = "icon" }, id) {
     return `
     <path d="M262 600 Q258 330 400 310 Q542 330 538 600 Z" fill="${fill}"/>
     <path d="M262 600 Q258 330 400 310 Q542 330 538 600 Z" fill="url(#shade-${id})"/>
@@ -214,16 +255,17 @@ const GARMENTS = {
     <rect x="245" y="560" width="310" height="120" rx="14" fill="${fill}"/>
     <rect x="245" y="560" width="310" height="120" rx="14" fill="#000" fill-opacity="0.18"/>
     ${rib(245, 560, 555, 680, 24, "#000")}
-    ${chestPrint("tab", 400, 620, accent, 1.6)}`;
+    ${print === "icon"
+      ? `<g transform="translate(400 620)"><rect x="-44" y="-36" width="88" height="72" rx="4" fill="${accent}"/>${blockIcon(fill, 22, 7)}</g>`
+      : `<g transform="translate(400 600)"><rect x="-90" y="-26" width="180" height="62" rx="4" fill="${accent}"/><text x="-74" y="22" font-family="${DISPLAY}" font-size="40" fill="${fill}" textLength="148" lengthAdjust="spacingAndGlyphs">${SLOGANS[print].join(" ")}</text></g>`}`;
   },
-  tote({ fill, accent }, id) {
+  tote({ fill, accent, print = "pitch" }, id) {
     return `
     <path d="M330 380 Q330 210 400 210 Q470 210 470 380" stroke="${fill}" stroke-width="22" fill="none"/>
     <path d="M330 380 Q330 210 400 210 Q470 210 470 380" stroke="#000" stroke-opacity="0.25" stroke-width="22" fill="none"/>
     <rect x="235" y="360" width="330" height="420" fill="${fill}"/>
     <rect x="235" y="360" width="330" height="420" fill="url(#shade-${id})"/>
-    <text x="400" y="560" font-family="${DISPLAY}" font-size="88" fill="${accent}" text-anchor="middle">AFRO</text>
-    <text x="400" y="645" font-family="${DISPLAY}" font-size="88" fill="${accent}" text-anchor="middle">BIAN</text>
+    <g transform="translate(400 490)">${stack(SLOGANS[print], accent, 250, 82)}</g>
     ${stamp(400, 700, "CARRY THE CULTURE", accent, 15, "middle")}`;
   },
 };
@@ -267,7 +309,7 @@ function figure({ x = 400, y = 0, s = 1, top = C.ink, bottom = C.coal, skin = C.
     ${hood ? `<ellipse cx="400" cy="200" rx="40" ry="50" fill="${skin}"/><path d="M360 180 Q400 150 440 180 L440 196 Q400 176 360 196 Z" fill="#000" opacity="0.45"/>` : ""}
     <path d="M330 262 Q400 292 470 262 L548 286 Q592 306 602 372 L628 602 Q631 642 614 652 L586 657 Q572 647 570 612 L552 432 L556 652 Q400 672 244 652 L248 432 L230 612 Q228 647 214 657 L186 652 Q169 642 172 602 L198 372 Q208 306 252 286 Z" fill="${top}"/>
     <path d="M330 262 Q400 292 470 262 L548 286 Q592 306 602 372 L628 602 Q631 642 614 652 L586 657 Q572 647 570 612 L552 432 L556 652 Q400 672 244 652 L248 432 L230 612 Q228 647 214 657 L186 652 Q169 642 172 602 L198 372 Q208 306 252 286 Z" fill="#fff" opacity="0.06"/>
-    <rect x="356" y="380" width="88" height="54" fill="${accent}"/>
+    <g transform="translate(400 410)">${blockIcon(accent, 30)}</g>
     <ellipse cx="600" cy="672" rx="17" ry="22" fill="${skin}"/><ellipse cx="200" cy="672" rx="17" ry="22" fill="${skin}"/>
     <path d="M258 640 L542 640 L566 912 L470 918 L410 712 L390 712 L330 918 L234 912 Z" fill="${bottom}"/>
     <path d="M236 560 L236 560" />
@@ -342,22 +384,24 @@ function portrait({ name, bg, skin, top, hair, accent, initials }) {
 /* PRODUCTS                                                            */
 /* ================================================================== */
 const products = [
-  { id: "concrete-sun-heavy-hoodie", garment: "hoodie", fill: C.ink, accent: C.blaze, print: "sun", bgs: [C.bone, C.blaze, C.coal] },
-  { id: "sahara-static-tee", garment: "tee", fill: C.bone, accent: C.blaze, print: "word", bgs: [C.coal, C.blaze, C.ink] },
-  { id: "atlas-cargo-pant", garment: "cargo", fill: C.olive, accent: C.blaze, bgs: [C.bone, C.sand, C.coal] },
-  { id: "medina-track-jacket", garment: "jacket", fill: C.coal, accent: C.blaze, print: "tab", bgs: [C.bone, C.blaze, C.sand] },
-  { id: "asphalt-boxy-tee", garment: "tee", fill: C.ink, accent: C.bone, print: "block", bgs: [C.blaze, C.bone, C.coal] },
-  { id: "orbit-puffer-vest", garment: "vest", fill: C.blaze, accent: C.ink, bgs: [C.ink, C.bone, C.coal] },
-  { id: "rooftop-nylon-short", garment: "shorts", fill: C.ink, accent: C.blaze, bgs: [C.bone, C.sky, C.blaze] },
-  { id: "signal-cropped-hoodie", garment: "hoodie", cropped: true, fill: C.blaze, accent: C.ink, print: "word", bgs: [C.ink, C.bone, C.coal] },
-  { id: "dune-wide-leg-cargo", garment: "cargo", wide: true, fill: C.sand, accent: C.ink, bgs: [C.coal, C.bone, C.blaze] },
-  { id: "night-market-baby-tee", garment: "babytee", fill: C.bone, accent: C.blaze, print: "star", bgs: [C.ink, C.blaze, C.coal] },
-  { id: "heatwave-cropped-hoodie", garment: "hoodie", cropped: true, fill: C.clay, accent: C.bone, print: "sun", bgs: [C.bone, C.ink, C.sand] },
-  { id: "riad-baby-tee", garment: "babytee", fill: C.ink, accent: C.blaze, print: "word", bgs: [C.blaze, C.bone, C.coal] },
-  { id: "hub-logo-cap", garment: "cap", fill: C.ink, accent: C.blaze, bgs: [C.bone, C.blaze, C.coal] },
-  { id: "zellige-rib-beanie", garment: "beanie", fill: C.blaze, accent: C.ink, bgs: [C.ink, C.bone, C.coal] },
-  { id: "courier-tote", garment: "tote", fill: C.bone, accent: C.ink, bgs: [C.blaze, C.coal, C.ink] },
-  { id: "northbound-coach-jacket", garment: "jacket", fill: C.ink, accent: C.bone, print: "tab", bgs: [C.blaze, C.bone, C.coal] },
+  { id: "bloock-that-guyyy-heavy-hoodie", garment: "hoodie", fill: C.ink, accent: C.blaze, print: "guy", bgs: [C.bone, C.blaze, C.coal] },
+  { id: "bloock-that-pitch-heavy-hoodie", garment: "hoodie", fill: C.bone, accent: C.ink, print: "pitch", bgs: [C.blaze, C.coal, C.sand] },
+  { id: "bloock-that-guyyy-tee", garment: "tee", fill: C.bone, accent: C.ink, print: "guy", bgs: [C.blaze, C.coal, C.ink] },
+  { id: "bloock-that-pitch-tee", garment: "tee", fill: C.ink, accent: C.blaze, print: "pitch", bgs: [C.bone, C.blaze, C.coal] },
+  { id: "blocked-icon-tee", garment: "tee", fill: C.blaze, accent: C.ink, print: "blocked-guy", bgs: [C.ink, C.bone, C.coal] },
+  { id: "bloock-that-pitch-track-jacket", garment: "jacket", fill: C.coal, accent: C.blaze, print: "pitch-small", bgs: [C.bone, C.blaze, C.sand] },
+  { id: "blocked-puffer-vest", garment: "vest", fill: C.blaze, accent: C.ink, print: "icon", bgs: [C.ink, C.bone, C.coal] },
+  { id: "bloock-cargo-pant", garment: "cargo", fill: C.olive, accent: C.blaze, print: "guy", bgs: [C.bone, C.sand, C.coal] },
+  { id: "bloock-that-guyyy-cropped-hoodie", garment: "hoodie", cropped: true, fill: C.blaze, accent: C.ink, print: "guy", bgs: [C.ink, C.bone, C.coal] },
+  { id: "bloock-that-pitch-cropped-hoodie", garment: "hoodie", cropped: true, fill: C.clay, accent: C.bone, print: "pitch", bgs: [C.bone, C.ink, C.sand] },
+  { id: "bloock-wide-leg-cargo", garment: "cargo", wide: true, fill: C.sand, accent: C.ink, print: "pitch", bgs: [C.coal, C.bone, C.blaze] },
+  { id: "bloock-that-pitch-baby-tee", garment: "babytee", fill: C.bone, accent: C.blaze, print: "pitch", bgs: [C.ink, C.blaze, C.coal] },
+  { id: "blocked-baby-tee", garment: "babytee", fill: C.ink, accent: C.blaze, print: "blocked-pitch", bgs: [C.blaze, C.bone, C.coal] },
+  { id: "bloock-that-guyyy-cap", garment: "cap", fill: C.ink, accent: C.blaze, print: "guy", bgs: [C.bone, C.blaze, C.coal] },
+  { id: "bloock-that-pitch-cap", garment: "cap", fill: C.bone, accent: C.ink, print: "pitch", bgs: [C.blaze, C.coal, C.ink] },
+  { id: "blocked-beanie", garment: "beanie", fill: C.blaze, accent: C.ink, print: "icon", bgs: [C.ink, C.bone, C.coal] },
+  { id: "bloock-that-pitch-tote", garment: "tote", fill: C.bone, accent: C.ink, print: "pitch", bgs: [C.blaze, C.coal, C.ink] },
+  { id: "bloock-coach-jacket", garment: "jacket", fill: C.ink, accent: C.bone, print: "guy-small", bgs: [C.blaze, C.bone, C.coal] },
 ];
 
 products.forEach((p) => {
@@ -385,7 +429,7 @@ editorial({
       <rect x="0" y="${h * 0.62}" width="${w}" height="${h * 0.38}" fill="url(#lines-${id})" opacity="0.06"/>
       <ellipse cx="${w * 0.5}" cy="${h * 0.93}" rx="360" ry="40" fill="#000" opacity="0.7" filter="url(#soft-${id})"/>
       ${figure({ x: w * 0.5, y: h * 0.03, s: 1.48, top: C.ink, bottom: "#1a1a1a", skin: C.skinA, shoe: C.bone })}
-      ${tape(w * 0.18, h * 0.16, 420, -8, C.bone, "DROP 01 — CONCRETE SUN")}
+      ${tape(w * 0.18, h * 0.16, 420, -8, C.bone, "DROP 01 — BLOOCK THAT GUYYY")}
       ${tape(w * 0.86, h * 0.78, 360, 6, C.blaze, "MA → WORLD")}
     `,
   },
@@ -410,9 +454,9 @@ editorial({
 });
 
 const lookbooks = [
-  { name: "lookbook-01", bg: C.coal, sun: C.blaze, figs: [{ top: C.blaze, bottom: C.ink, skin: C.skinA, shoe: C.bone, accent: C.ink }], word: "NO SIGNAL" },
-  { name: "lookbook-02", bg: C.blaze, sun: C.ink, figs: [{ top: C.ink, bottom: C.coal, skin: C.skinB, shoe: C.blaze, hood: false }], word: "CONCRETE" },
-  { name: "lookbook-03", bg: C.bone, sun: C.blaze, figs: [{ top: C.coal, bottom: C.sand, skin: C.skinC, shoe: C.ink }, { top: C.ink, bottom: C.olive, skin: C.skinA, shoe: C.bone, hood: false }], word: "THE BLOCK" },
+  { name: "lookbook-01", bg: C.coal, sun: C.blaze, figs: [{ top: C.blaze, bottom: C.ink, skin: C.skinA, shoe: C.bone, accent: C.ink }], word: "BLOOCK" },
+  { name: "lookbook-02", bg: C.blaze, sun: C.ink, figs: [{ top: C.ink, bottom: C.coal, skin: C.skinB, shoe: C.blaze, hood: false }], word: "GUYYY" },
+  { name: "lookbook-03", bg: C.bone, sun: C.blaze, figs: [{ top: C.coal, bottom: C.sand, skin: C.skinC, shoe: C.ink }, { top: C.ink, bottom: C.olive, skin: C.skinA, shoe: C.bone, hood: false }], word: "PITCH" },
   { name: "lookbook-04", bg: C.ink, sun: C.coal, figs: [{ top: C.bone, bottom: C.ink, skin: C.skinB, shoe: C.blaze, accent: C.blaze, hood: false }], word: "AFTER DARK" },
 ];
 lookbooks.forEach((lb) => {
@@ -500,7 +544,7 @@ editorial({
       <rect x="${w * 0.45}" y="${h * 0.18}" width="${w * 0.22}" height="${h * 0.62}" fill="${C.bone}"/>
       <rect x="${w * 0.72}" y="${h * 0.08}" width="${w * 0.23}" height="${h * 0.4}" fill="${C.blaze}"/>
       <rect x="${w * 0.05}" y="${h * 0.66}" width="${w * 0.35}" height="${h * 0.24}" fill="url(#dots-${id})"/>
-      <g transform="translate(${w * 0.45} ${h * 0.18}) scale(0.5)">${GARMENTS.hoodie({ fill: C.ink, accent: C.blaze, print: "sun" }, id)}</g>
+      <g transform="translate(${w * 0.45} ${h * 0.18}) scale(0.5)">${GARMENTS.hoodie({ fill: C.ink, accent: C.blaze, print: "guy" }, id)}</g>
       <g transform="translate(${w * 0.72} ${h * 0.06}) scale(0.4)">${GARMENTS.tee({ fill: C.bone, accent: C.ink, print: "block" }, id)}</g>
       ${figure({ x: w * 0.22, y: h * 0.12, s: 0.72, top: C.blaze, bottom: C.ink, skin: C.skinB, shoe: C.bone, accent: C.ink, hood: false })}
       <text x="${w * 0.72}" y="${h * 0.66}" font-family="${DISPLAY}" font-size="120" fill="${C.bone}">MADE</text>

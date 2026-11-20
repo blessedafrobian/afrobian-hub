@@ -20,7 +20,7 @@ export function TickerCross() {
   return (
     <div className="relative z-20 -my-6 overflow-hidden py-14 sm:-my-10 sm:py-20" aria-hidden>
       <div className="absolute inset-x-[-5%] top-1/2 -translate-y-1/2 rotate-[3deg] bg-bone py-2 text-ink sm:py-3">
-        <Marquee items={["Concrete Sun", "Night Market", "Hub Essentials", "Drop 01", "Concrete Sun", "Night Market"]} reverse className="display text-2xl sm:text-4xl" duration={45} />
+        <Marquee items={["Bloock that guyyy", "Bloock that pitch", "Drop 01", "Bloock that guyyy", "Bloock that pitch", "Drop 01"]} reverse className="display text-2xl sm:text-4xl" duration={45} />
       </div>
       <div className="absolute inset-x-[-5%] top-1/2 -translate-y-1/2 -rotate-[2.5deg] bg-blaze py-2 text-ink shadow-[0_20px_60px_-20px_rgba(0,0,0,0.9)] sm:py-3">
         <Marquee
@@ -48,13 +48,13 @@ export function DropSection() {
             eyebrow="The drop"
             title={
               <span id="drop-title">
-                Concrete <span className="text-blaze">Sun</span>
+                Bloock that <span className="text-blaze">guyyy</span>
                 <span className="font-serif text-[0.5em] normal-case italic tracking-normal text-bone/70"> /drop 01</span>
               </span>
             }
             aside={
               <p className="text-bone/70">
-                Heavyweight fleece, ripstop cargo and loud orange. Every piece ordered directly on WhatsApp — pick your size, send the message, done.
+                The slogans everyone already knows, now on heavyweight fleece, tees, caps and cargos. Order directly on WhatsApp — pick your size, send the message, done.
               </p>
             }
           />
@@ -73,7 +73,7 @@ export function DropSection() {
 
         <Reveal className="mt-14 flex flex-col items-start justify-between gap-6 border-t border-bone/10 pt-8 sm:flex-row sm:items-center">
           <p className="label text-bone/60">
-            {products.length} pieces across 3 collections · Prices in {site.currency}
+            {products.length} pieces across 3 lines · Prices in {site.currency}
           </p>
           <ButtonLink href="/shop" variant="bone">
             Shop everything
@@ -88,9 +88,9 @@ export function DropSection() {
 /* 03 — campaign / lookbook                                            */
 /* ------------------------------------------------------------------ */
 const frames = [
-  { src: "/media/editorial/lookbook-01.svg", title: "No signal", n: "01" },
-  { src: "/media/editorial/lookbook-02.svg", title: "Concrete", n: "02" },
-  { src: "/media/editorial/lookbook-03.svg", title: "The block", n: "03" },
+  { src: "/media/editorial/lookbook-01.svg", title: "Bloock", n: "01" },
+  { src: "/media/editorial/lookbook-02.svg", title: "That guyyy", n: "02" },
+  { src: "/media/editorial/lookbook-03.svg", title: "That pitch", n: "03" },
 ];
 
 export function CampaignSection() {
@@ -110,7 +110,7 @@ export function CampaignSection() {
           </div>
           <Reveal className="flex flex-col justify-end lg:col-span-5 lg:col-start-8">
             <p className="font-serif text-3xl leading-tight sm:text-4xl">
-              Shot on the street, styled by the crew. <em className="text-blaze-deep">Concrete Sun</em> is about the moment the city turns orange.
+              Shot on the street, styled by the crew. <em className="text-blaze-deep">Bloock that guyyy</em> — protect your peace, out loud.
             </p>
           </Reveal>
         </div>
