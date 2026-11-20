@@ -1,40 +1,45 @@
 import Link from "next/link";
 import { mainNav, site, socials } from "@/lib/site";
 import { generalWhatsappLink } from "@/lib/order";
-import { Container, Marquee } from "@/components/ui/primitives";
+import { Container, Wordmark } from "@/components/ui/primitives";
 import { InstagramIcon, TikTokIcon, WhatsAppIcon } from "@/components/ui/brand-icons";
 import { NewsletterForm } from "./newsletter-form";
 import { CurrentYear } from "./current-year";
 
 export function Footer() {
   return (
-    <footer className="grain relative overflow-hidden bg-ink text-bone">
-      <div className="border-y border-bone/10 bg-blaze py-3 text-ink">
-        <Marquee
-          className="display text-2xl sm:text-3xl"
-          items={["Order on WhatsApp", "DM on Instagram", "Made in Morocco spirit", "Worn worldwide", "Creators first"]}
-          duration={40}
-        />
-      </div>
-
-      <Container className="relative z-[2] grid gap-14 py-16 lg:grid-cols-12 lg:py-24">
-        <div className="lg:col-span-5">
-          <p className="label mb-4 text-blaze">Newsletter</p>
-          <p className="display mb-6 text-5xl sm:text-6xl">
-            First in line.
-            <br />
-            <span className="font-serif text-[0.85em] normal-case italic tracking-normal text-bone/80">every drop, every story.</span>
-          </p>
-          <NewsletterForm />
+    <footer className="bg-ink text-white">
+      <Container className="grid gap-12 py-14 lg:grid-cols-12 lg:py-16">
+        <div className="lg:col-span-4">
+          <Wordmark className="text-3xl" />
+          <p className="mt-4 max-w-xs text-sm text-white/60">{site.tagline}</p>
+          <div className="mt-6 flex gap-2">
+            {[
+              { href: socials.instagram, label: "Instagram", Icon: InstagramIcon },
+              { href: socials.tiktok, label: "TikTok", Icon: TikTokIcon },
+              { href: generalWhatsappLink, label: "WhatsApp", Icon: WhatsAppIcon },
+            ].map(({ href, label, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${site.name} on ${label}`}
+                className="grid size-10 place-items-center rounded-full bg-white/10 transition-colors hover:bg-white hover:text-ink"
+              >
+                <Icon size={18} />
+              </a>
+            ))}
+          </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-6 lg:col-start-7">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-4">
           <div>
-            <p className="label mb-5 text-bone/50">Explore</p>
-            <ul className="space-y-2.5">
-              {mainNav.map((n) => (
+            <p className="mb-4 text-sm font-medium">Explore</p>
+            <ul className="space-y-2.5 text-sm text-white/60">
+              {mainNav.slice(0, 5).map((n) => (
                 <li key={n.href}>
-                  <Link href={n.href} className="text-sm font-medium transition-colors hover:text-blaze">
+                  <Link href={n.href} className="transition-colors hover:text-white">
                     {n.label}
                   </Link>
                 </li>
@@ -42,58 +47,64 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <p className="label mb-5 text-bone/50">Order</p>
-            <ul className="space-y-2.5 text-sm font-medium">
+            <p className="mb-4 text-sm font-medium">Help</p>
+            <ul className="space-y-2.5 text-sm text-white/60">
               <li>
-                <a href={generalWhatsappLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-blaze">
-                  <WhatsAppIcon size={16} /> WhatsApp
-                </a>
+                <Link href="/contact#faq" className="hover:text-white">
+                  How to order
+                </Link>
               </li>
               <li>
-                <a href={socials.instagramDm} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-blaze">
-                  <InstagramIcon size={16} /> Instagram DM
-                </a>
+                <Link href="/contact#faq" className="hover:text-white">
+                  Delivery
+                </Link>
               </li>
               <li>
-                <Link href="/contact#faq" className="hover:text-blaze">
-                  How ordering works
+                <Link href="/contact#faq" className="hover:text-white">
+                  Sizing
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-white">
+                  Contact us
                 </Link>
               </li>
             </ul>
           </div>
-          <div className="col-span-2 sm:col-span-1">
-            <p className="label mb-5 text-bone/50">Follow</p>
-            <div className="flex gap-2">
-              {[
-                { href: socials.instagram, label: "Instagram", Icon: InstagramIcon },
-                { href: socials.tiktok, label: "TikTok", Icon: TikTokIcon },
-              ].map(({ href, label, Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${site.name} on ${label}`}
-                  className="grid size-12 place-items-center border border-bone/20 transition-colors hover:border-blaze hover:bg-blaze hover:text-ink"
-                >
-                  <Icon />
-                </a>
-              ))}
-            </div>
-            <p className="mt-6 text-sm text-bone/60">{site.shipping}</p>
+          <div>
+            <p className="mb-4 text-sm font-medium">Company</p>
+            <ul className="space-y-2.5 text-sm text-white/60">
+              <li>
+                <Link href="/about" className="hover:text-white">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link href="/creators" className="hover:text-white">
+                  Become a creator
+                </Link>
+              </li>
+              <li>
+                <Link href="/culture" className="hover:text-white">
+                  Stories
+                </Link>
+              </li>
+            </ul>
           </div>
+        </div>
+
+        <div className="lg:col-span-4">
+          <p className="text-sm font-medium">Get drop alerts</p>
+          <p className="mt-1 text-sm text-white/60">New releases, restocks and stories. No spam.</p>
+          <NewsletterForm className="mt-4" />
         </div>
       </Container>
 
-      <div className="relative z-[2] select-none overflow-hidden px-2" aria-hidden>
-        <p className="display translate-y-[0.14em] whitespace-nowrap text-center text-[17.5vw] leading-none text-bone">
-          AFROBIAN<span className="text-blaze">HUB</span>
+      <Container className="flex flex-col gap-2 border-t border-white/10 py-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
+        <p>
+          © <CurrentYear /> {site.name}. All rights reserved.
         </p>
-      </div>
-
-      <Container className="relative z-[2] flex flex-col gap-2 border-t border-bone/10 py-6 text-xs text-bone/50 sm:flex-row sm:items-center sm:justify-between">
-        <p>© <CurrentYear /> {site.name}. All rights reserved.</p>
-        <p className="label">Morocco ⟶ World</p>
+        <p>{site.baseLocation} · Worldwide</p>
       </Container>
     </footer>
   );

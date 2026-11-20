@@ -7,13 +7,14 @@
       <feColorMatrix type="saturate" values="0"/>
       <feComponentTransfer><feFuncA type="table" tableValues="0 0.12"/></feComponentTransfer>
     </filter>
+    <filter id="drop-bloockthatgu-b" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="28" stdDeviation="26" flood-color="#000" flood-opacity="0.28"/></filter>
     <filter id="soft-bloockthatgu-b" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
     <filter id="blur-bloockthatgu-b" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60"/></filter>
     <pattern id="dots-bloockthatgu-b" width="14" height="14" patternUnits="userSpaceOnUse">
-      <circle cx="7" cy="7" r="3.2" fill="#000000"/>
+      <circle cx="7" cy="7" r="3.2" fill="#080808"/>
     </pattern>
     <pattern id="lines-bloockthatgu-b" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
-      <rect width="4" height="10" fill="#000000"/>
+      <rect width="4" height="10" fill="#080808"/>
     </pattern>
     <linearGradient id="shade-bloockthatgu-b" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#fff" stop-opacity="0.16"/>
@@ -26,11 +27,9 @@
     </radialGradient>
     <mask id="halo-bloockthatgu-b"><rect width="100%" height="100%" fill="url(#fade-bloockthatgu-b)"/></mask>
   </defs>
-  <rect width="800" height="1000" fill="#FF7900"/>
-  <rect width="800" height="1000" fill="url(#fade-bloockthatgu-b)" opacity="0.35"/>
+  <rect width="800" height="1000" fill="#F2F2F0"/>
   
-  <ellipse cx="400" cy="900" rx="260" ry="34" fill="#000" opacity="0.22" filter="url(#soft-bloockthatgu-b)"/>
-  <g transform="translate(400 470) scale(1.9) translate(-400 -420)">
+  <g transform="translate(400 470) scale(2.565) translate(-400 -470)">
     <path d="M230 560 Q236 340 400 322 Q564 340 570 560 Z" fill="#080808"/>
     <path d="M230 560 Q236 340 400 322 Q564 340 570 560 Z" fill="url(#shade-bloockthatgu-b)"/>
     <path d="M400 322 L400 560 M318 340 Q300 450 300 560 M482 340 Q500 450 500 560" stroke="#000" stroke-opacity="0.22" stroke-width="4" fill="none"/>
@@ -38,9 +37,4 @@
     <path d="M210 562 Q400 520 590 562 Q610 610 560 640 Q400 600 240 640 Q190 610 210 562 Z" fill="#080808"/>
     <path d="M210 562 Q400 520 590 562 Q610 610 560 640 Q400 600 240 640 Q190 610 210 562 Z" fill="#000" fill-opacity="0.3"/>
     <g transform="translate(400 402)"><text x="-75" y="0" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="46" fill="#FF7900" textLength="150" lengthAdjust="spacingAndGlyphs">BLOOCK</text><text x="-75" y="43.239999999999995" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="46" fill="#FF7900" textLength="150" lengthAdjust="spacingAndGlyphs">THAT</text><text x="-75" y="86.47999999999999" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="46" fill="#FF7900" textLength="150" lengthAdjust="spacingAndGlyphs">GUYYY</text></g></g>
-  <rect width="800" height="1000" filter="url(#grain-bloockthatgu-b)" style="mix-blend-mode:overlay"/>
-  <text x="36" y="52" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="15" letter-spacing="2" fill="#080808" text-anchor="start">AFROBIAN/HUB</text>
-  <text x="764" y="52" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="15" letter-spacing="2" fill="#080808" text-anchor="end">DETAIL</text>
-  <text x="36" y="964" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="13" letter-spacing="2" fill="#080808" text-anchor="start">BLOOCK THAT GUYYY CAP</text>
-  <text x="764" y="964" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="13" letter-spacing="2" fill="#080808" text-anchor="end">TEMP SHOT</text>
 </svg>

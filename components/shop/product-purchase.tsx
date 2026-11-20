@@ -31,35 +31,34 @@ export function ProductPurchase({ product }: { product: Product }) {
 
   return (
     <div className="space-y-8">
-      {/* colour */}
-      <fieldset>
-        <legend className="label mb-3 flex w-full justify-between text-bone/60">
-          <span>Colour</span>
-          <span className="text-bone">{color}</span>
-        </legend>
-        <div className="flex flex-wrap gap-2">
-          {product.colors.map((c) => (
-            <button
-              key={c.name}
-              type="button"
-              onClick={() => setColor(c.name)}
-              aria-pressed={color === c.name}
-              aria-label={c.name}
-              className={cn("grid size-11 place-items-center border-2 transition-colors", color === c.name ? "border-blaze" : "border-bone/15 hover:border-bone/50")}
-            >
-              <span className="size-7 ring-1 ring-bone/20" style={{ backgroundColor: c.hex }} />
-            </button>
-          ))}
-        </div>
-      </fieldset>
+      {product.colors.length > 1 && (
+        <fieldset>
+          <legend className="mb-3 font-medium">Colour: <span className="font-normal text-mute">{color}</span></legend>
+          <div className="flex flex-wrap gap-2">
+            {product.colors.map((c) => (
+              <button
+                key={c.name}
+                type="button"
+                onClick={() => setColor(c.name)}
+                aria-pressed={color === c.name}
+                aria-label={c.name}
+                className={cn("grid size-12 place-items-center rounded-md border", color === c.name ? "border-ink" : "border-line hover:border-mute")}
+              >
+                <span className="size-8 rounded-sm ring-1 ring-black/10" style={{ backgroundColor: c.hex }} />
+              </button>
+            ))}
+          </div>
+        </fieldset>
+      )}
 
-      {/* size */}
       <fieldset>
-        <legend className="label mb-3 flex w-full justify-between text-bone/60">
-          <span>Size</span>
-          <span className={cn(sizeError && !size ? "text-blaze" : "text-bone")}>{size ?? (sizeError ? "Pick a size ↓" : "Select")}</span>
+        <legend className="mb-3 flex w-full justify-between font-medium">
+          <span className={cn(sizeError && !size && "text-blaze-deep")}>Select Size</span>
+          <a href="/contact#faq" className="font-normal text-mute underline-offset-4 hover:underline">
+            Size Guide
+          </a>
         </legend>
-        <div className="grid grid-cols-4 gap-2 sm:grid-cols-6">
+        <div className={cn("grid grid-cols-3 gap-2 rounded-md", sizeError && !size && "ring-1 ring-blaze-deep ring-offset-4")}>
           {product.sizes.map((s) => (
             <button
               key={s}
@@ -71,49 +70,45 @@ export function ProductPurchase({ product }: { product: Product }) {
               aria-pressed={size === s}
               disabled={product.soldOut}
               className={cn(
-                "h-12 border font-mono text-sm font-bold transition-colors disabled:opacity-30",
-                product.sizes.length === 1 && "col-span-2",
-                size === s ? "border-blaze bg-blaze text-ink" : "border-bone/20 hover:border-bone",
+                "h-12 rounded-md border text-[0.95rem] transition-colors disabled:bg-mist disabled:text-mute",
+                product.sizes.length === 1 && "col-span-3",
+                size === s ? "border-ink" : "border-line hover:border-ink",
               )}
             >
               {s}
             </button>
           ))}
         </div>
-        <p className="mt-3 text-sm text-bone/60">{product.fit}</p>
+        {sizeError && !size && <p className="mt-3 text-sm text-blaze-deep">Pick a size ↓ to continue.</p>}
+        <p className="mt-3 text-sm text-mute">{product.fit}</p>
       </fieldset>
 
-      {/* quantity */}
-      <div className="flex items-center justify-between border-y border-bone/10 py-4">
-        <span className="label text-bone/60">Quantity</span>
-        <div className="flex items-center">
-          <button type="button" aria-label="Decrease quantity" onClick={() => setQty((q) => Math.max(1, q - 1))} className="grid size-10 place-items-center border border-bone/20 hover:border-bone">
+      <div className="flex items-center justify-between">
+        <span className="font-medium">Quantity</span>
+        <div className="flex items-center rounded-full border border-line">
+          <button type="button" aria-label="Decrease quantity" onClick={() => setQty((q) => Math.max(1, q - 1))} className="grid size-10 place-items-center rounded-full hover:bg-mist">
             <Minus className="size-4" />
           </button>
-          <span className="w-12 text-center font-mono font-bold" aria-live="polite">
+          <span className="w-10 text-center font-medium" aria-live="polite">
             {qty}
           </span>
-          <button type="button" aria-label="Increase quantity" onClick={() => setQty((q) => Math.min(10, q + 1))} className="grid size-10 place-items-center border border-bone/20 hover:border-bone">
+          <button type="button" aria-label="Increase quantity" onClick={() => setQty((q) => Math.min(10, q + 1))} className="grid size-10 place-items-center rounded-full hover:bg-mist">
             <Plus className="size-4" />
           </button>
         </div>
       </div>
 
-      {/* CTAs */}
       {product.soldOut ? (
-        <div className="space-y-3">
-          <p className="display text-3xl text-bone/60">Sold out</p>
-          <a
-            href={whatsappLink(`Hi ${site.name} — please let me know if the ${product.name} (${product.sku}) gets restocked.`)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="label flex h-14 w-full items-center justify-center gap-3 border border-bone/30 font-bold transition-colors hover:border-blaze hover:bg-blaze hover:text-ink"
-          >
-            <WhatsAppIcon size={18} /> Notify me on restock
-          </a>
-        </div>
+        <a
+          href={whatsappLink(`Hi ${site.name} — please let me know if the ${product.name} (${product.sku}) gets restocked.`)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex h-14 w-full items-center justify-center gap-2 rounded-full border border-line font-medium hover:border-ink"
+        >
+          <WhatsAppIcon size={20} /> Notify me on restock
+        </a>
       ) : (
-        <div className="space-y-2">
+        <div className="space-y-3">
           <a
             href={waHref}
             target="_blank"
@@ -124,39 +119,36 @@ export function ProductPurchase({ product }: { product: Product }) {
                 setSizeError(true);
               }
             }}
-            className="label flex h-16 w-full items-center justify-center gap-3 bg-blaze text-[0.8rem] font-bold text-ink transition-colors hover:bg-bone"
+            className="flex h-14 w-full items-center justify-center gap-2 rounded-full bg-ink font-medium text-white transition-colors hover:bg-ink/75"
           >
             <WhatsAppIcon size={20} /> Order on WhatsApp — {formatPrice(product.price * qty)}
           </a>
-          <div className="grid grid-cols-2 gap-2">
-            <a
-              href={socials.instagramDm}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={copyForInstagram}
-              className="label flex h-12 items-center justify-center gap-2 border border-bone/30 font-bold transition-colors hover:border-bone hover:bg-bone hover:text-ink"
-            >
-              <InstagramIcon size={16} /> {copied ? "Order copied ✓" : "DM on Instagram"}
-            </a>
-            <a
-              href={whatsappLink(`Hi ${site.name} — I have a question about the ${product.name} (${product.sku}).`)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="label flex h-12 items-center justify-center gap-2 border border-bone/30 font-bold transition-colors hover:border-bone hover:bg-bone hover:text-ink"
-            >
-              <MessageCircle className="size-4" /> Ask a question
-            </a>
-          </div>
-          <p className="pt-1 text-xs text-bone/50">Instagram button copies your order details so you can paste them in the DM.</p>
+          <a
+            href={socials.instagramDm}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={copyForInstagram}
+            className="flex h-14 w-full items-center justify-center gap-2 rounded-full border border-line font-medium transition-colors hover:border-ink"
+          >
+            <InstagramIcon size={20} /> {copied ? "Order details copied ✓" : "DM on Instagram"}
+          </a>
+          <a
+            href={whatsappLink(`Hi ${site.name} — I have a question about the ${product.name} (${product.sku}).`)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 pt-1 text-sm text-mute hover:text-ink"
+          >
+            <MessageCircle className="size-4" /> Ask a question about this product
+          </a>
         </div>
       )}
 
-      <ul className="grid gap-3 text-sm text-bone/70">
-        <li className="flex items-center gap-3">
-          <Truck className="size-4 text-blaze" /> {site.shipping}
+      <ul className="space-y-3 border-t border-line pt-6 text-[0.95rem]">
+        <li className="flex items-start gap-3">
+          <Truck className="mt-0.5 size-5 shrink-0" /> {site.shipping}
         </li>
-        <li className="flex items-center gap-3">
-          <ShieldCheck className="size-4 text-blaze" /> Confirm size, stock &amp; delivery with the team before paying
+        <li className="flex items-start gap-3">
+          <ShieldCheck className="mt-0.5 size-5 shrink-0" /> We confirm size, stock &amp; delivery with you before you pay
         </li>
       </ul>
     </div>

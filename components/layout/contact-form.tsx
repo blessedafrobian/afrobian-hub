@@ -31,22 +31,22 @@ export function ContactForm() {
     window.open(whatsappLink(text), "_blank", "noopener,noreferrer");
   }
 
-  const field = "h-14 w-full border-b-2 border-ink/25 bg-transparent px-1 text-lg text-ink outline-none transition-colors placeholder:text-ink/35 focus:border-blaze-deep";
+  const field = "mt-2 h-12 w-full rounded-lg border border-line bg-white px-4 text-ink outline-none transition-colors placeholder:text-mute focus:border-ink";
 
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-6">
       <div className="grid gap-6 sm:grid-cols-2">
         <label className="block">
-          <span className="label text-ink/60">Name *</span>
+          <span className="text-sm font-medium">Name *</span>
           <input value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" className={field} placeholder="Your name" required />
         </label>
         <label className="block">
-          <span className="label text-ink/60">City / country</span>
+          <span className="text-sm font-medium">City / country</span>
           <input value={city} onChange={(e) => setCity(e.target.value)} autoComplete="address-level2" className={field} placeholder="Casablanca, Morocco" />
         </label>
       </div>
       <fieldset>
-        <legend className="label mb-3 text-ink/60">Topic</legend>
+        <legend className="mb-2 text-sm font-medium">Topic</legend>
         <div className="flex flex-wrap gap-2">
           {topics.map((t) => (
             <button
@@ -54,7 +54,7 @@ export function ContactForm() {
               type="button"
               onClick={() => setTopic(t)}
               aria-pressed={topic === t}
-              className={cn("label h-10 border px-4 font-bold transition-colors", topic === t ? "border-ink bg-ink text-bone" : "border-ink/25 text-ink hover:border-ink")}
+              className={cn("h-10 rounded-full px-4 text-sm font-medium transition-colors", topic === t ? "bg-ink text-white" : "bg-mist hover:bg-line")}
             >
               {t}
             </button>
@@ -62,12 +62,12 @@ export function ContactForm() {
         </div>
       </fieldset>
       <label className="block">
-        <span className="label text-ink/60">Message *</span>
+        <span className="text-sm font-medium">Message *</span>
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           rows={4}
-          className="w-full resize-y border-b-2 border-ink/25 bg-transparent px-1 py-3 text-lg text-ink outline-none transition-colors placeholder:text-ink/35 focus:border-blaze-deep"
+          className="mt-2 w-full resize-y rounded-lg border border-line bg-white px-4 py-3 text-ink outline-none transition-colors placeholder:text-mute focus:border-ink"
           placeholder="Tell us what you need…"
           required
         />
@@ -78,10 +78,10 @@ export function ContactForm() {
         </p>
       )}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-        <button type="submit" className="label inline-flex h-14 items-center justify-center gap-3 bg-ink px-8 font-bold text-bone transition-colors hover:bg-blaze hover:text-ink">
+        <button type="submit" className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ink px-7 font-medium text-white transition-colors hover:bg-ink/75">
           <WhatsAppIcon size={18} /> Send via WhatsApp
         </button>
-        <p className="text-sm text-ink/55">Opens WhatsApp with your message ready to send. Nothing is stored on this site.</p>
+        <p className="text-sm text-mute">Opens WhatsApp with your message ready to send. Nothing is stored on this site.</p>
       </div>
     </form>
   );

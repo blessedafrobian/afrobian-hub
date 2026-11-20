@@ -10,13 +10,6 @@ export const metadata: Metadata = {
 
 export default function MenPage() {
   return (
-    <CollectionPage
-      index="Men"
-      eyebrow="His rotation · incl. unisex"
-      title="Men"
-      outline="heavy rotation."
-      intro="Heavy layers, straight cargos and track tops. Unisex pieces are cut oversized — check the fit notes on each product."
-      products={productsFor("men")}
-    />
+    <CollectionPage title="Men's Clothing" products={productsFor("men")} />
   );
 }

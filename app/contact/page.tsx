@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowUpRight, Mail, MapPin, Plus } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Mail } from "lucide-react";
 import { site, socials } from "@/lib/site";
 import { generalWhatsappLink } from "@/lib/order";
 import { PageHero } from "@/components/layout/page-hero";
@@ -16,13 +16,13 @@ export const metadata: Metadata = {
 
 const channels = [
   { label: "WhatsApp", sub: "Orders · sizing · delivery", href: generalWhatsappLink, Icon: WhatsAppIcon, primary: true },
-  { label: "Instagram", sub: `@${site.instagramHandle} · DMs open`, href: socials.instagramDm, Icon: InstagramIcon },
+  { label: "Instagram", sub: `@${site.instagramHandle}`, href: socials.instagramDm, Icon: InstagramIcon },
   { label: "TikTok", sub: `@${site.tiktokHandle}`, href: socials.tiktok, Icon: TikTokIcon },
   { label: "Email", sub: site.email, href: `mailto:${site.email}`, Icon: Mail },
 ];
 
 const faq = [
-  { q: "How do I order?", a: "Open a product, pick your colour and size, then tap “Order on WhatsApp”. Your order details are prefilled — add your city and send. You can also DM us on Instagram." },
+  { q: "How do I order?", a: "Open a product, pick your size, then tap “Order on WhatsApp”. Your order details are prefilled — add your city and send. You can also DM us on Instagram." },
   { q: "How do I pay?", a: "Payment options are confirmed in the chat once stock and delivery are confirmed. Never pay before the team has confirmed your order." },
   { q: "Do you deliver outside Morocco?", a: "We ship across Morocco, and worldwide on request. Message us with your country and we'll quote delivery." },
   { q: "How do sizes fit?", a: "Most tops are cut oversized/boxy. Each product page has fit notes — and the team can help you choose in the chat." },
@@ -39,37 +39,26 @@ export default function ContactPage() {
 
   return (
     <>
-      <PageHero
-        index="Contact"
-        eyebrow="Talk to us"
-        title="Hit us"
-        outline="up."
-        tone="blaze"
-        intro={<p>Orders, sizing, delivery, collabs — everything happens in the chat. We usually reply the same day.</p>}
-      >
-        <p className="label flex items-center gap-2">
-          <MapPin className="size-4" /> {site.baseLocation} · {site.shipping}
-        </p>
-      </PageHero>
+      <PageHero eyebrow="Contact" title="Get Help" intro={<p>Orders, sizing, delivery, collabs — everything happens in the chat. We usually reply the same day.</p>} />
 
-      <section className="bg-ink py-16 sm:py-24">
+      <section className="pb-16">
         <Container>
-          <ul className="grid gap-px bg-bone/10 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {channels.map(({ label, sub, href, Icon, primary }) => (
               <li key={label}>
                 <a
                   href={href}
                   target={href.startsWith("mailto:") ? undefined : "_blank"}
                   rel="noopener noreferrer"
-                  className={`group flex h-full min-h-56 flex-col justify-between p-6 transition-colors sm:p-8 ${primary ? "bg-blaze text-ink hover:bg-bone" : "bg-ink hover:bg-coal"}`}
+                  className={`group flex h-full min-h-44 flex-col justify-between rounded-xl p-6 transition-colors ${primary ? "bg-ink text-white hover:bg-ink/85" : "bg-mist hover:bg-line"}`}
                 >
                   <div className="flex items-start justify-between">
-                    <Icon size={32} />
-                    <ArrowUpRight className="size-6 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+                    <Icon size={28} />
+                    <ArrowUpRight className="size-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </div>
                   <div>
-                    <p className="display text-4xl sm:text-5xl">{label}</p>
-                    <p className={`mt-2 break-all font-mono text-xs ${primary ? "text-ink/70" : "text-bone/60"}`}>{sub}</p>
+                    <p className="text-xl font-medium">{label}</p>
+                    <p className={`mt-1 break-all text-sm ${primary ? "text-white/70" : "text-mute"}`}>{sub}</p>
                   </div>
                 </a>
               </li>
@@ -78,14 +67,11 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      <section className="bg-bone py-20 text-ink sm:py-28">
-        <Container className="grid gap-14 lg:grid-cols-12">
+      <section className="border-t border-line py-16 sm:py-20">
+        <Container className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <p className="label mb-4 text-ink/60">Write to us</p>
-            <h2 className="display text-huge">
-              Send a <span className="text-blaze-deep">message</span>
-            </h2>
-            <p className="mt-6 text-ink/70">Fill this in and we&apos;ll open WhatsApp with your message ready to go.</p>
+            <h2 className="text-2xl font-medium tracking-tight sm:text-[1.75rem]">Send us a message</h2>
+            <p className="mt-3 text-mute">Fill this in and we&apos;ll open WhatsApp with your message ready to go.</p>
           </div>
           <div className="lg:col-span-7 lg:col-start-6">
             <ContactForm />
@@ -93,22 +79,19 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      <section id="faq" className="scroll-mt-24 bg-ink py-20 sm:py-28" aria-labelledby="faq-title">
-        <Container className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <p className="label mb-4 text-blaze">FAQ</p>
-            <h2 id="faq-title" className="display text-huge">
-              How it <span className="text-outline-bone">works</span>
-            </h2>
-          </div>
-          <div className="divide-y divide-bone/10 border-y border-bone/10 lg:col-span-7 lg:col-start-6">
+      <section id="faq" className="scroll-mt-24 border-t border-line py-16 sm:py-20" aria-labelledby="faq-title">
+        <Container className="grid gap-10 lg:grid-cols-12">
+          <h2 id="faq-title" className="text-2xl font-medium tracking-tight sm:text-[1.75rem] lg:col-span-4">
+            Frequently Asked Questions
+          </h2>
+          <div className="border-t border-line lg:col-span-7 lg:col-start-6">
             {faq.map((f) => (
-              <details key={f.q} className="group py-6">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-xl font-bold uppercase tracking-tight sm:text-2xl">
+              <details key={f.q} className="group border-b border-line py-5">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-medium">
                   {f.q}
-                  <Plus className="size-6 shrink-0 text-blaze transition-transform duration-300 group-open:rotate-45" />
+                  <ChevronDown className="size-5 shrink-0 transition-transform group-open:rotate-180" />
                 </summary>
-                <p className="mt-4 max-w-2xl text-bone/70">{f.a}</p>
+                <p className="mt-3 max-w-2xl text-ink/75">{f.a}</p>
               </details>
             ))}
           </div>

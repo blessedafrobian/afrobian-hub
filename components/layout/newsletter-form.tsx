@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useState, type FormEvent } from "react";
-import { ArrowRight, Info } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { socials } from "@/lib/site";
 import { cn } from "@/components/ui/primitives";
 
@@ -16,7 +16,7 @@ const NEWSLETTER_LIVE = false;
 
 type State = { status: "idle" } | { status: "error"; message: string } | { status: "pending-launch" };
 
-export function NewsletterForm({ tone = "dark", className }: { tone?: "dark" | "light" | "blaze"; className?: string }) {
+export function NewsletterForm({ className }: { className?: string }) {
   const id = useId();
   const [email, setEmail] = useState("");
   const [state, setState] = useState<State>({ status: "idle" });
@@ -33,24 +33,18 @@ export function NewsletterForm({ tone = "dark", className }: { tone?: "dark" | "
     }
   }
 
-  const styles = {
-    dark: { field: "border-bone/30 text-bone placeholder:text-bone/40 focus:border-blaze", btn: "bg-blaze text-ink hover:bg-bone", note: "text-bone/60" },
-    light: { field: "border-ink/30 text-ink placeholder:text-ink/40 focus:border-ink", btn: "bg-ink text-bone hover:bg-blaze hover:text-ink", note: "text-ink/60" },
-    blaze: { field: "border-ink/40 text-ink placeholder:text-ink/50 focus:border-ink", btn: "bg-ink text-bone hover:bg-bone hover:text-ink", note: "text-ink/70" },
-  }[tone];
-
   return (
     <form onSubmit={handleSubmit} noValidate className={cn("w-full", className)}>
       <label htmlFor={`${id}-email`} className="sr-only">
         Email address
       </label>
-      <div className="flex flex-col gap-2 sm:flex-row">
+      <div className="flex h-12 items-center rounded-full bg-white/10 pl-5 pr-1.5 focus-within:ring-2 focus-within:ring-white/40">
         <input
           id={`${id}-email`}
           type="email"
           inputMode="email"
           autoComplete="email"
-          placeholder="your@email.com"
+          placeholder="Email address"
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
@@ -58,27 +52,23 @@ export function NewsletterForm({ tone = "dark", className }: { tone?: "dark" | "
           }}
           aria-invalid={state.status === "error"}
           aria-describedby={`${id}-msg`}
-          className={cn("h-14 min-w-0 flex-1 border-b-2 bg-transparent px-1 font-mono text-sm outline-none transition-colors", styles.field)}
+          className="h-full min-w-0 flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/50"
         />
-        <button type="submit" className={cn("label inline-flex h-14 items-center justify-center gap-2 px-7 font-bold transition-colors", styles.btn)}>
-          Get on the list <ArrowRight className="size-4" />
+        <button type="submit" aria-label="Get on the list" className="grid size-9 shrink-0 place-items-center rounded-full bg-white text-ink transition-colors hover:bg-blaze">
+          <ArrowRight className="size-4" />
         </button>
       </div>
-      <p id={`${id}-msg`} role="status" aria-live="polite" className={cn("mt-3 min-h-[2.5rem] text-sm", styles.note)}>
-        {state.status === "error" && <span className="font-semibold">{state.message}</span>}
+      <p id={`${id}-msg`} role="status" aria-live="polite" className="mt-3 min-h-[2.5rem] text-sm text-white/60">
+        {state.status === "error" && <span className="text-blaze">{state.message}</span>}
         {state.status === "pending-launch" && (
-          <span className="flex items-start gap-2">
-            <Info className="mt-0.5 size-4 shrink-0" aria-hidden />
-            <span>
-              Sign-ups open soon — we haven&apos;t saved your email. Until then, catch drops first on{" "}
-              <a href={socials.instagram} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">
-                Instagram
-              </a>
-              .
-            </span>
+          <span>
+            Sign-ups open soon — we haven&apos;t saved your email. Until then, catch drops first on{" "}
+            <a href={socials.instagram} target="_blank" rel="noopener noreferrer" className="text-white underline underline-offset-4">
+              Instagram
+            </a>
+            .
           </span>
         )}
-        {state.status === "idle" && "Drops, restocks and culture. No spam."}
       </p>
     </form>
   );

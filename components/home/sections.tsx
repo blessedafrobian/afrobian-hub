@@ -1,384 +1,261 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { featuredProducts, productsFor, products } from "@/lib/products";
+import { products, productsFor, type Category } from "@/lib/products";
 import { creators } from "@/lib/creators";
 import { storiesByDate } from "@/lib/stories";
-import { generalWhatsappLink, whatsappLink } from "@/lib/order";
-import { site, socials } from "@/lib/site";
-import { ButtonLink, Container, Marquee, SectionHeading, Sticker } from "@/components/ui/primitives";
-import { Parallax, Reveal, RevealLines } from "@/components/ui/motion";
+import { generalWhatsappLink } from "@/lib/order";
+import { socials } from "@/lib/site";
+import { ButtonLink, Container } from "@/components/ui/primitives";
+import { Carousel } from "@/components/ui/carousel";
+import { Reveal } from "@/components/ui/motion";
 import { ProductCard } from "@/components/shop/product-card";
 import { CreatorCard } from "@/components/creators/creator-card";
 import { StoryCard } from "@/components/culture/story-card";
 import { InstagramIcon, WhatsAppIcon } from "@/components/ui/brand-icons";
 
 /* ------------------------------------------------------------------ */
-/* 01 — crossing tickers                                               */
+/* Hero                                                                */
 /* ------------------------------------------------------------------ */
-export function TickerCross() {
+export function Hero() {
   return (
-    <div className="relative z-20 -my-6 overflow-hidden py-14 sm:-my-10 sm:py-20" aria-hidden>
-      <div className="absolute inset-x-[-5%] top-1/2 -translate-y-1/2 rotate-[3deg] bg-bone py-2 text-ink sm:py-3">
-        <Marquee items={["Bloock that guyyy", "Bloock that pitch", "Drop 01", "Bloock that guyyy", "Bloock that pitch", "Drop 01"]} reverse className="display text-2xl sm:text-4xl" duration={45} />
-      </div>
-      <div className="absolute inset-x-[-5%] top-1/2 -translate-y-1/2 -rotate-[2.5deg] bg-blaze py-2 text-ink shadow-[0_20px_60px_-20px_rgba(0,0,0,0.9)] sm:py-3">
-        <Marquee
-          items={["Order on WhatsApp", "DM on Instagram", "Shipping across Morocco", "Worldwide on request", "Creators first"]}
-          className="display text-2xl sm:text-4xl"
-          duration={38}
-        />
-      </div>
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* 02 — the drop                                                       */
-/* ------------------------------------------------------------------ */
-export function DropSection() {
-  const [lead, ...rest] = featuredProducts();
-  const grid = rest.slice(0, 4);
-  return (
-    <section id="drop" className="relative scroll-mt-20 bg-ink pb-24 pt-16 sm:pb-32 sm:pt-24" aria-labelledby="drop-title">
-      <Container>
-        <Reveal>
-          <SectionHeading
-            index="01"
-            eyebrow="The drop"
-            title={
-              <span id="drop-title">
-                Bloock that <span className="text-blaze">guyyy</span>
-                <span className="font-serif text-[0.5em] normal-case italic tracking-normal text-bone/70"> /drop 01</span>
-              </span>
-            }
-            aside={
-              <p className="text-bone/70">
-                The slogans everyone already knows, now on heavyweight fleece, tees, caps and cargos. Order directly on WhatsApp — pick your size, send the message, done.
-              </p>
-            }
-          />
-        </Reveal>
-
-        <div className="mt-12 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 lg:mt-16 lg:grid-cols-12 lg:gap-x-6">
-          <Reveal className="col-span-2 lg:col-span-6 lg:row-span-2">
-            <ProductCard product={lead} size="lg" sizes="(max-width: 1024px) 100vw, 50vw" index={0} />
-          </Reveal>
-          {grid.map((p, i) => (
-            <Reveal key={p.slug} delay={0.08 * (i % 2)} className="lg:col-span-3">
-              <ProductCard product={p} index={i + 1} />
-            </Reveal>
-          ))}
+    <section aria-labelledby="hero-title">
+      <Link href="/shop" className="block" aria-label="Shop Drop 01">
+        <div className="relative aspect-[3/4] w-full sm:hidden">
+          <Image src="/media/editorial/hero-tall.svg" alt="Drop 01 — Bloock That Guyyy hoodie and cap" fill preload sizes="100vw" className="object-cover" />
         </div>
-
-        <Reveal className="mt-14 flex flex-col items-start justify-between gap-6 border-t border-bone/10 pt-8 sm:flex-row sm:items-center">
-          <p className="label text-bone/60">
-            {products.length} pieces across 3 lines · Prices in {site.currency}
-          </p>
-          <ButtonLink href="/shop" variant="bone">
-            Shop everything
+        <div className="relative hidden aspect-[16/9] w-full sm:block">
+          <Image src="/media/editorial/hero-wide.svg" alt="Drop 01 — Bloock That Guyyy hoodie, tee and cap" fill preload sizes="100vw" className="object-cover" />
+        </div>
+      </Link>
+      <Container className="py-10 text-center sm:py-14">
+        <p className="font-medium">Drop 01 — Out now</p>
+        <h1 id="hero-title" className="display mx-auto mt-3 max-w-5xl text-[clamp(3.25rem,10vw,8.5rem)]">
+          Bloock that guyyy
+        </h1>
+        <p className="mx-auto mt-4 max-w-xl text-[1.05rem]">Protect your peace — out loud. Heavyweight hoodies, tees and caps, ordered straight from WhatsApp.</p>
+        <div className="mt-7 flex flex-wrap justify-center gap-2">
+          <ButtonLink href="/shop">Shop the drop</ButtonLink>
+          <ButtonLink href={generalWhatsappLink} variant="outline" icon={<WhatsAppIcon size={18} />}>
+            Order on WhatsApp
           </ButtonLink>
-        </Reveal>
+        </div>
       </Container>
     </section>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/* 03 — campaign / lookbook                                            */
+/* Just in — product carousel                                          */
 /* ------------------------------------------------------------------ */
-const frames = [
-  { src: "/media/editorial/lookbook-01.svg", title: "Bloock", n: "01" },
-  { src: "/media/editorial/lookbook-02.svg", title: "That guyyy", n: "02" },
-  { src: "/media/editorial/lookbook-03.svg", title: "That pitch", n: "03" },
-];
-
-export function CampaignSection() {
+export function JustIn() {
+  const list = [...products].filter((p) => !p.soldOut).sort((a, b) => Number(!!b.featured) - Number(!!a.featured)).slice(0, 10);
   return (
-    <section className="edge-slant-top relative -mt-[4vw] bg-bone pb-24 pt-[calc(4vw+5rem)] text-ink sm:pb-32" aria-labelledby="campaign-title">
-      <Container>
-        <div className="grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <p className="label mb-5 flex items-center gap-3 text-ink/60">
-              <span className="text-blaze">02</span>
-              <span className="h-px w-8 bg-current" />
-              Campaign
-            </p>
-            <h2 id="campaign-title" className="display text-giga">
-              <RevealLines lines={["Worn", <span key="l" className="text-outline-ink">loud.</span>]} />
-            </h2>
-          </div>
-          <Reveal className="flex flex-col justify-end lg:col-span-5 lg:col-start-8">
-            <p className="font-serif text-3xl leading-tight sm:text-4xl">
-              Shot on the street, styled by the crew. <em className="text-blaze-deep">Bloock that guyyy</em> — protect your peace, out loud.
-            </p>
-          </Reveal>
-        </div>
-
-        <div className="mt-16 grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3">
-          {frames.map((f, i) => (
-            <Reveal
-              key={f.n}
-              delay={i * 0.1}
-              className={i === 0 ? "col-span-2 lg:col-span-1" : i === 1 ? "lg:mt-24" : "lg:mt-48"}
-            >
-              <figure>
-                <Parallax offset={i === 0 ? 20 : 40} className="relative aspect-[4/5] overflow-hidden bg-coal">
-                  <Image src={f.src} alt={`Campaign frame ${f.n}: ${f.title} (temporary artwork)`} fill sizes="(max-width: 1024px) 50vw, 33vw" className="scale-110 object-cover" />
-                </Parallax>
-                <figcaption className="mt-3 flex items-baseline justify-between border-t border-ink/20 pt-3">
-                  <span className="display text-2xl sm:text-3xl">{f.title}</span>
-                  <span className="label text-ink/50">Frame {f.n}</span>
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </div>
-      </Container>
+    <section className="py-10 sm:py-14" aria-label="Just in">
+      <Carousel
+        title="Just In"
+        action={
+          <Link href="/shop" className="font-medium underline-offset-4 hover:underline">
+            Shop all
+          </Link>
+        }
+        itemClassName="w-[72vw] sm:w-[40vw] lg:w-[28vw] xl:w-[23vw]"
+      >
+        {list.map((p) => (
+          <ProductCard key={p.slug} product={p} sizes="(max-width: 640px) 72vw, 28vw" />
+        ))}
+      </Carousel>
     </section>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/* 04 — men / women split                                              */
+/* Featured — men / women                                              */
 /* ------------------------------------------------------------------ */
-export function SplitSection() {
-  const panels = [
-    { href: "/men", label: "Men", img: "/media/editorial/panel-men.svg", count: productsFor("men").length, line: "Heavy layers, straight cargos, track tops." },
-    { href: "/women", label: "Women", img: "/media/editorial/panel-women.svg", count: productsFor("women").length, line: "Cropped fleece, wide legs, baby tees." },
+export function Featured() {
+  const tiles = [
+    { href: "/men", label: "Men", sub: `${productsFor("men").length} pieces`, img: "/media/editorial/panel-men.svg", light: true },
+    { href: "/women", label: "Women", sub: `${productsFor("women").length} pieces`, img: "/media/editorial/panel-women.svg", light: false },
   ];
   return (
-    <section className="bg-ink" aria-label="Shop by edit">
-      <div className="flex flex-col md:h-[92vh] md:min-h-[640px] md:flex-row">
-        {panels.map((p, i) => (
-          <Link
-            key={p.href}
-            href={p.href}
-            className="group relative flex h-[78vh] min-h-[520px] flex-1 overflow-hidden transition-[flex-grow] duration-700 ease-snap md:h-auto md:hover:flex-[1.45]"
-          >
-            <Image src={p.img} alt={`${p.label}'s edit (temporary artwork)`} fill sizes="(max-width: 768px) 100vw, 60vw" className="object-cover transition-transform duration-[1.2s] ease-snap group-hover:scale-105" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/10 to-transparent" />
-            <div className="relative z-10 mt-auto flex w-full items-end justify-between gap-4 p-5 sm:p-8 lg:p-10">
-              <div>
-                <p className="label mb-3 text-blaze">
-                  0{i + 3} / {p.count} pieces
-                </p>
-                <h2 className="display text-[22vw] leading-[0.78] text-bone md:text-[10vw]">{p.label}</h2>
-                <p className="mt-4 max-w-xs text-bone/80">{p.line}</p>
-              </div>
-              <span className="grid size-14 shrink-0 place-items-center rounded-full bg-blaze text-ink transition-transform duration-500 group-hover:rotate-45 sm:size-20">
-                <ArrowUpRight className="size-6 sm:size-8" />
-              </span>
-            </div>
-          </Link>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* 05 — manifesto                                                      */
-/* ------------------------------------------------------------------ */
-const pillars = [
-  { n: "A", title: "Streetwear", body: "Heavyweight, considered pieces built for the city — designed with a Moroccan eye, made to travel." },
-  { n: "B", title: "Creators", body: "Dancers, stylists, photographers, DJs. A home for the people who make culture, with profiles that link straight to their work." },
-  { n: "C", title: "Culture", body: "Stories on style, sound and the street. The zine side of the hub." },
-];
-
-export function ManifestoSection() {
-  return (
-    <section className="grain relative overflow-hidden bg-blaze text-ink" aria-labelledby="manifesto-title">
-      <Container className="relative z-[2] py-24 sm:py-32">
-        <p className="label mb-8 flex items-center gap-3">
-          <span>05</span>
-          <span className="h-px w-8 bg-current" />
-          Manifesto
-        </p>
-        <h2 id="manifesto-title" className="display text-[13vw] leading-[0.85] sm:text-[11vw] lg:text-[9vw]">
-          <RevealLines
-            lines={[
-              "We don't follow",
-              <span key="2">
-                the city<span className="font-serif normal-case italic tracking-normal">,</span>
-              </span>,
-              <span key="3" className="flex flex-wrap items-baseline gap-x-[2vw]">
-                <span className="font-serif text-[0.9em] normal-case italic tracking-tight">we</span>
-                <span className="text-outline-ink">dress it.</span>
-              </span>,
-            ]}
-          />
+    <section className="py-10 sm:py-14" aria-labelledby="featured-title">
+      <Container>
+        <h2 id="featured-title" className="mb-6 text-2xl font-medium tracking-tight sm:text-[1.75rem]">
+          Featured
         </h2>
-
-        <div className="absolute right-6 top-20 hidden lg:block">
-          <Sticker text="Morocco ✺ to the world ✺ since drop 01 ✺ " className="!bg-ink !text-bone" center={<span className="text-blaze">A/H</span>} />
-        </div>
-
-        <div className="mt-16 grid gap-px border border-ink/20 bg-ink/20 sm:grid-cols-3">
-          {pillars.map((p, i) => (
-            <Reveal key={p.n} delay={i * 0.08} className="bg-blaze p-6 sm:p-8">
-              <p className="display text-6xl">{p.n}.</p>
-              <h3 className="display mt-6 text-3xl">{p.title}</h3>
-              <p className="mt-3 text-ink/80">{p.body}</p>
+        <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
+          {tiles.map((t) => (
+            <Reveal key={t.href}>
+              <Link href={t.href} className="group relative block aspect-[4/5] overflow-hidden">
+                <Image src={t.img} alt={`${t.label}'s edit`} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover transition-transform duration-700 ease-snap group-hover:scale-[1.03]" />
+                <div className={`absolute bottom-0 left-0 p-6 sm:p-10 ${t.light ? "text-ink" : "text-white"}`}>
+                  <p className="font-medium">{t.sub}</p>
+                  <p className="display mt-1 text-5xl sm:text-6xl">{t.label}</p>
+                  <span className={`mt-5 inline-flex h-10 items-center rounded-full px-5 text-sm font-medium ${t.light ? "bg-ink text-white" : "bg-white text-ink"}`}>
+                    Shop {t.label}
+                  </span>
+                </div>
+              </Link>
             </Reveal>
           ))}
         </div>
       </Container>
+    </section>
+  );
+}
 
-      <div className="edge-jag-bottom relative z-[2] aspect-[16/10] w-full sm:aspect-[16/7]">
-        <Image src="/media/editorial/manifesto.svg" alt="The AFROBIAN crew — three figures in Drop 01 (temporary artwork)" fill sizes="100vw" className="object-cover" />
+/* ------------------------------------------------------------------ */
+/* Campaign banner                                                     */
+/* ------------------------------------------------------------------ */
+export function Campaign() {
+  return (
+    <section className="relative bg-ink text-white" aria-labelledby="campaign-title">
+      <div className="relative aspect-[4/5] w-full sm:hidden">
+        <Image src="/media/editorial/campaign-tall.svg" alt="Bloock That Pitch hoodie and cap" fill sizes="100vw" className="object-cover" />
+      </div>
+      <div className="relative hidden aspect-[24/11] w-full sm:block">
+        <Image src="/media/editorial/campaign-wide.svg" alt="Bloock That Pitch hoodie, cap and tote" fill sizes="100vw" className="object-cover" />
+      </div>
+      <div className="relative sm:absolute sm:inset-y-0 sm:left-0 sm:flex sm:w-[48%] sm:items-center">
+        <div className="p-6 sm:p-12 lg:p-20">
+          <p className="font-medium text-white/70">Drop 01 · Part two</p>
+          <h2 id="campaign-title" className="display mt-2 text-[clamp(3rem,6.5vw,7rem)]">
+            Bloock that pitch
+          </h2>
+          <p className="mt-4 max-w-md text-white/80">Bone heavyweight fleece, ink print. For when the energy around you isn&apos;t it.</p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            <ButtonLink href="/shop/bloock-that-pitch-heavy-hoodie" variant="light">
+              Shop the hoodie
+            </ButtonLink>
+            <ButtonLink href="/shop" variant="outline-light">
+              View all
+            </ButtonLink>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/* 06 — creators                                                       */
+/* Shop by category                                                    */
 /* ------------------------------------------------------------------ */
-export function CreatorsSection() {
+export function Categories() {
+  const tiles: { label: string; cat: Category; img: string }[] = [
+    { label: "Hoodies", cat: "hoodies", img: "/media/products/bloock-that-pitch-heavy-hoodie-a.svg" },
+    { label: "T-Shirts", cat: "tees", img: "/media/products/blocked-icon-tee-c.svg" },
+    { label: "Pants", cat: "pants", img: "/media/products/bloock-cargo-pant-a.svg" },
+    { label: "Caps & Accessories", cat: "accessories", img: "/media/products/bloock-that-guyyy-cap-c.svg" },
+  ];
   return (
-    <section className="relative overflow-hidden bg-ink py-24 sm:py-32" aria-labelledby="creators-title">
-      <Container>
-        <Reveal>
-          <SectionHeading
-            index="06"
-            eyebrow="Creators"
-            title={
-              <span id="creators-title">
-                The <span className="text-blaze">crew</span>
-              </span>
-            }
-            aside={
-              <div className="space-y-4">
-                <p className="text-bone/70">Movers, stylists, lenses and selectors. Each creator gets a profile on the hub with direct links to their Instagram and TikTok.</p>
-                <p className="label text-bone/40">Roster in progress — profiles below are placeholder slots.</p>
-              </div>
-            }
-          />
-        </Reveal>
-      </Container>
-
-      <div className="no-scrollbar mt-12 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-4 sm:gap-5 sm:px-6 lg:px-10" role="list" aria-label="Creators">
-        {creators.map((c, i) => (
-          <Reveal key={c.slug} delay={i * 0.06} className="w-[78vw] shrink-0 snap-start sm:w-[44vw] lg:w-[27vw] xl:w-[22vw]" role="listitem">
-            <CreatorCard creator={c} />
-          </Reveal>
-        ))}
-        <div className="flex w-[78vw] shrink-0 snap-start flex-col justify-between bg-blaze p-6 text-ink sm:w-[44vw] lg:w-[27vw] xl:w-[22vw]" role="listitem">
-          <p className="label">Open call</p>
-          <div>
-            <p className="display text-5xl sm:text-6xl">You create?</p>
-            <p className="mt-3 text-ink/80">Dance, style, shoot, mix, skate or speak — we want to hear from you.</p>
-            <div className="mt-6 flex flex-col gap-2">
-              <ButtonLink href={socials.instagramDm} variant="ink" icon={<InstagramIcon size={16} />}>
-                Pitch us on Instagram
-              </ButtonLink>
-              <ButtonLink href={whatsappLink(`Hi ${site.name} — I'm a creator and I'd like to join the roster.`)} variant="outline-ink" icon={<WhatsAppIcon size={16} />}>
-                Or on WhatsApp
-              </ButtonLink>
+    <section className="py-10 sm:py-14" aria-label="Shop by category">
+      <Carousel title="Shop by Category" itemClassName="w-[72vw] sm:w-[40vw] lg:w-[23vw]">
+        {tiles.map((t) => (
+          <Link key={t.cat} href="/shop" className="group block">
+            <div className="relative aspect-[4/5] overflow-hidden bg-mist">
+              <Image src={t.img} alt="" fill sizes="(max-width: 640px) 72vw, 25vw" className="object-cover transition-transform duration-700 ease-snap group-hover:scale-[1.03]" />
             </div>
-          </div>
-        </div>
-      </div>
-
-      <Container className="mt-10">
-        <ButtonLink href="/creators" variant="outline">
-          Meet all creators
-        </ButtonLink>
-      </Container>
+            <p className="mt-3 text-lg font-medium">{t.label}</p>
+          </Link>
+        ))}
+      </Carousel>
     </section>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/* 07 — culture                                                        */
+/* Creators                                                            */
 /* ------------------------------------------------------------------ */
-export function CultureSection() {
-  const [lead, ...rest] = storiesByDate();
+export function CreatorsRail() {
   return (
-    <section className="edge-slant-top relative -mt-[4vw] bg-bone pb-24 pt-[calc(4vw+5rem)] text-ink sm:pb-32" aria-labelledby="culture-title">
+    <section className="py-10 sm:py-14" aria-label="Creators">
+      <Carousel
+        title="The Crew"
+        action={
+          <Link href="/creators" className="font-medium underline-offset-4 hover:underline">
+            All creators
+          </Link>
+        }
+        itemClassName="w-[60vw] sm:w-[32vw] lg:w-[22vw] xl:w-[18vw]"
+      >
+        {creators.map((c) => (
+          <CreatorCard key={c.slug} creator={c} />
+        ))}
+      </Carousel>
       <Container>
-        <Reveal>
-          <SectionHeading
-            tone="light"
-            index="07"
-            eyebrow="Culture"
-            title={
-              <span id="culture-title">
-                The zine<span className="text-blaze">.</span>
-              </span>
-            }
-            aside={<p className="text-ink/70">Style guides, street notes, sound and the creator economy — the editorial side of the hub.</p>}
-          />
-        </Reveal>
-        <div className="mt-14 grid gap-12 lg:grid-cols-12">
-          <Reveal className="lg:col-span-7">
-            <StoryCard story={lead} variant="lead" tone="light" />
-          </Reveal>
-          <div className="divide-y divide-ink/15 border-y border-ink/15 lg:col-span-5">
-            {rest.slice(0, 4).map((s, i) => (
-              <Reveal key={s.slug} delay={i * 0.06}>
-                <StoryCard story={s} variant="row" tone="light" />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-        <Reveal className="mt-12">
-          <ButtonLink href="/culture" variant="ink">
-            Read the culture
-          </ButtonLink>
-        </Reveal>
+        <p className="mt-4 text-sm text-mute">Roster in progress — profiles shown are placeholders until our first creators are signed.</p>
       </Container>
     </section>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/* 08 — how to order                                                   */
+/* Stories                                                             */
+/* ------------------------------------------------------------------ */
+export function Stories() {
+  const list = storiesByDate().slice(0, 3);
+  return (
+    <section className="py-10 sm:py-14" aria-labelledby="stories-title">
+      <Container>
+        <div className="mb-6 flex items-end justify-between">
+          <h2 id="stories-title" className="text-2xl font-medium tracking-tight sm:text-[1.75rem]">
+            Culture
+          </h2>
+          <Link href="/culture" className="font-medium underline-offset-4 hover:underline">
+            All stories
+          </Link>
+        </div>
+        <div className="grid gap-8 sm:grid-cols-3 sm:gap-4">
+          {list.map((s) => (
+            <Reveal key={s.slug}>
+              <StoryCard story={s} />
+            </Reveal>
+          ))}
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* How to order                                                        */
 /* ------------------------------------------------------------------ */
 const steps = [
-  { n: "01", title: "Pick your piece", body: "Browse the shop, choose your colour and size on the product page." },
-  { n: "02", title: "Send the message", body: "Tap “Order on WhatsApp” — your order details are prefilled. Prefer Instagram? DM us." },
-  { n: "03", title: "Confirm & receive", body: "We confirm stock, delivery and payment with you directly. Then it's on the way." },
+  { n: "1", title: "Pick your piece", body: "Choose your colour and size on the product page." },
+  { n: "2", title: "Send the message", body: "Tap “Order on WhatsApp” — your order is prefilled. Prefer Instagram? DM us." },
+  { n: "3", title: "Confirm & receive", body: "We confirm stock, delivery and payment with you directly." },
 ];
 
-export function HowToOrderSection() {
+export function HowToOrder() {
   return (
-    <section className="grain relative overflow-hidden bg-ink py-24 sm:py-32" aria-labelledby="order-title">
-      <Container className="relative z-[2]">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <p className="label mb-5 flex items-center gap-3 text-bone/60">
-              <span className="text-blaze">08</span>
-              <span className="h-px w-8 bg-current" />
-              How to order
-            </p>
-            <h2 id="order-title" className="display text-huge">
-              <RevealLines lines={["No cart.", <span key="b" className="text-blaze">Just chat.</span>]} />
-            </h2>
-            <p className="mt-6 max-w-md text-bone/70">Ordering happens in a real conversation with the team — sizing help, stock checks and delivery in one thread.</p>
-            <div className="mt-8 flex flex-wrap gap-2">
-              <ButtonLink href={generalWhatsappLink} size="lg" icon={<WhatsAppIcon size={18} />}>
-                WhatsApp us
-              </ButtonLink>
-              <ButtonLink href={socials.instagramDm} size="lg" variant="outline" icon={<InstagramIcon size={18} />}>
-                Instagram DM
-              </ButtonLink>
+    <section className="py-10 sm:py-14" aria-labelledby="order-title">
+      <Container>
+        <div className="rounded-2xl bg-mist px-6 py-12 sm:px-12 sm:py-16">
+          <div className="grid gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-4">
+              <h2 id="order-title" className="display text-5xl sm:text-6xl">
+                No cart.
+                <br />
+                Just chat.
+              </h2>
+              <div className="mt-6 flex flex-wrap gap-2">
+                <ButtonLink href={generalWhatsappLink} icon={<WhatsAppIcon size={18} />}>
+                  WhatsApp us
+                </ButtonLink>
+                <ButtonLink href={socials.instagramDm} variant="outline" icon={<InstagramIcon size={18} />}>
+                  Instagram DM
+                </ButtonLink>
+              </div>
             </div>
+            <ol className="grid gap-8 sm:grid-cols-3 lg:col-span-8">
+              {steps.map((s) => (
+                <li key={s.n}>
+                  <span className="grid size-10 place-items-center rounded-full bg-ink font-medium text-white">{s.n}</span>
+                  <h3 className="mt-4 text-lg font-medium">{s.title}</h3>
+                  <p className="mt-1 text-mute">{s.body}</p>
+                </li>
+              ))}
+            </ol>
           </div>
-          <ol className="lg:col-span-6 lg:col-start-7">
-            {steps.map((s, i) => (
-              <Reveal as="li" key={s.n} delay={i * 0.1} className="group grid grid-cols-[auto_1fr] gap-6 border-t border-bone/15 py-8 last:border-b">
-                <span className="display text-outline-bone text-7xl transition-colors duration-500 group-hover:text-blaze group-hover:[-webkit-text-stroke-color:var(--color-blaze)] sm:text-8xl">
-                  {s.n}
-                </span>
-                <div className="pt-2">
-                  <h3 className="display text-3xl sm:text-4xl">{s.title}</h3>
-                  <p className="mt-2 text-bone/70">{s.body}</p>
-                </div>
-              </Reveal>
-            ))}
-          </ol>
         </div>
       </Container>
     </section>

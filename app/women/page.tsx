@@ -10,14 +10,6 @@ export const metadata: Metadata = {
 
 export default function WomenPage() {
   return (
-    <CollectionPage
-      index="Women"
-      eyebrow="Her rotation · incl. unisex"
-      title="Women"
-      outline="loud & cropped."
-      tone="blaze"
-      intro="Cropped fleece, wide legs, fitted baby tees and oversized outerwear. Unisex pieces included — size down for a closer fit."
-      products={productsFor("women")}
-    />
+    <CollectionPage title="Women's Clothing" products={productsFor("women")} />
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { categories, type Category, type Product } from "@/lib/products";
 import { ProductCard } from "./product-card";
 import { cn } from "@/components/ui/primitives";
@@ -10,12 +10,12 @@ type Sort = "featured" | "price-asc" | "price-desc" | "name";
 
 const sortLabels: Record<Sort, string> = {
   featured: "Featured",
-  "price-asc": "Price: low → high",
-  "price-desc": "Price: high → low",
+  "price-asc": "Price: Low–High",
+  "price-desc": "Price: High–Low",
   name: "Name A–Z",
 };
 
-export function ShopBrowser({ products }: { products: Product[] }) {
+export function ShopBrowser({ products, title }: { products: Product[]; title: string }) {
   const [category, setCategory] = useState<Category | "all">("all");
   const [sort, setSort] = useState<Sort>("featured");
   const [hideSoldOut, setHideSoldOut] = useState(false);
@@ -23,52 +23,33 @@ export function ShopBrowser({ products }: { products: Product[] }) {
   const available = useMemo(() => categories.filter((c) => products.some((p) => p.category === c.id)), [products]);
 
   const list = useMemo(() => {
-    let l = products.filter((p) => (category === "all" || p.category === category) && (!hideSoldOut || !p.soldOut));
-    l = [...l];
-    if (sort === "price-asc") l.sort((a, b) => a.price - b.price);
-    else if (sort === "price-desc") l.sort((a, b) => b.price - a.price);
-    else if (sort === "name") l.sort((a, b) => a.name.localeCompare(b.name));
-    else l.sort((a, b) => Number(!!b.featured) - Number(!!a.featured) || Number(!!a.soldOut) - Number(!!b.soldOut));
-    return l;
+    const l = products.filter((p) => (category === "all" || p.category === category) && (!hideSoldOut || !p.soldOut));
+    if (sort === "price-asc") return [...l].sort((a, b) => a.price - b.price);
+    if (sort === "price-desc") return [...l].sort((a, b) => b.price - a.price);
+    if (sort === "name") return [...l].sort((a, b) => a.name.localeCompare(b.name));
+    return [...l].sort((a, b) => Number(!!b.featured) - Number(!!a.featured) || Number(!!a.soldOut) - Number(!!b.soldOut));
   }, [products, category, sort, hideSoldOut]);
 
-  const chips: { id: Category | "all"; label: string; count: number }[] = [
-    { id: "all", label: "All", count: products.length },
-    ...available.map((c) => ({ id: c.id, label: c.label, count: products.filter((p) => p.category === c.id).length })),
-  ];
+  const chips: { id: Category | "all"; label: string }[] = [{ id: "all", label: "All" }, ...available.map((c) => ({ id: c.id, label: c.label }))];
 
   return (
     <div>
-      <div className="sticky top-16 z-30 -mx-4 border-y border-bone/10 bg-ink/90 px-4 py-3 backdrop-blur-md sm:top-20 sm:-mx-6 sm:px-6 lg:-mx-10 lg:px-10">
-        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-          <div className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 sm:mx-0 sm:px-0" role="group" aria-label="Filter by category">
-            {chips.map((c) => (
-              <button
-                key={c.id}
-                type="button"
-                onClick={() => setCategory(c.id)}
-                aria-pressed={category === c.id}
-                className={cn(
-                  "label flex h-10 shrink-0 items-center gap-2 border px-4 font-bold transition-colors",
-                  category === c.id ? "border-blaze bg-blaze text-ink" : "border-bone/20 text-bone hover:border-bone",
-                )}
-              >
-                {c.label}
-                <span className={cn("text-[0.6rem]", category === c.id ? "text-ink/60" : "text-bone/40")}>{c.count}</span>
-              </button>
-            ))}
-          </div>
-          <div className="flex items-center justify-between gap-4 lg:justify-end">
-            <label className="label flex cursor-pointer items-center gap-2 text-bone/70">
-              <input type="checkbox" checked={hideSoldOut} onChange={(e) => setHideSoldOut(e.target.checked)} className="size-4 accent-[#FF7900]" />
+      <div className="sticky top-16 z-30 -mx-5 bg-white/95 px-5 py-4 backdrop-blur sm:-mx-9 sm:px-9 lg:-mx-12 lg:px-12">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <h1 className="text-2xl font-medium tracking-tight">
+            {title} <span className="text-mute">({list.length})</span>
+          </h1>
+          <div className="flex items-center gap-5">
+            <label className="flex cursor-pointer items-center gap-2 text-[0.95rem]">
+              <input type="checkbox" checked={hideSoldOut} onChange={(e) => setHideSoldOut(e.target.checked)} className="size-4 accent-ink" />
               In stock only
             </label>
-            <label className="label flex items-center gap-2 text-bone/70">
-              <span className="hidden sm:inline">Sort</span>
+            <label className="relative flex items-center gap-1 text-[0.95rem]">
+              <span>Sort By:</span>
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value as Sort)}
-                className="h-10 border border-bone/20 bg-ink px-3 font-mono text-xs uppercase tracking-wider text-bone outline-none focus:border-blaze"
+                className="appearance-none bg-transparent pr-6 font-medium text-mute outline-none"
               >
                 {Object.entries(sortLabels).map(([v, l]) => (
                   <option key={v} value={v}>
@@ -76,33 +57,37 @@ export function ShopBrowser({ products }: { products: Product[] }) {
                   </option>
                 ))}
               </select>
+              <ChevronDown className="pointer-events-none absolute right-0 size-4" />
             </label>
           </div>
         </div>
+        <div className="no-scrollbar -mx-5 mt-4 flex gap-2 overflow-x-auto px-5 sm:mx-0 sm:px-0" role="group" aria-label="Filter by category">
+          {chips.map((c) => (
+            <button
+              key={c.id}
+              type="button"
+              onClick={() => setCategory(c.id)}
+              aria-pressed={category === c.id}
+              className={cn(
+                "h-10 shrink-0 rounded-full px-5 text-[0.95rem] font-medium transition-colors",
+                category === c.id ? "bg-ink text-white" : "bg-mist hover:bg-line",
+              )}
+            >
+              {c.label}
+            </button>
+          ))}
+        </div>
       </div>
 
-      <p className="label mt-6 text-bone/50" aria-live="polite">
-        {list.length} {list.length === 1 ? "piece" : "pieces"}
-      </p>
+      <ul className="mt-4 grid grid-cols-2 gap-x-2 gap-y-10 sm:gap-x-4 lg:grid-cols-3 xl:grid-cols-4">
+        {list.map((p, i) => (
+          <li key={p.slug}>
+            <ProductCard product={p} preload={i < 4} />
+          </li>
+        ))}
+      </ul>
 
-      <motion.ul layout className="mt-4 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 lg:grid-cols-3 xl:grid-cols-4">
-        <AnimatePresence mode="popLayout">
-          {list.map((p, i) => (
-            <motion.li
-              key={p.slug}
-              layout
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <ProductCard product={p} index={i} preload={i < 4} />
-            </motion.li>
-          ))}
-        </AnimatePresence>
-      </motion.ul>
-
-      {list.length === 0 && <p className="py-24 text-center text-bone/60">Nothing here yet — try another filter.</p>}
+      {list.length === 0 && <p className="py-24 text-center text-mute">Nothing here yet — try another filter.</p>}
     </div>
   );
 }

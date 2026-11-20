@@ -10,13 +10,6 @@ export const metadata: Metadata = {
 
 export default function ShopPage() {
   return (
-    <CollectionPage
-      index="Shop"
-      eyebrow="All drops · Men · Women · Unisex"
-      title="The shop"
-      outline="everything."
-      intro="Every piece from Drop 01 — Bloock That Guyyy, Bloock That Pitch and the Blocked icon line. Pick your size, tap order, and finish it in the chat."
-      products={products}
-    />
+    <CollectionPage title="All Products" products={products} />
   );
 }

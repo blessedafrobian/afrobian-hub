@@ -8,7 +8,6 @@ import { site } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui/primitives";
 import { StoryCard } from "@/components/culture/story-card";
 import { JsonLd } from "@/components/ui/json-ld";
-import { RevealLines } from "@/components/ui/motion";
 
 export function generateStaticParams() {
   return stories.map((s) => ({ slug: s.slug }));
@@ -47,84 +46,68 @@ export default async function StoryPage({ params }: PageProps<"/culture/[slug]">
   };
 
   return (
-    <article className="bg-bone text-ink">
-      <header className="pt-20 sm:pt-24">
-        <Container>
-          <Link href="/culture" className="label inline-flex items-center gap-2 py-5 text-ink/60 hover:text-blaze-deep">
-            <ArrowLeft className="size-4" /> Culture
-          </Link>
-          <div className="mx-auto max-w-5xl pb-10 pt-4 text-center">
-            <p className="label mb-6">
-              <span className="bg-blaze px-2 py-1 font-bold">{story.kicker}</span>
-              <span className="ml-3 text-ink/60">
-                {formatDate(story.date)} · {story.readTime} read · {story.author}
-              </span>
-            </p>
-            <h1 className="display text-[clamp(2.75rem,8vw,7.5rem)]">
-              <RevealLines lines={[story.title]} />
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl font-serif text-2xl italic leading-snug text-ink/75 sm:text-3xl">{story.excerpt}</p>
-          </div>
-        </Container>
-        <div className="relative mx-auto aspect-[16/10] w-full max-w-[1600px] sm:aspect-[16/8]">
+    <article>
+      <Container className="pt-6 sm:pt-10">
+        <Link href="/culture" className="inline-flex items-center gap-2 text-sm text-mute hover:text-ink">
+          <ArrowLeft className="size-4" /> All stories
+        </Link>
+        <header className="mx-auto max-w-3xl py-10 text-center sm:py-14">
+          <p className="text-mute">
+            {story.kicker} · {formatDate(story.date)} · {story.readTime} read
+          </p>
+          <h1 className="display mt-4 text-[clamp(2.75rem,7vw,5.5rem)]">{story.title}</h1>
+          <p className="mx-auto mt-5 max-w-2xl text-xl text-ink/75">{story.excerpt}</p>
+        </header>
+        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-mist sm:aspect-[16/8]">
           <Image src={story.cover} alt={story.title} fill preload sizes="100vw" className="object-cover" />
         </div>
-      </header>
+      </Container>
 
       <Container>
-        <div className="prose-afb mx-auto max-w-2xl py-16 text-lg leading-relaxed text-ink/85 sm:py-24 sm:text-xl">
+        <div className="mx-auto max-w-2xl space-y-5 py-14 text-lg leading-relaxed text-ink/85 sm:py-20">
           {story.body.map((block, i) => {
             switch (block.type) {
               case "h":
                 return (
-                  <h2 key={i} className="display !mt-12 text-4xl text-ink">
+                  <h2 key={i} className="!mt-10 text-2xl font-medium text-ink">
                     {block.text}
                   </h2>
                 );
               case "quote":
                 return (
-                  <blockquote key={i} className="!my-12 border-l-4 border-blaze pl-6 font-serif text-3xl italic leading-tight text-ink sm:-mx-16 sm:text-5xl">
+                  <blockquote key={i} className="!my-10 border-l-4 border-blaze pl-6 text-3xl font-medium leading-snug text-ink">
                     “{block.text}”
                   </blockquote>
                 );
               case "list":
                 return (
-                  <ul key={i} className="space-y-3">
+                  <ul key={i} className="list-disc space-y-2 pl-6">
                     {block.items.map((it) => (
-                      <li key={it} className="flex gap-3">
-                        <span className="mt-3 size-2 shrink-0 bg-blaze" />
-                        {it}
-                      </li>
+                      <li key={it}>{it}</li>
                     ))}
                   </ul>
                 );
               default:
-                return (
-                  <p key={i} className={i === 0 ? "first-letter:float-left first-letter:mr-3 first-letter:font-display first-letter:text-7xl first-letter:leading-[0.8] first-letter:text-blaze-deep" : ""}>
-                    {block.text}
-                  </p>
-                );
+                return <p key={i}>{block.text}</p>;
             }
           })}
-          <div className="!mt-14 flex flex-wrap items-center gap-3 border-t border-ink/15 pt-8">
-            <ButtonLink href="/shop" variant="ink">
-              Shop the drop
-            </ButtonLink>
-            <ButtonLink href="/culture" variant="outline-ink">
+          <div className="!mt-12 flex flex-wrap gap-2 border-t border-line pt-8">
+            <ButtonLink href="/shop">Shop the drop</ButtonLink>
+            <ButtonLink href="/culture" variant="outline">
               More stories
             </ButtonLink>
           </div>
         </div>
       </Container>
 
-      <section className="border-t border-ink/15 py-20" aria-labelledby="more-title">
+      <section className="border-t border-line py-14" aria-labelledby="more-title">
         <Container>
-          <h2 id="more-title" className="display mb-10 text-5xl sm:text-6xl">
-            Keep <span className="text-blaze-deep">reading</span>
+          <h2 id="more-title" className="mb-6 text-2xl font-medium tracking-tight sm:text-[1.75rem]">
+            Keep Reading
           </h2>
-          <div className="grid gap-10 sm:grid-cols-3">
+          <div className="grid gap-8 sm:grid-cols-3 sm:gap-4">
             {more.map((s) => (
-              <StoryCard key={s.slug} story={s} tone="light" />
+              <StoryCard key={s.slug} story={s} />
             ))}
           </div>
         </Container>

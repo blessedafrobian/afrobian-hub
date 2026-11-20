@@ -7,13 +7,14 @@
       <feColorMatrix type="saturate" values="0"/>
       <feComponentTransfer><feFuncA type="table" tableValues="0 0.12"/></feComponentTransfer>
     </filter>
+    <filter id="drop-blockedpuffe-b" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="28" stdDeviation="26" flood-color="#000" flood-opacity="0.28"/></filter>
     <filter id="soft-blockedpuffe-b" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
     <filter id="blur-blockedpuffe-b" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60"/></filter>
     <pattern id="dots-blockedpuffe-b" width="14" height="14" patternUnits="userSpaceOnUse">
-      <circle cx="7" cy="7" r="3.2" fill="#000000"/>
+      <circle cx="7" cy="7" r="3.2" fill="#080808"/>
     </pattern>
     <pattern id="lines-blockedpuffe-b" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
-      <rect width="4" height="10" fill="#000000"/>
+      <rect width="4" height="10" fill="#080808"/>
     </pattern>
     <linearGradient id="shade-blockedpuffe-b" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#fff" stop-opacity="0.16"/>
@@ -26,10 +27,8 @@
     </radialGradient>
     <mask id="halo-blockedpuffe-b"><rect width="100%" height="100%" fill="url(#fade-blockedpuffe-b)"/></mask>
   </defs>
-  <rect width="800" height="1000" fill="#F2EEE7"/>
-  <rect width="800" height="1000" fill="url(#fade-blockedpuffe-b)" opacity="0.35"/>
+  <rect width="800" height="1000" fill="#F2F2F0"/>
   
-  <ellipse cx="400" cy="900" rx="260" ry="34" fill="#000" opacity="0.22" filter="url(#soft-blockedpuffe-b)"/>
   <g transform="translate(400 470) scale(1.9) translate(-400 -420)">
     <path d="M320 215 L400 250 L480 215 L540 245 Q520 320 550 380 L556 772 Q400 795 244 772 L250 380 Q280 320 260 245 Z" fill="#FF7900"/>
     <path d="M320 215 L400 250 L480 215 L540 245 Q520 320 550 380 L556 772 Q400 795 244 772 L250 380 Q280 320 260 245 Z" fill="url(#shade-blockedpuffe-b)"/>
@@ -37,9 +36,4 @@
     <path d="M262 330 Q400 346 538 330" stroke="#000" stroke-opacity="0.28" stroke-width="4" fill="none"/><path d="M262 392 Q400 408 538 392" stroke="#000" stroke-opacity="0.28" stroke-width="4" fill="none"/><path d="M262 454 Q400 470 538 454" stroke="#000" stroke-opacity="0.28" stroke-width="4" fill="none"/><path d="M262 516 Q400 532 538 516" stroke="#000" stroke-opacity="0.28" stroke-width="4" fill="none"/><path d="M262 578 Q400 594 538 578" stroke="#000" stroke-opacity="0.28" stroke-width="4" fill="none"/><path d="M262 640 Q400 656 538 640" stroke="#000" stroke-opacity="0.28" stroke-width="4" fill="none"/><path d="M262 702 Q400 718 538 702" stroke="#000" stroke-opacity="0.28" stroke-width="4" fill="none"/>
     <line x1="400" y1="250" x2="400" y2="785" stroke="#000" stroke-opacity="0.5" stroke-width="5"/>
     <g transform="translate(470 330) scale(0.9)"><circle r="30" fill="none" stroke="#080808" stroke-width="7.800000000000001"/><line x1="-21" y1="21" x2="21" y2="-21" stroke="#080808" stroke-width="7.800000000000001" stroke-linecap="round"/></g></g>
-  <rect width="800" height="1000" filter="url(#grain-blockedpuffe-b)" style="mix-blend-mode:overlay"/>
-  <text x="36" y="52" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="15" letter-spacing="2" fill="#080808" text-anchor="start">AFROBIAN/HUB</text>
-  <text x="764" y="52" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="15" letter-spacing="2" fill="#080808" text-anchor="end">DETAIL</text>
-  <text x="36" y="964" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="13" letter-spacing="2" fill="#080808" text-anchor="start">BLOCKED PUFFER VEST</text>
-  <text x="764" y="964" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="13" letter-spacing="2" fill="#080808" text-anchor="end">TEMP SHOT</text>
 </svg>

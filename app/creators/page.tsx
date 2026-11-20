@@ -18,53 +18,43 @@ export default function CreatorsPage() {
   return (
     <>
       <PageHero
-        index="Creators"
-        eyebrow="The crew · roster in progress"
-        title="The crew"
-        outline="makes culture."
-        intro={
-          <p>
-            AFROBIAN HUB is built around the people who make things. Every creator gets a profile with their story, their picks from each drop and direct links to follow them.
-          </p>
-        }
+        eyebrow="Creators"
+        title="The Crew"
+        intro={<p>Dancers, stylists, photographers, DJs. Every creator gets a profile with their story, their picks from each drop and direct links to follow them.</p>}
       >
-        <div className="border border-dashed border-bone/25 p-5 text-sm text-bone/70">
-          <p className="label mb-2 text-blaze">Note</p>
-          We&apos;re onboarding our first roster. The profiles below are <strong className="text-bone">placeholder slots</strong> — no real accounts are linked yet.
-        </div>
+        <p className="rounded-xl bg-mist p-5 text-[0.95rem] text-mute">
+          We&apos;re onboarding our first roster. The profiles below are <strong className="font-medium text-ink">placeholder slots</strong> — no real accounts are linked yet.
+        </p>
       </PageHero>
 
-      <section className="bg-ink pb-24 pt-6">
+      <section className="pb-16">
         <Container>
-          <ul className="grid gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+          <ul className="grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-4 lg:grid-cols-3">
             {creators.map((c, i) => (
-              <Reveal as="li" key={c.slug} delay={(i % 3) * 0.08} className={i % 3 === 1 ? "lg:mt-16" : ""}>
-                <CreatorCard creator={c} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+              <Reveal as="li" key={c.slug} delay={(i % 3) * 0.06}>
+                <CreatorCard creator={c} sizes="(max-width: 1024px) 50vw, 33vw" />
               </Reveal>
             ))}
           </ul>
         </Container>
       </section>
 
-      <section className="grain relative overflow-hidden bg-blaze py-20 text-ink sm:py-28">
-        <Container className="relative z-[2] grid gap-10 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-7">
-            <p className="label mb-5">Open call</p>
-            <h2 className="display text-giga">
-              Join the <span className="text-outline-ink">roster.</span>
-            </h2>
-          </div>
-          <div className="lg:col-span-5">
-            <p className="mb-6 text-lg text-ink/80">
-              Dance, style, shoot, mix, skate or speak? Send us your work — we&apos;re building profiles, drops and stories around real creators.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              <ButtonLink href={socials.instagramDm} variant="ink" size="lg" icon={<InstagramIcon size={18} />}>
-                Pitch on Instagram
-              </ButtonLink>
-              <ButtonLink href={whatsappLink(`Hi ${site.name} — I'm a creator and I'd like to join the roster.`)} variant="outline-ink" size="lg" icon={<WhatsAppIcon size={18} />}>
-                WhatsApp
-              </ButtonLink>
+      <section className="pb-20">
+        <Container>
+          <div className="rounded-2xl bg-blaze px-6 py-12 sm:px-12 sm:py-16">
+            <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
+              <h2 className="display text-6xl sm:text-8xl lg:col-span-7">Join the roster</h2>
+              <div className="lg:col-span-5">
+                <p className="mb-6 text-lg">Dance, style, shoot, mix, skate or speak? Send us your work — we&apos;re building profiles, drops and stories around real creators.</p>
+                <div className="flex flex-wrap gap-2">
+                  <ButtonLink href={socials.instagramDm} icon={<InstagramIcon size={18} />}>
+                    Pitch on Instagram
+                  </ButtonLink>
+                  <ButtonLink href={whatsappLink(`Hi ${site.name} — I'm a creator and I'd like to join the roster.`)} variant="light" icon={<WhatsAppIcon size={18} />}>
+                    WhatsApp
+                  </ButtonLink>
+                </div>
+              </div>
             </div>
           </div>
         </Container>

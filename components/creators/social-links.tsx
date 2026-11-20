@@ -11,21 +11,16 @@ const icons: Record<SocialPlatform, typeof InstagramIcon> = {
 /** Renders creator social links; null URLs show a "link pending" state rather than a fake account. */
 export function SocialLinks({ socials }: { socials: Creator["socials"] }) {
   return (
-    <ul className="grid gap-2">
+    <ul className="flex flex-wrap gap-2">
       {socials.map((s) => {
         const Icon = icons[s.platform];
         if (!s.url) {
           return (
             <li key={s.platform}>
-              <span
-                aria-disabled="true"
-                className="flex h-14 items-center justify-between border border-dashed border-bone/25 px-4 text-bone/50"
-              >
-                <span className="flex items-center gap-3">
-                  <Icon size={20} />
-                  <span className="label font-bold">{platformLabel[s.platform]}</span>
-                </span>
-                <span className="label flex items-center gap-1.5 text-[0.6rem]">
+              <span aria-disabled="true" className="flex h-11 items-center gap-2 rounded-full border border-dashed border-line px-5 text-mute">
+                <Icon size={18} />
+                <span className="font-medium">{platformLabel[s.platform]}</span>
+                <span className="flex items-center gap-1 text-xs">
                   <Clock className="size-3.5" /> Link pending
                 </span>
               </span>
@@ -38,13 +33,11 @@ export function SocialLinks({ socials }: { socials: Creator["socials"] }) {
               href={s.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex h-14 items-center justify-between border border-bone/25 px-4 transition-colors hover:border-blaze hover:bg-blaze hover:text-ink"
+              className="flex h-11 items-center gap-2 rounded-full bg-ink px-5 font-medium text-white transition-colors hover:bg-ink/75"
             >
-              <span className="flex items-center gap-3">
-                <Icon size={20} />
-                <span className="label font-bold">{platformLabel[s.platform]}</span>
-                {s.handle && <span className="font-mono text-xs opacity-70">@{s.handle}</span>}
-              </span>
+              <Icon size={18} />
+              {platformLabel[s.platform]}
+              {s.handle && <span className="text-sm text-white/70">@{s.handle}</span>}
               <ArrowUpRight className="size-4" />
             </a>
           </li>

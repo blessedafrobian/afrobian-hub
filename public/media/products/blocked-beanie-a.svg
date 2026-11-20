@@ -7,13 +7,14 @@
       <feColorMatrix type="saturate" values="0"/>
       <feComponentTransfer><feFuncA type="table" tableValues="0 0.12"/></feComponentTransfer>
     </filter>
+    <filter id="drop-blockedbeani-a" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="28" stdDeviation="26" flood-color="#000" flood-opacity="0.28"/></filter>
     <filter id="soft-blockedbeani-a" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
     <filter id="blur-blockedbeani-a" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60"/></filter>
     <pattern id="dots-blockedbeani-a" width="14" height="14" patternUnits="userSpaceOnUse">
-      <circle cx="7" cy="7" r="3.2" fill="#ffffff"/>
+      <circle cx="7" cy="7" r="3.2" fill="#080808"/>
     </pattern>
     <pattern id="lines-blockedbeani-a" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
-      <rect width="4" height="10" fill="#ffffff"/>
+      <rect width="4" height="10" fill="#080808"/>
     </pattern>
     <linearGradient id="shade-blockedbeani-a" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#fff" stop-opacity="0.16"/>
@@ -26,11 +27,9 @@
     </radialGradient>
     <mask id="halo-blockedbeani-a"><rect width="100%" height="100%" fill="url(#fade-blockedbeani-a)"/></mask>
   </defs>
-  <rect width="800" height="1000" fill="#080808"/>
-  <rect width="800" height="1000" fill="url(#fade-blockedbeani-a)" opacity="0.08"/>
-  
-  <ellipse cx="400" cy="900" rx="260" ry="34" fill="#000" opacity="0.6" filter="url(#soft-blockedbeani-a)"/>
-  <g transform="">
+  <rect width="800" height="1000" fill="#F2F2F0"/>
+  <ellipse cx="400" cy="760" rx="310.5" ry="26" fill="#000" opacity="0.16" filter="url(#soft-blockedbeani-a)"/>
+  <g transform="translate(400 490) scale(1.35) translate(-400 -490)">
     <path d="M262 600 Q258 330 400 310 Q542 330 538 600 Z" fill="#FF7900"/>
     <path d="M262 600 Q258 330 400 310 Q542 330 538 600 Z" fill="url(#shade-blockedbeani-a)"/>
     <line x1="277.3333333333333" y1="360" x2="277.3333333333333" y2="600" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="292.6666666666667" y1="360" x2="292.6666666666667" y2="600" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="308" y1="360" x2="308" y2="600" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="323.3333333333333" y1="360" x2="323.3333333333333" y2="600" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="338.6666666666667" y1="360" x2="338.6666666666667" y2="600" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="354" y1="360" x2="354" y2="600" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="369.3333333333333" y1="360" x2="369.3333333333333" y2="600" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="384.6666666666667" y1="360" x2="384.6666666666667" y2="600" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="400" y1="360" x2="400" y2="600" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="415.33333333333337" y1="360" x2="415.33333333333337" y2="600" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="430.66666666666663" y1="360" x2="430.66666666666663" y2="600" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="446" y1="360" x2="446" y2="600" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="461.33333333333337" y1="360" x2="461.33333333333337" y2="600" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="476.66666666666663" y1="360" x2="476.66666666666663" y2="600" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="492" y1="360" x2="492" y2="600" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="507.33333333333337" y1="360" x2="507.33333333333337" y2="600" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="522.6666666666667" y1="360" x2="522.6666666666667" y2="600" stroke="#000" stroke-opacity="0.25" stroke-width="2"/>
@@ -38,9 +37,4 @@
     <rect x="245" y="560" width="310" height="120" rx="14" fill="#000" fill-opacity="0.18"/>
     <line x1="257.9166666666667" y1="560" x2="257.9166666666667" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="270.8333333333333" y1="560" x2="270.8333333333333" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="283.75" y1="560" x2="283.75" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="296.6666666666667" y1="560" x2="296.6666666666667" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="309.5833333333333" y1="560" x2="309.5833333333333" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="322.5" y1="560" x2="322.5" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="335.4166666666667" y1="560" x2="335.4166666666667" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="348.3333333333333" y1="560" x2="348.3333333333333" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="361.25" y1="560" x2="361.25" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="374.16666666666663" y1="560" x2="374.16666666666663" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="387.08333333333337" y1="560" x2="387.08333333333337" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="400" y1="560" x2="400" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="412.91666666666663" y1="560" x2="412.91666666666663" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="425.83333333333337" y1="560" x2="425.83333333333337" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="438.75" y1="560" x2="438.75" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="451.66666666666663" y1="560" x2="451.66666666666663" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="464.58333333333337" y1="560" x2="464.58333333333337" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="477.5" y1="560" x2="477.5" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="490.41666666666663" y1="560" x2="490.41666666666663" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="503.3333333333333" y1="560" x2="503.3333333333333" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="516.25" y1="560" x2="516.25" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="529.1666666666667" y1="560" x2="529.1666666666667" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="542.0833333333333" y1="560" x2="542.0833333333333" y2="680" stroke="#000" stroke-opacity="0.25" stroke-width="2"/>
     <g transform="translate(400 620)"><rect x="-44" y="-36" width="88" height="72" rx="4" fill="#080808"/><circle r="22" fill="none" stroke="#FF7900" stroke-width="7"/><line x1="-15.399999999999999" y1="15.399999999999999" x2="15.399999999999999" y2="-15.399999999999999" stroke="#FF7900" stroke-width="7" stroke-linecap="round"/></g></g>
-  <rect width="800" height="1000" filter="url(#grain-blockedbeani-a)" style="mix-blend-mode:overlay"/>
-  <text x="36" y="52" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="15" letter-spacing="2" fill="#F2EEE7" text-anchor="start">AFROBIAN/HUB</text>
-  <text x="764" y="52" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="15" letter-spacing="2" fill="#F2EEE7" text-anchor="end">FRONT</text>
-  <text x="36" y="964" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="13" letter-spacing="2" fill="#F2EEE7" text-anchor="start">BLOCKED BEANIE</text>
-  <text x="764" y="964" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="13" letter-spacing="2" fill="#F2EEE7" text-anchor="end">TEMP SHOT</text>
 </svg>

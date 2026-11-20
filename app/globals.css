@@ -9,32 +9,24 @@
   --color-ink: #080808;
   --color-coal: #292929;
   --color-bone: #f2eee7;
-  --color-bone-dim: #d9d3c8;
   --color-sand: #c9b79c;
-  --color-ash: #8a8580;
+
+  /* neutral UI scale */
+  --color-paper: #ffffff;
+  --color-mist: #f5f5f4;
+  --color-line: #e5e5e5;
+  --color-mute: #707070;
 
   --font-display: var(--font-anton), "Impact", "Arial Narrow Bold", sans-serif;
-  --font-serif: var(--font-instrument), "Times New Roman", serif;
   --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
-
-  --text-mega: clamp(4.5rem, 19vw, 21rem);
-  --text-giga: clamp(3.25rem, 11vw, 11rem);
-  --text-huge: clamp(2.75rem, 7vw, 6.5rem);
 
   --ease-snap: cubic-bezier(0.22, 1, 0.36, 1);
 
   --animate-marquee: marquee var(--marquee-duration, 30s) linear infinite;
-  --animate-marquee-rev: marquee-rev var(--marquee-duration, 30s) linear infinite;
-  --animate-spin-slow: spin 18s linear infinite;
 
   @keyframes marquee {
     from { transform: translate3d(0, 0, 0); }
     to { transform: translate3d(-50%, 0, 0); }
-  }
-  @keyframes marquee-rev {
-    from { transform: translate3d(-50%, 0, 0); }
-    to { transform: translate3d(0, 0, 0); }
   }
 }
 
@@ -44,8 +36,8 @@
     -webkit-tap-highlight-color: transparent;
   }
   body {
-    background: var(--color-ink);
-    color: var(--color-bone);
+    background: var(--color-paper);
+    color: var(--color-ink);
     font-family: var(--font-sans);
     text-rendering: optimizeLegibility;
   }
@@ -60,69 +52,18 @@
 }
 
 @layer components {
-  /* uppercase condensed display type */
+  /* uppercase condensed display type — headlines only */
   .display {
     font-family: var(--font-display);
     text-transform: uppercase;
-    line-height: 0.86;
-    letter-spacing: -0.01em;
+    line-height: 0.9;
+    letter-spacing: 0;
   }
-  .label {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-  .text-outline {
-    color: transparent;
-    -webkit-text-stroke: 1.5px currentColor;
-  }
-  .text-outline-bone {
-    color: transparent;
-    -webkit-text-stroke: 1.5px var(--color-bone);
-  }
-  .text-outline-ink {
-    color: transparent;
-    -webkit-text-stroke: 1.5px var(--color-ink);
-  }
-
-  /* film grain overlay */
-  .grain {
-    position: relative;
-    isolation: isolate;
-  }
-  .grain::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.09;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-  }
-
-  /* torn / jagged section edges */
-  .edge-jag-bottom {
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 22px), 95% 100%, 90% calc(100% - 18px), 84% 100%, 77% calc(100% - 20px), 70% 100%, 63% calc(100% - 14px), 55% 100%, 47% calc(100% - 22px), 40% 100%, 33% calc(100% - 16px), 25% 100%, 18% calc(100% - 22px), 11% 100%, 5% calc(100% - 14px), 0 100%);
-  }
-  .edge-slant-top {
-    clip-path: polygon(0 4vw, 100% 0, 100% 100%, 0 100%);
-  }
-  .edge-slant-bottom {
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4vw), 0 100%);
-  }
-
   .no-scrollbar {
     scrollbar-width: none;
   }
   .no-scrollbar::-webkit-scrollbar {
     display: none;
-  }
-
-  /* editorial rich text */
-  .prose-afb > * + * {
-    margin-top: 1.25rem;
   }
 }
 

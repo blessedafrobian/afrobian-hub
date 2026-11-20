@@ -61,6 +61,7 @@ function defs(id, { grain = 0.12, dots = C.ink } = {}) {
       <feColorMatrix type="saturate" values="0"/>
       <feComponentTransfer><feFuncA type="table" tableValues="0 ${grain}"/></feComponentTransfer>
     </filter>
+    <filter id="drop-${id}" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="28" stdDeviation="26" flood-color="#000" flood-opacity="0.28"/></filter>
     <filter id="soft-${id}" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
     <filter id="blur-${id}" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60"/></filter>
     <pattern id="dots-${id}" width="14" height="14" patternUnits="userSpaceOnUse">
@@ -81,9 +82,6 @@ function defs(id, { grain = 0.12, dots = C.ink } = {}) {
     <mask id="halo-${id}"><rect width="100%" height="100%" fill="url(#fade-${id})"/></mask>
   </defs>`;
 }
-
-const grainLayer = (id, w, h) =>
-  `<rect width="${w}" height="${h}" filter="url(#grain-${id})" style="mix-blend-mode:overlay"/>`;
 
 function stamp(x, y, text, color = C.ink, size = 15, anchor = "start") {
   return `<text x="${x}" y="${y}" font-family="${MONO}" font-size="${size}" letter-spacing="2" fill="${color}" text-anchor="${anchor}">${text}</text>`;
@@ -273,111 +271,33 @@ const GARMENTS = {
 /* ------------------------------------------------------------------ */
 /* product shots                                                       */
 /* ------------------------------------------------------------------ */
-function productShot({ id, garment, fill, accent, print, bg, cropped, wide, variant, label }) {
+const STUDIO = "#F2F2F0";
+const SCALE = { cap: 1.35, beanie: 1.35, tote: 1.1, babytee: 1.15, shorts: 1.15 };
+
+/** Clean studio product shot: light backdrop, soft floor shadow, no overlays. */
+function productShot({ id, garment, fill, accent, print, bg, cropped, wide, variant }) {
   const W = 800;
   const H = 1000;
   const sid = `${id}-${variant}`;
-  const isDark = bg === C.ink || bg === C.coal;
-  const ink = isDark ? C.bone : C.ink;
   const g = GARMENTS[garment]({ fill, accent, print, cropped, wide }, sid);
-  let transform = "";
-  if (variant === "b") transform = "translate(400 470) scale(1.9) translate(-400 -420)";
-  if (variant === "c") transform = "translate(400 500) rotate(-8) scale(0.9) translate(-400 -500)";
-
+  const k = SCALE[garment] ?? 1;
+  const back = variant === "c" ? bg : STUDIO;
+  let transform = `translate(400 490) scale(${k}) translate(-400 -490)`;
+  if (variant === "b") transform = `translate(400 470) scale(${1.9 * k}) translate(-400 ${garment === "cap" || garment === "beanie" ? -470 : -420})`;
+  if (variant === "c") transform = `translate(400 500) rotate(-6) scale(${0.92 * k}) translate(-400 -500)`;
+  const dark = back === C.ink || back === C.coal;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
-  ${defs(sid, { dots: isDark ? "#ffffff" : "#000000" })}
-  <rect width="${W}" height="${H}" fill="${bg}"/>
-  <rect width="${W}" height="${H}" fill="url(#fade-${sid})" opacity="${isDark ? 0.08 : 0.35}"/>
-  ${variant === "c" ? `<rect x="0" y="0" width="${W}" height="${H}" fill="url(#lines-${sid})" opacity="0.05"/>` : ""}
-  <ellipse cx="400" cy="900" rx="260" ry="34" fill="#000" opacity="${isDark ? 0.6 : 0.22}" filter="url(#soft-${sid})"/>
+  ${defs(sid)}
+  <rect width="${W}" height="${H}" fill="${back}"/>
+  ${variant !== "b" ? `<ellipse cx="400" cy="${garment === "cap" || garment === "beanie" ? 760 : 905}" rx="${230 * k}" ry="26" fill="#000" opacity="${dark ? 0.55 : 0.16}" filter="url(#soft-${sid})"/>` : ""}
   <g transform="${transform}">${g}</g>
-  ${grainLayer(sid, W, H)}
-  ${stamp(36, 52, "AFROBIAN/HUB", ink, 15)}
-  ${stamp(W - 36, 52, variant === "b" ? "DETAIL" : variant === "c" ? "ALT VIEW" : "FRONT", ink, 15, "end")}
-  ${stamp(36, H - 36, label, ink, 13)}
-  ${stamp(W - 36, H - 36, "TEMP SHOT", ink, 13, "end")}
 </svg>`;
 }
 
-/* ------------------------------------------------------------------ */
-/* figures for editorial collages                                     */
-/* ------------------------------------------------------------------ */
-function figure({ x = 400, y = 0, s = 1, top = C.ink, bottom = C.coal, skin = C.skinA, shoe = C.bone, accent = C.blaze, hood = true, flip = false }) {
-  const t = `translate(${x} ${y}) scale(${flip ? -s : s} ${s}) translate(-400 0)`;
-  return `<g transform="${t}">
-    ${hood ? `<path d="M326 278 Q312 118 400 100 Q488 118 474 278 Q400 256 326 278 Z" fill="${top}"/>` : `<rect x="380" y="226" width="40" height="50" fill="${skin}"/><ellipse cx="400" cy="186" rx="52" ry="62" fill="${skin}"/><path d="M342 170 Q350 106 400 104 Q454 106 460 170 Q430 140 400 142 Q370 140 342 170Z" fill="${C.ink}"/>`}
-    ${hood ? `<ellipse cx="400" cy="200" rx="40" ry="50" fill="${skin}"/><path d="M360 180 Q400 150 440 180 L440 196 Q400 176 360 196 Z" fill="#000" opacity="0.45"/>` : ""}
-    <path d="M330 262 Q400 292 470 262 L548 286 Q592 306 602 372 L628 602 Q631 642 614 652 L586 657 Q572 647 570 612 L552 432 L556 652 Q400 672 244 652 L248 432 L230 612 Q228 647 214 657 L186 652 Q169 642 172 602 L198 372 Q208 306 252 286 Z" fill="${top}"/>
-    <path d="M330 262 Q400 292 470 262 L548 286 Q592 306 602 372 L628 602 Q631 642 614 652 L586 657 Q572 647 570 612 L552 432 L556 652 Q400 672 244 652 L248 432 L230 612 Q228 647 214 657 L186 652 Q169 642 172 602 L198 372 Q208 306 252 286 Z" fill="#fff" opacity="0.06"/>
-    <g transform="translate(400 410)">${blockIcon(accent, 30)}</g>
-    <ellipse cx="600" cy="672" rx="17" ry="22" fill="${skin}"/><ellipse cx="200" cy="672" rx="17" ry="22" fill="${skin}"/>
-    <path d="M258 640 L542 640 L566 912 L470 918 L410 712 L390 712 L330 918 L234 912 Z" fill="${bottom}"/>
-    <path d="M236 560 L236 560" />
-    <path d="M222 900 L338 904 Q356 934 336 946 L208 946 Q196 922 222 900 Z" fill="${shoe}"/>
-    <path d="M462 904 L578 900 Q604 922 592 946 L464 946 Q444 934 462 904 Z" fill="${shoe}"/>
-    <rect x="208" y="938" width="130" height="8" fill="#000" opacity="0.35"/><rect x="464" y="938" width="130" height="8" fill="#000" opacity="0.35"/>
-  </g>`;
-}
-
-function tape(x, y, w, rot, color = C.blaze, text = "") {
-  return `<g transform="translate(${x} ${y}) rotate(${rot})"><rect x="${-w / 2}" y="-24" width="${w}" height="48" fill="${color}"/>${
-    text ? `<text x="0" y="9" font-family="${MONO}" font-size="20" font-weight="700" letter-spacing="4" fill="${C.ink}" text-anchor="middle">${text}</text>` : ""
-  }</g>`;
-}
-
-function editorial({ name, w, h, bg, scene }) {
-  const id = name.replace(/[^a-z0-9]/gi, "");
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
-  ${defs(id, { grain: 0.18, dots: scene.dots ?? C.blaze })}
-  <rect width="${w}" height="${h}" fill="${bg}"/>
-  ${scene.body(id, w, h)}
-  ${grainLayer(id, w, h)}
-  </svg>`;
-  write(`editorial/${name}.svg`, svg);
-}
-
-/* ------------------------------------------------------------------ */
-/* creator portraits                                                   */
-/* ------------------------------------------------------------------ */
-function portrait({ name, bg, skin, top, hair, accent, initials }) {
-  const W = 800;
-  const H = 1000;
-  const id = name;
-  const hairs = {
-    afro: `<circle cx="400" cy="400" r="200" fill="${C.ink}"/><circle cx="400" cy="400" r="200" fill="url(#dots-${id})" opacity="0.18"/>`,
-    puffs: `<circle cx="285" cy="280" r="92" fill="${C.ink}"/><circle cx="515" cy="280" r="92" fill="${C.ink}"/>`,
-    cap: "",
-    hood: `<path d="M240 720 Q200 260 400 220 Q600 260 560 720 Z" fill="${top}"/><path d="M240 720 Q200 260 400 220 Q600 260 560 720 Z" fill="#000" opacity="0.25"/>`,
-    wrap: "",
-    buzz: "",
-    braids: [...Array(9)].map((_, i) => `<rect x="${282 + i * 28}" y="300" width="18" height="${380 + (i % 3) * 30}" rx="9" fill="${C.ink}"/>`).join(""),
-  };
-  const above = {
-    cap: `<path d="M282 410 Q286 270 400 262 Q514 270 518 410 Z" fill="${accent}"/><path d="M276 408 Q400 380 524 408 Q560 430 590 430 Q470 448 276 430 Z" fill="${accent}"/><path d="M276 408 Q400 380 524 408 Q560 430 590 430 Q470 448 276 430 Z" fill="#000" opacity="0.3"/>`,
-    wrap: `<path d="M276 420 Q270 250 400 236 Q530 250 524 420 Q470 360 400 362 Q330 360 276 420 Z" fill="${accent}"/><circle cx="452" cy="262" r="46" fill="${accent}"/><path d="M276 420 Q270 250 400 236 Q530 250 524 420 Q470 360 400 362 Q330 360 276 420 Z" fill="url(#lines-${id})" opacity="0.2"/>`,
-    buzz: `<path d="M286 420 Q286 290 400 280 Q514 290 514 420 Q470 340 400 336 Q330 340 286 420 Z" fill="${C.ink}"/>`,
-    afro: "",
-    puffs: `<path d="M286 420 Q286 290 400 280 Q514 290 514 420 Q470 340 400 336 Q330 340 286 420 Z" fill="${C.ink}"/>`,
-    hood: "",
-    braids: `<path d="M282 430 Q282 285 400 276 Q518 285 518 430 Q470 340 400 336 Q330 340 282 430 Z" fill="${C.ink}"/>`,
-  };
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
-  ${defs(id, { grain: 0.2, dots: C.ink })}
-  <rect width="${W}" height="${H}" fill="${bg}"/>
-  <text x="${W / 2}" y="${H * 0.58}" font-family="${DISPLAY}" font-size="620" fill="${C.ink}" opacity="0.08" text-anchor="middle">${initials}</text>
-  <circle cx="400" cy="430" r="320" fill="url(#dots-${id})" mask="url(#halo-${id})" opacity="0.25"/>
-  ${hairs[hair]}
-  <path d="M110 1000 Q120 790 290 748 L352 726 L352 640 L448 640 L448 726 L510 748 Q680 790 690 1000 Z" fill="${top}"/>
-  <path d="M110 1000 Q120 790 290 748 L352 726 L352 640 L448 640 L448 726 L510 748 Q680 790 690 1000 Z" fill="#fff" opacity="0.07"/>
-  <path d="M352 680 L448 680 L448 728 Q400 770 352 728 Z" fill="${skin}"/>
-  <ellipse cx="400" cy="470" rx="118" ry="150" fill="${skin}"/>
-  <path d="M300 520 Q400 560 500 520 Q490 600 400 620 Q310 600 300 520 Z" fill="#000" opacity="0.12"/>
-  ${above[hair]}
-  <path d="M355 760 L445 760 L430 830 L370 830 Z" fill="${accent}"/>
-  ${grainLayer(id, W, H)}
-  ${stamp(36, 52, "AFROBIAN/HUB — CREATORS", C.ink, 14)}
-  ${stamp(W - 36, H - 36, "PORTRAIT PLACEHOLDER", bg === C.ink || bg === C.coal ? C.bone : C.ink, 13, "end")}
-</svg>`;
+/** Place a garment in a composition with a soft drop shadow. */
+function piece(type, opts, x, y, s = 1, rot = 0, id = "p") {
+  const g = GARMENTS[type](opts, id);
+  return `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s}) translate(-400 -490)" filter="url(#drop-${id})">${g}</g>`;
 }
 
 /* ================================================================== */
@@ -414,186 +334,126 @@ products.forEach((p) => {
 });
 
 /* ================================================================== */
-/* EDITORIAL                                                           */
+/* EDITORIAL — product-led compositions                                */
 /* ================================================================== */
-editorial({
-  name: "hero-main",
-  w: 1200,
-  h: 1500,
-  bg: C.ink,
-  scene: {
-    body: (id, w, h) => `
-      <circle cx="${w * 0.55}" cy="${h * 0.38}" r="420" fill="${C.blaze}"/>
-      <circle cx="${w * 0.55}" cy="${h * 0.38}" r="520" fill="url(#dots-${id})" mask="url(#halo-${id})" opacity="0.7"/>
-      <rect x="0" y="${h * 0.62}" width="${w}" height="${h * 0.38}" fill="${C.coal}"/>
-      <rect x="0" y="${h * 0.62}" width="${w}" height="${h * 0.38}" fill="url(#lines-${id})" opacity="0.06"/>
-      <ellipse cx="${w * 0.5}" cy="${h * 0.93}" rx="360" ry="40" fill="#000" opacity="0.7" filter="url(#soft-${id})"/>
-      ${figure({ x: w * 0.5, y: h * 0.03, s: 1.48, top: C.ink, bottom: "#1a1a1a", skin: C.skinA, shoe: C.bone })}
-      ${tape(w * 0.18, h * 0.16, 420, -8, C.bone, "DROP 01 — BLOOCK THAT GUYYY")}
-      ${tape(w * 0.86, h * 0.78, 360, 6, C.blaze, "MA → WORLD")}
-    `,
-  },
-});
+function comp(name, w, h, bg, body) {
+  const id = name.replace(/[^a-z0-9]/gi, "");
+  write(`editorial/${name}.svg`, `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">${defs(id)}<rect width="${w}" height="${h}" fill="${bg}"/>${body(id, w, h)}</svg>`);
+}
+const bigWord = (text, x, y, size, color, opacity = 1, anchor = "middle") =>
+  `<text x="${x}" y="${y}" font-family="${DISPLAY}" font-size="${size}" fill="${color}" opacity="${opacity}" text-anchor="${anchor}">${text}</text>`;
+/** Word stretched to an exact width (x = left edge). */
+const fitWord = (text, x, y, width, size, color, opacity = 1) =>
+  `<text x="${x}" y="${y}" font-family="${DISPLAY}" font-size="${size}" fill="${color}" opacity="${opacity}" textLength="${width}" lengthAdjust="spacingAndGlyphs">${text}</text>`;
 
-editorial({
-  name: "hero-side",
-  w: 900,
-  h: 1100,
-  bg: C.bone,
-  scene: {
-    dots: C.ink,
-    body: (id, w, h) => `
-      <rect x="${w * 0.08}" y="${h * 0.06}" width="${w * 0.84}" height="${h * 0.7}" fill="${C.blaze}"/>
-      <rect x="${w * 0.08}" y="${h * 0.06}" width="${w * 0.84}" height="${h * 0.7}" fill="url(#dots-${id})" opacity="0.18"/>
-      ${figure({ x: w * 0.36, y: h * 0.1, s: 0.96, top: C.bone, bottom: C.olive, skin: C.skinB, shoe: C.ink, accent: C.ink, hood: false })}
-      ${figure({ x: w * 0.68, y: h * 0.16, s: 0.88, top: C.ink, bottom: C.sand, skin: C.skinC, shoe: C.bone, flip: true })}
-      <text x="${w * 0.08}" y="${h * 0.92}" font-family="${DISPLAY}" font-size="120" fill="${C.ink}">STREET/</text>
-      ${stamp(w * 0.08, h * 0.97, "LOOKBOOK FRAME 02 — TEMPORARY ARTWORK", C.ink, 18)}
-    `,
-  },
-});
+const O = {
+  guyHoodie: { fill: C.ink, accent: C.blaze, print: "guy" },
+  pitchHoodie: { fill: C.bone, accent: C.ink, print: "pitch" },
+  guyCrop: { fill: C.blaze, accent: C.ink, print: "guy", cropped: true },
+  pitchCrop: { fill: C.clay, accent: C.bone, print: "pitch", cropped: true },
+  guyTee: { fill: C.bone, accent: C.ink, print: "guy" },
+  pitchTee: { fill: C.ink, accent: C.blaze, print: "pitch" },
+  iconTee: { fill: C.blaze, accent: C.ink, print: "blocked-guy" },
+  guyCap: { fill: C.ink, accent: C.blaze, print: "guy" },
+  pitchCap: { fill: C.bone, accent: C.ink, print: "pitch" },
+  cargo: { fill: C.olive, accent: C.blaze, print: "guy" },
+  wideCargo: { fill: C.sand, accent: C.ink, print: "pitch", wide: true },
+  vest: { fill: C.blaze, accent: C.ink, print: "icon" },
+  beanie: { fill: C.blaze, accent: C.ink, print: "icon" },
+  tote: { fill: C.bone, accent: C.ink, print: "pitch" },
+  track: { fill: C.coal, accent: C.blaze, print: "pitch-small" },
+};
 
-const lookbooks = [
-  { name: "lookbook-01", bg: C.coal, sun: C.blaze, figs: [{ top: C.blaze, bottom: C.ink, skin: C.skinA, shoe: C.bone, accent: C.ink }], word: "BLOOCK" },
-  { name: "lookbook-02", bg: C.blaze, sun: C.ink, figs: [{ top: C.ink, bottom: C.coal, skin: C.skinB, shoe: C.blaze, hood: false }], word: "GUYYY" },
-  { name: "lookbook-03", bg: C.bone, sun: C.blaze, figs: [{ top: C.coal, bottom: C.sand, skin: C.skinC, shoe: C.ink }, { top: C.ink, bottom: C.olive, skin: C.skinA, shoe: C.bone, hood: false }], word: "PITCH" },
-  { name: "lookbook-04", bg: C.ink, sun: C.coal, figs: [{ top: C.bone, bottom: C.ink, skin: C.skinB, shoe: C.blaze, accent: C.blaze, hood: false }], word: "AFTER DARK" },
+/* hero — wide (desktop) and tall (mobile) */
+comp("hero-wide", 2400, 1350, C.blaze, (id, w, h) => `
+  ${fitWord("BLOOCK", w * 0.04, h * 0.47, w * 0.92, 520, "#EE7200")}
+  ${fitWord("THAT GUYYY", w * 0.04, h * 0.95, w * 0.92, 520, "#EE7200")}
+  ${piece("tee", O.guyTee, w * 0.85, h * 0.46, 1.05, 9, id)}
+  ${piece("hoodie", O.guyHoodie, w * 0.67, h * 0.52, 1.45, -5, id)}
+  ${piece("cap", O.guyCap, w * 0.52, h * 0.8, 0.9, -12, id)}`);
+comp("hero-tall", 1200, 1600, C.blaze, (id, w, h) => `
+  ${fitWord("BLOOCK", w * 0.05, h * 0.3, w * 0.9, 420, "#EE7200")}
+  ${fitWord("THAT", w * 0.05, h * 0.6, w * 0.9, 420, "#EE7200")}
+  ${fitWord("GUYYY", w * 0.05, h * 0.9, w * 0.9, 420, "#EE7200")}
+  ${piece("hoodie", O.guyHoodie, w * 0.55, h * 0.44, 1.4, -5, id)}
+  ${piece("cap", O.guyCap, w * 0.3, h * 0.72, 0.85, -12, id)}`);
+
+/* men / women edits */
+comp("panel-men", 1000, 1250, "#E7E4DF", (id, w, h) => `
+  ${piece("cargo", O.cargo, w * 0.5, h * 0.66, 1.0, 4, id)}
+  ${piece("hoodie", O.guyHoodie, w * 0.47, h * 0.36, 0.95, -6, id)}
+  ${piece("cap", O.guyCap, w * 0.8, h * 0.17, 0.62, 14, id)}`);
+comp("panel-women", 1000, 1250, "#1E1E1E", (id, w, h) => `
+  ${piece("cargo", O.wideCargo, w * 0.5, h * 0.68, 1.0, -4, id)}
+  ${piece("hoodie", O.guyCrop, w * 0.5, h * 0.33, 0.95, 5, id)}
+  ${piece("babytee", { fill: C.bone, accent: C.blaze, print: "pitch" }, w * 0.18, h * 0.2, 0.5, -14, id)}`);
+
+/* campaign banner (text is overlaid in the UI on the left) */
+comp("campaign-wide", 2400, 1100, C.ink, (id, w, h) => `
+  ${piece("tote", O.tote, w * 0.9, h * 0.52, 0.95, 8, id)}
+  ${piece("hoodie", O.pitchHoodie, w * 0.73, h * 0.52, 1.25, -4, id)}
+  ${piece("cap", O.pitchCap, w * 0.59, h * 0.8, 0.8, -10, id)}`);
+comp("campaign-tall", 1200, 1500, C.ink, (id, w, h) => `
+  ${fitWord("PITCH", w * 0.04, h * 0.97, w * 0.92, 420, "#161616")}
+  ${piece("hoodie", O.pitchHoodie, w * 0.52, h * 0.6, 1.25, -4, id)}
+  ${piece("cap", O.pitchCap, w * 0.25, h * 0.86, 0.8, -10, id)}`);
+
+/* lookbook outfits */
+const outfits = [
+  { name: "lookbook-01", bg: "#D9D4CB", top: ["hoodie", O.pitchHoodie], bottom: ["cargo", O.cargo], acc: ["cap", O.pitchCap] },
+  { name: "lookbook-02", bg: C.blaze, top: ["vest", O.vest], under: ["tee", O.pitchTee], bottom: ["cargo", { ...O.cargo, fill: C.ink }], acc: ["beanie", O.beanie] },
+  { name: "lookbook-03", bg: C.coal, top: ["jacket", O.track], bottom: ["cargo", O.wideCargo], acc: ["cap", O.guyCap] },
 ];
-lookbooks.forEach((lb) => {
-  editorial({
-    name: lb.name,
-    w: 1000,
-    h: 1250,
-    bg: lb.bg,
-    scene: {
-      dots: lb.bg === C.bone ? C.ink : C.bone,
-      body: (id, w, h) => {
-        const n = lb.figs.length;
-        const figs = lb.figs
-          .map((f, i) => figure({ ...f, x: n === 1 ? w / 2 : w * (0.32 + i * 0.36), y: n === 1 ? h * 0.08 : h * 0.16 + i * 20, s: n === 1 ? 1.2 : 0.98, flip: i === 1 }))
-          .join("");
-        const textColor = lb.bg === C.bone ? C.ink : lb.bg === C.blaze ? C.ink : C.bone;
-        return `
-        <circle cx="${w * 0.7}" cy="${h * 0.3}" r="300" fill="${lb.sun}"/>
-        <rect width="${w}" height="${h}" fill="url(#dots-${id})" opacity="0.07"/>
-        <text x="-20" y="${h * 0.5}" font-family="${DISPLAY}" font-size="300" fill="none" stroke="${textColor}" stroke-width="3" opacity="0.5">${lb.word}</text>
-        ${figs}
-        ${stamp(40, h - 40, `${lb.name.toUpperCase()} / TEMPORARY ARTWORK`, textColor, 18)}`;
-      },
-    },
-  });
-});
+outfits.forEach((o) =>
+  comp(o.name, 1000, 1250, o.bg, (id, w, h) => `
+    ${piece(o.bottom[0], o.bottom[1], w * 0.52, h * 0.68, 1.0, 3, id)}
+    ${o.under ? piece(o.under[0], o.under[1], w * 0.42, h * 0.34, 0.9, -8, id) : ""}
+    ${piece(o.top[0], o.top[1], w * 0.5, h * 0.34, 0.92, -4, id)}
+    ${piece(o.acc[0], { ...o.acc[1], fill: o.acc[1].fill === o.bg ? C.ink : o.acc[1].fill }, w * 0.8, h * 0.15, 0.6, 12, id)}`),
+);
 
-editorial({
-  name: "panel-men",
-  w: 1000,
-  h: 1400,
-  bg: C.coal,
-  scene: {
-    dots: C.bone,
-    body: (id, w, h) => `
-      <rect x="0" y="${h * 0.55}" width="${w}" height="${h * 0.45}" fill="${C.ink}"/>
-      <rect x="${w * 0.6}" y="0" width="${w * 0.4}" height="${h}" fill="${C.blaze}"/>
-      <rect width="${w}" height="${h}" fill="url(#lines-${id})" opacity="0.05"/>
-      ${figure({ x: w * 0.5, y: h * 0.12, s: 1.3, top: C.ink, bottom: C.olive, skin: C.skinA, shoe: C.bone })}
-      ${stamp(40, h - 40, "MEN — TEMPORARY ARTWORK", C.bone, 18)}`,
-  },
-});
-
-editorial({
-  name: "panel-women",
-  w: 1000,
-  h: 1400,
-  bg: C.bone,
-  scene: {
-    dots: C.ink,
-    body: (id, w, h) => `
-      <circle cx="${w * 0.5}" cy="${h * 0.36}" r="380" fill="${C.blaze}"/>
-      <circle cx="${w * 0.5}" cy="${h * 0.36}" r="460" fill="url(#dots-${id})" mask="url(#halo-${id})" opacity="0.35"/>
-      <rect x="0" y="${h * 0.72}" width="${w}" height="${h * 0.28}" fill="${C.sand}"/>
-      ${figure({ x: w * 0.5, y: h * 0.12, s: 1.3, top: C.ink, bottom: C.sand, skin: C.skinC, shoe: C.blaze, hood: false, accent: C.blaze })}
-      ${stamp(40, h - 40, "WOMEN — TEMPORARY ARTWORK", C.ink, 18)}`,
-  },
-});
-
-editorial({
-  name: "manifesto",
-  w: 1600,
-  h: 1000,
-  bg: C.blaze,
-  scene: {
-    dots: C.ink,
-    body: (id, w, h) => `
-      <rect width="${w}" height="${h}" fill="url(#dots-${id})" opacity="0.12"/>
-      ${figure({ x: w * 0.22, y: h * 0.05, s: 0.92, top: C.ink, bottom: C.coal, skin: C.skinA, shoe: C.bone })}
-      ${figure({ x: w * 0.5, y: h * 0.0, s: 0.98, top: C.bone, bottom: C.ink, skin: C.skinB, shoe: C.ink, hood: false, accent: C.ink })}
-      ${figure({ x: w * 0.78, y: h * 0.05, s: 0.92, top: C.coal, bottom: C.sand, skin: C.skinC, shoe: C.blaze, flip: true })}
-      ${stamp(40, h - 36, "CREW SHOT — TEMPORARY ARTWORK", C.ink, 18)}`,
-  },
-});
-
-editorial({
-  name: "about-studio",
-  w: 1400,
-  h: 1000,
-  bg: C.ink,
-  scene: {
-    dots: C.blaze,
-    body: (id, w, h) => `
-      <rect x="${w * 0.05}" y="${h * 0.1}" width="${w * 0.35}" height="${h * 0.5}" fill="${C.coal}"/>
-      <rect x="${w * 0.45}" y="${h * 0.18}" width="${w * 0.22}" height="${h * 0.62}" fill="${C.bone}"/>
-      <rect x="${w * 0.72}" y="${h * 0.08}" width="${w * 0.23}" height="${h * 0.4}" fill="${C.blaze}"/>
-      <rect x="${w * 0.05}" y="${h * 0.66}" width="${w * 0.35}" height="${h * 0.24}" fill="url(#dots-${id})"/>
-      <g transform="translate(${w * 0.45} ${h * 0.18}) scale(0.5)">${GARMENTS.hoodie({ fill: C.ink, accent: C.blaze, print: "guy" }, id)}</g>
-      <g transform="translate(${w * 0.72} ${h * 0.06}) scale(0.4)">${GARMENTS.tee({ fill: C.bone, accent: C.ink, print: "block" }, id)}</g>
-      ${figure({ x: w * 0.22, y: h * 0.12, s: 0.72, top: C.blaze, bottom: C.ink, skin: C.skinB, shoe: C.bone, accent: C.ink, hood: false })}
-      <text x="${w * 0.72}" y="${h * 0.66}" font-family="${DISPLAY}" font-size="120" fill="${C.bone}">MADE</text>
-      <text x="${w * 0.72}" y="${h * 0.8}" font-family="${DISPLAY}" font-size="120" fill="${C.blaze}">LOUD.</text>
-      ${stamp(40, h - 36, "STUDIO — TEMPORARY ARTWORK", C.bone, 18)}`,
-  },
-});
+/* studio flat-lay grid (about) */
+comp("about-studio", 1600, 1000, "#ECE9E4", (id, w, h) => `
+  ${piece("hoodie", O.guyHoodie, w * 0.2, h * 0.5, 0.82, -6, id)}
+  ${piece("tee", O.guyTee, w * 0.43, h * 0.42, 0.62, 5, id)}
+  ${piece("hoodie", O.pitchHoodie, w * 0.64, h * 0.52, 0.82, -3, id)}
+  ${piece("cap", O.guyCap, w * 0.86, h * 0.28, 0.6, 12, id)}
+  ${piece("beanie", O.beanie, w * 0.87, h * 0.72, 0.55, -8, id)}
+  ${piece("cap", O.pitchCap, w * 0.42, h * 0.84, 0.5, -14, id)}`);
+comp("manifesto", 1600, 900, C.blaze, (id, w, h) => `
+  ${piece("hoodie", O.guyHoodie, w * 0.25, h * 0.52, 0.85, -6, id)}
+  ${piece("hoodie", O.pitchHoodie, w * 0.5, h * 0.5, 0.85, 2, id)}
+  ${piece("tee", O.iconTee, w * 0.75, h * 0.5, 0.8, 7, id)}`);
 
 /* culture covers */
 const covers = [
-  { name: "culture-heat-layering", bg: C.blaze, word: "38°C", fig: { top: C.bone, bottom: C.ink, skin: C.skinB, shoe: C.ink, hood: false, accent: C.ink } },
-  { name: "culture-night-market", bg: C.ink, word: "NIGHT", fig: { top: C.blaze, bottom: C.coal, skin: C.skinA, shoe: C.bone, accent: C.ink } },
-  { name: "culture-inside-drop", bg: C.bone, word: "DROP 01", fig: { top: C.ink, bottom: C.olive, skin: C.skinC, shoe: C.blaze } },
-  { name: "culture-read-a-fit", bg: C.coal, word: "FIT CHECK", fig: { top: C.sand, bottom: C.ink, skin: C.skinB, shoe: C.bone, hood: false, accent: C.blaze } },
-  { name: "culture-sound-block", bg: C.sky, word: "BPM", fig: { top: C.ink, bottom: C.ink, skin: C.skinA, shoe: C.blaze } },
-  { name: "culture-creator-economy", bg: C.sand, word: "CREATE", fig: { top: C.blaze, bottom: C.coal, skin: C.skinC, shoe: C.ink, hood: false, accent: C.ink } },
+  { name: "culture-heat-layering", bg: "#E9E4DC", items: [["tee", O.guyTee, 0.42, 0.5, 0.75, -6], ["cap", O.guyCap, 0.7, 0.42, 0.6, 10]] },
+  { name: "culture-night-market", bg: C.ink, items: [["vest", O.vest, 0.42, 0.52, 0.8, -5], ["beanie", O.beanie, 0.72, 0.5, 0.6, 10]] },
+  { name: "culture-inside-drop", bg: C.blaze, items: [["hoodie", O.guyHoodie, 0.38, 0.52, 0.85, -5], ["hoodie", O.pitchHoodie, 0.64, 0.52, 0.85, 5]] },
+  { name: "culture-read-a-fit", bg: "#D9D4CB", items: [["cargo", O.wideCargo, 0.62, 0.55, 0.75, 4], ["babytee", { fill: C.ink, accent: C.blaze, print: "blocked-pitch" }, 0.34, 0.45, 0.75, -6]] },
+  { name: "culture-sound-block", bg: C.coal, items: [["jacket", O.track, 0.45, 0.52, 0.8, -4], ["cap", O.pitchCap, 0.74, 0.62, 0.55, 12]] },
+  { name: "culture-creator-economy", bg: "#E7E4DF", items: [["tee", O.iconTee, 0.4, 0.5, 0.8, -5], ["tote", O.tote, 0.7, 0.52, 0.65, 8]] },
 ];
-covers.forEach((c) => {
-  editorial({
-    name: c.name,
-    w: 1200,
-    h: 900,
-    bg: c.bg,
-    scene: {
-      dots: c.bg === C.ink || c.bg === C.coal ? C.bone : C.ink,
-      body: (id, w, h) => {
-        const tc = c.bg === C.ink || c.bg === C.coal ? C.bone : C.ink;
-        return `
-        <text x="${w / 2}" y="${h * 0.62}" font-family="${DISPLAY}" font-size="330" fill="${tc}" opacity="0.14" text-anchor="middle">${c.word}</text>
-        <circle cx="${w * 0.78}" cy="${h * 0.3}" r="150" fill="url(#dots-${id})" opacity="0.4"/>
-        ${figure({ ...c.fig, x: w * 0.42, y: h * 0.04, s: 0.88 })}
-        ${tape(w * 0.78, h * 0.82, 330, -5, c.bg === C.blaze ? C.ink : C.blaze, "")}
-        ${stamp(36, h - 30, "CULTURE — TEMPORARY ARTWORK", tc, 16)}`;
-      },
-    },
-  });
-});
+covers.forEach((c) =>
+  comp(c.name, 1200, 900, c.bg, (id, w, h) => c.items.map(([t, o, x, y, s, r]) => piece(t, o, w * x, h * y, s, r, id)).join("")),
+);
 
 /* ================================================================== */
-/* CREATORS                                                            */
+/* CREATORS — clean placeholder portraits (replace with real photos)   */
 /* ================================================================== */
-const creators = [
-  { name: "creator-01", bg: C.blaze, skin: C.skinA, top: C.ink, hair: "afro", accent: C.bone, initials: "01" },
-  { name: "creator-02", bg: C.bone, skin: C.skinC, top: C.blaze, hair: "wrap", accent: C.ink, initials: "02" },
-  { name: "creator-03", bg: C.coal, skin: C.skinB, top: C.bone, hair: "cap", accent: C.blaze, initials: "03" },
-  { name: "creator-04", bg: C.sand, skin: C.skinA, top: C.ink, hair: "braids", accent: C.blaze, initials: "04" },
-  { name: "creator-05", bg: C.sky, skin: C.skinB, top: C.coal, hair: "hood", accent: C.blaze, initials: "05" },
-  { name: "creator-06", bg: C.bone, skin: C.skinC, top: C.ink, hair: "puffs", accent: C.blaze, initials: "06" },
+const creatorCards = [
+  { name: "creator-01", bg: C.blaze, fg: C.ink },
+  { name: "creator-02", bg: "#E7E4DF", fg: C.ink },
+  { name: "creator-03", bg: C.coal, fg: C.bone },
+  { name: "creator-04", bg: C.sand, fg: C.ink },
+  { name: "creator-05", bg: C.ink, fg: C.blaze },
+  { name: "creator-06", bg: "#D9D4CB", fg: C.ink },
 ];
-creators.forEach((c) => write(`creators/${c.name}.svg`, portrait(c)));
+creatorCards.forEach((c, i) =>
+  comp(`../creators/${c.name}`, 800, 1000, c.bg, (id, w, h) => `
+    ${bigWord(String(i + 1).padStart(2, "0"), w / 2, h * 0.62, 520, c.fg, 0.1)}
+    <circle cx="${w / 2}" cy="${h * 0.4}" r="120" fill="${c.fg}" opacity="0.9"/>
+    <path d="M${w / 2 - 230} ${h} Q${w / 2 - 220} ${h * 0.6} ${w / 2} ${h * 0.6} Q${w / 2 + 220} ${h * 0.6} ${w / 2 + 230} ${h} Z" fill="${c.fg}" opacity="0.9"/>`),
+);
 
 console.log(`✓ media generated in ${ROOT}`);
