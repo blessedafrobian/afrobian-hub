@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  
+  <defs>
+    <filter id="grain-asphaltboxyt-c" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="n"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="table" tableValues="0 0.12"/></feComponentTransfer>
+    </filter>
+    <filter id="soft-asphaltboxyt-c" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="blur-asphaltboxyt-c" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60"/></filter>
+    <pattern id="dots-asphaltboxyt-c" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="7" cy="7" r="3.2" fill="#ffffff"/>
+    </pattern>
+    <pattern id="lines-asphaltboxyt-c" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
+      <rect width="4" height="10" fill="#ffffff"/>
+    </pattern>
+    <linearGradient id="shade-asphaltboxyt-c" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.16"/>
+      <stop offset="0.55" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.32"/>
+    </linearGradient>
+    <radialGradient id="fade-asphaltboxyt-c" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="halo-asphaltboxyt-c"><rect width="100%" height="100%" fill="url(#fade-asphaltboxyt-c)"/></mask>
+  </defs>
+  <rect width="800" height="1000" fill="#292929"/>
+  <rect width="800" height="1000" fill="url(#fade-asphaltboxyt-c)" opacity="0.08"/>
+  <rect x="0" y="0" width="800" height="1000" fill="url(#lines-asphaltboxyt-c)" opacity="0.05"/>
+  <ellipse cx="400" cy="900" rx="260" ry="34" fill="#000" opacity="0.6" filter="url(#soft-asphaltboxyt-c)"/>
+  <g transform="translate(400 500) rotate(-8) scale(0.9) translate(-400 -500)">
+    <path d="M250 235 L335 200 Q400 240 465 200 L550 235 L645 335 L578 392 L548 360 L548 772 Q400 790 252 772 L252 360 L222 392 L155 335 Z" fill="#080808"/>
+    <path d="M335 200 Q400 240 465 200 Q455 222 400 232 Q345 222 335 200 Z" fill="#000" fill-opacity="0.35"/>
+    <path d="M250 235 L335 200 Q400 240 465 200 L550 235 L645 335 L578 392 L548 360 L548 772 Q400 790 252 772 L252 360 L222 392 L155 335 Z" fill="url(#shade-asphaltboxyt-c)"/>
+    <path d="M300 520 Q330 600 310 700 M500 470 Q470 560 492 680" stroke="#000" stroke-opacity="0.12" stroke-width="5" fill="none"/>
+    <g transform="translate(400 380) scale(1)"><rect x="-70" y="-55" width="140" height="110" fill="#F2EEE7"/><text x="0" y="22" font-family="Impact, 'Anton', 'Arial Narrow Bold', 'Arial Black', sans-serif" font-size="66" fill="#080808" text-anchor="middle">A/H</text></g></g>
+  <rect width="800" height="1000" filter="url(#grain-asphaltboxyt-c)" style="mix-blend-mode:overlay"/>
+  <text x="36" y="52" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="15" letter-spacing="2" fill="#F2EEE7" text-anchor="start">AFROBIAN/HUB</text>
+  <text x="764" y="52" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="15" letter-spacing="2" fill="#F2EEE7" text-anchor="end">ALT VIEW</text>
+  <text x="36" y="964" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="13" letter-spacing="2" fill="#F2EEE7" text-anchor="start">ASPHALT BOXY TEE</text>
+  <text x="764" y="964" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="13" letter-spacing="2" fill="#F2EEE7" text-anchor="end">TEMP SHOT</text>
+</svg>

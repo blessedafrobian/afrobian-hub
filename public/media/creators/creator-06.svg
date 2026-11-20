@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  
+  <defs>
+    <filter id="grain-creator-06" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="n"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="table" tableValues="0 0.2"/></feComponentTransfer>
+    </filter>
+    <filter id="soft-creator-06" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="blur-creator-06" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60"/></filter>
+    <pattern id="dots-creator-06" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="7" cy="7" r="3.2" fill="#080808"/>
+    </pattern>
+    <pattern id="lines-creator-06" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
+      <rect width="4" height="10" fill="#080808"/>
+    </pattern>
+    <linearGradient id="shade-creator-06" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.16"/>
+      <stop offset="0.55" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.32"/>
+    </linearGradient>
+    <radialGradient id="fade-creator-06" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="halo-creator-06"><rect width="100%" height="100%" fill="url(#fade-creator-06)"/></mask>
+  </defs>
+  <rect width="800" height="1000" fill="#F2EEE7"/>
+  <text x="400" y="580" font-family="Impact, 'Anton', 'Arial Narrow Bold', 'Arial Black', sans-serif" font-size="620" fill="#080808" opacity="0.08" text-anchor="middle">06</text>
+  <circle cx="400" cy="430" r="320" fill="url(#dots-creator-06)" mask="url(#halo-creator-06)" opacity="0.25"/>
+  <circle cx="285" cy="280" r="92" fill="#080808"/><circle cx="515" cy="280" r="92" fill="#080808"/>
+  <path d="M110 1000 Q120 790 290 748 L352 726 L352 640 L448 640 L448 726 L510 748 Q680 790 690 1000 Z" fill="#080808"/>
+  <path d="M110 1000 Q120 790 290 748 L352 726 L352 640 L448 640 L448 726 L510 748 Q680 790 690 1000 Z" fill="#fff" opacity="0.07"/>
+  <path d="M352 680 L448 680 L448 728 Q400 770 352 728 Z" fill="#7A4E33"/>
+  <ellipse cx="400" cy="470" rx="118" ry="150" fill="#7A4E33"/>
+  <path d="M300 520 Q400 560 500 520 Q490 600 400 620 Q310 600 300 520 Z" fill="#000" opacity="0.12"/>
+  <path d="M286 420 Q286 290 400 280 Q514 290 514 420 Q470 340 400 336 Q330 340 286 420 Z" fill="#080808"/>
+  <path d="M355 760 L445 760 L430 830 L370 830 Z" fill="#FF7900"/>
+  <rect width="800" height="1000" filter="url(#grain-creator-06)" style="mix-blend-mode:overlay"/>
+  <text x="36" y="52" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="14" letter-spacing="2" fill="#080808" text-anchor="start">AFROBIAN/HUB — CREATORS</text>
+  <text x="764" y="964" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="13" letter-spacing="2" fill="#080808" text-anchor="end">PORTRAIT PLACEHOLDER</text>
+</svg>

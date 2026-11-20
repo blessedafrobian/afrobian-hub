@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+  
+  <defs>
+    <filter id="grain-cultureinsidedrop" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="n"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="table" tableValues="0 0.18"/></feComponentTransfer>
+    </filter>
+    <filter id="soft-cultureinsidedrop" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="blur-cultureinsidedrop" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60"/></filter>
+    <pattern id="dots-cultureinsidedrop" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="7" cy="7" r="3.2" fill="#080808"/>
+    </pattern>
+    <pattern id="lines-cultureinsidedrop" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
+      <rect width="4" height="10" fill="#080808"/>
+    </pattern>
+    <linearGradient id="shade-cultureinsidedrop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.16"/>
+      <stop offset="0.55" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.32"/>
+    </linearGradient>
+    <radialGradient id="fade-cultureinsidedrop" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="halo-cultureinsidedrop"><rect width="100%" height="100%" fill="url(#fade-cultureinsidedrop)"/></mask>
+  </defs>
+  <rect width="1200" height="900" fill="#F2EEE7"/>
+  
+        <text x="600" y="558" font-family="Impact, 'Anton', 'Arial Narrow Bold', 'Arial Black', sans-serif" font-size="330" fill="#080808" opacity="0.14" text-anchor="middle">DROP 01</text>
+        <circle cx="936" cy="270" r="150" fill="url(#dots-cultureinsidedrop)" opacity="0.4"/>
+        <g transform="translate(504 36) scale(0.88 0.88) translate(-400 0)">
+    <path d="M326 278 Q312 118 400 100 Q488 118 474 278 Q400 256 326 278 Z" fill="#080808"/>
+    <ellipse cx="400" cy="200" rx="40" ry="50" fill="#7A4E33"/><path d="M360 180 Q400 150 440 180 L440 196 Q400 176 360 196 Z" fill="#000" opacity="0.45"/>
+    <path d="M330 262 Q400 292 470 262 L548 286 Q592 306 602 372 L628 602 Q631 642 614 652 L586 657 Q572 647 570 612 L552 432 L556 652 Q400 672 244 652 L248 432 L230 612 Q228 647 214 657 L186 652 Q169 642 172 602 L198 372 Q208 306 252 286 Z" fill="#080808"/>
+    <path d="M330 262 Q400 292 470 262 L548 286 Q592 306 602 372 L628 602 Q631 642 614 652 L586 657 Q572 647 570 612 L552 432 L556 652 Q400 672 244 652 L248 432 L230 612 Q228 647 214 657 L186 652 Q169 642 172 602 L198 372 Q208 306 252 286 Z" fill="#fff" opacity="0.06"/>
+    <rect x="356" y="380" width="88" height="54" fill="#FF7900"/>
+    <ellipse cx="600" cy="672" rx="17" ry="22" fill="#7A4E33"/><ellipse cx="200" cy="672" rx="17" ry="22" fill="#7A4E33"/>
+    <path d="M258 640 L542 640 L566 912 L470 918 L410 712 L390 712 L330 918 L234 912 Z" fill="#4B5137"/>
+    <path d="M236 560 L236 560" />
+    <path d="M222 900 L338 904 Q356 934 336 946 L208 946 Q196 922 222 900 Z" fill="#FF7900"/>
+    <path d="M462 904 L578 900 Q604 922 592 946 L464 946 Q444 934 462 904 Z" fill="#FF7900"/>
+    <rect x="208" y="938" width="130" height="8" fill="#000" opacity="0.35"/><rect x="464" y="938" width="130" height="8" fill="#000" opacity="0.35"/>
+  </g>
+        <g transform="translate(936 738) rotate(-5)"><rect x="-165" y="-24" width="330" height="48" fill="#FF7900"/></g>
+        <text x="36" y="870" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="16" letter-spacing="2" fill="#080808" text-anchor="start">CULTURE — TEMPORARY ARTWORK</text>
+  <rect width="1200" height="900" filter="url(#grain-cultureinsidedrop)" style="mix-blend-mode:overlay"/>
+  </svg>

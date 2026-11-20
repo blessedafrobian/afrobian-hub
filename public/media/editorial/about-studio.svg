@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1000" width="1400" height="1000">
+  
+  <defs>
+    <filter id="grain-aboutstudio" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="n"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="table" tableValues="0 0.18"/></feComponentTransfer>
+    </filter>
+    <filter id="soft-aboutstudio" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="blur-aboutstudio" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60"/></filter>
+    <pattern id="dots-aboutstudio" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="7" cy="7" r="3.2" fill="#FF7900"/>
+    </pattern>
+    <pattern id="lines-aboutstudio" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
+      <rect width="4" height="10" fill="#FF7900"/>
+    </pattern>
+    <linearGradient id="shade-aboutstudio" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.16"/>
+      <stop offset="0.55" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.32"/>
+    </linearGradient>
+    <radialGradient id="fade-aboutstudio" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="halo-aboutstudio"><rect width="100%" height="100%" fill="url(#fade-aboutstudio)"/></mask>
+  </defs>
+  <rect width="1400" height="1000" fill="#080808"/>
+  
+      <rect x="70" y="100" width="489.99999999999994" height="500" fill="#292929"/>
+      <rect x="630" y="180" width="308" height="620" fill="#F2EEE7"/>
+      <rect x="1008" y="80" width="322" height="400" fill="#FF7900"/>
+      <rect x="70" y="660" width="489.99999999999994" height="240" fill="url(#dots-aboutstudio)"/>
+      <g transform="translate(630 180) scale(0.5)">
+    <path d="M318 248 Q298 128 400 112 Q502 128 482 248 Z" fill="#080808"/>
+    <path d="M318 248 Q298 128 400 112 Q502 128 482 248 Z" fill="#000" fill-opacity="0.2"/>
+    <path d="M345 245 Q345 170 400 160 Q455 170 455 245 Q400 262 345 245 Z" fill="#000" fill-opacity="0.55"/>
+    <path d="M330 235 Q400 268 470 235 L560 268 Q612 300 626 380 L662 690 L600 706 L560 430 L555 775 Q400 793 245 775 L240 430 L200 706 L138 690 L174 380 Q188 300 240 268 Z" fill="#080808"/>
+    <path d="M330 235 Q400 268 470 235 L560 268 Q612 300 626 380 L662 690 L600 706 L560 430 L555 775 Q400 793 245 775 L240 430 L200 706 L138 690 L174 380 Q188 300 240 268 Z" fill="url(#shade-aboutstudio)"/>
+    <path d="M138 690 L200 706 L196 740 L134 724 Z M662 690 L600 706 L604 740 L666 724 Z" fill="#080808"/>
+    <path d="M138 690 L200 706 L196 740 L134 724 Z M662 690 L600 706 L604 740 L666 724 Z" fill="#000" fill-opacity="0.25"/>
+    <line x1="145" y1="700" x2="145" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="156" y1="700" x2="156" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="167" y1="700" x2="167" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="178" y1="700" x2="178" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="189" y1="700" x2="189" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="611" y1="700" x2="611" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="622" y1="700" x2="622" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="633" y1="700" x2="633" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="644" y1="700" x2="644" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="655" y1="700" x2="655" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/>
+    <rect x="245" y="735" width="310" height="44" fill="#000" fill-opacity="0.22"/>
+    <line x1="259.09090909090907" y1="735" x2="259.09090909090907" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="273.1818181818182" y1="735" x2="273.1818181818182" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="287.27272727272725" y1="735" x2="287.27272727272725" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="301.3636363636364" y1="735" x2="301.3636363636364" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="315.45454545454544" y1="735" x2="315.45454545454544" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="329.54545454545456" y1="735" x2="329.54545454545456" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="343.6363636363636" y1="735" x2="343.6363636363636" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="357.72727272727275" y1="735" x2="357.72727272727275" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="371.8181818181818" y1="735" x2="371.8181818181818" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="385.9090909090909" y1="735" x2="385.9090909090909" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="400" y1="735" x2="400" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="414.0909090909091" y1="735" x2="414.0909090909091" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="428.1818181818182" y1="735" x2="428.1818181818182" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="442.27272727272725" y1="735" x2="442.27272727272725" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="456.3636363636364" y1="735" x2="456.3636363636364" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="470.4545454545455" y1="735" x2="470.4545454545455" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="484.5454545454545" y1="735" x2="484.5454545454545" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="498.6363636363636" y1="735" x2="498.6363636363636" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="512.7272727272727" y1="735" x2="512.7272727272727" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="526.8181818181818" y1="735" x2="526.8181818181818" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="540.909090909091" y1="735" x2="540.909090909091" y2="779" stroke="#000" stroke-opacity="0.25" stroke-width="2"/>
+    <path d="M300 580 L500 580 L540 723 L260 723 Z" fill="#000" fill-opacity="0.14"/>
+    <line x1="378" y1="255" x2="370" y2="345" stroke="#FF7900" stroke-width="6" stroke-linecap="round"/>
+    <line x1="422" y1="255" x2="430" y2="345" stroke="#FF7900" stroke-width="6" stroke-linecap="round"/>
+    <g transform="translate(400 450) scale(1)"><circle r="46" fill="#FF7900"/><line x1="58" y1="0" x2="78" y2="0" stroke="#FF7900" stroke-width="7" stroke-linecap="round"/><line x1="50.229473419497445" y1="28.999999999999996" x2="67.54998149518622" y2="38.99999999999999" stroke="#FF7900" stroke-width="7" stroke-linecap="round"/><line x1="29.000000000000007" y1="50.22947341949744" x2="39.00000000000001" y2="67.54998149518622" stroke="#FF7900" stroke-width="7" stroke-linecap="round"/><line x1="3.5514757175273244e-15" y1="58" x2="4.776122516674678e-15" y2="78" stroke="#FF7900" stroke-width="7" stroke-linecap="round"/><line x1="-28.999999999999986" y1="50.229473419497445" x2="-38.999999999999986" y2="67.54998149518622" stroke="#FF7900" stroke-width="7" stroke-linecap="round"/><line x1="-50.229473419497445" y1="28.999999999999996" x2="-67.54998149518622" y2="38.99999999999999" stroke="#FF7900" stroke-width="7" stroke-linecap="round"/><line x1="-58" y1="7.102951435054649e-15" x2="-78" y2="9.552245033349356e-15" stroke="#FF7900" stroke-width="7" stroke-linecap="round"/><line x1="-50.22947341949745" y1="-28.999999999999982" x2="-67.54998149518623" y2="-38.99999999999998" stroke="#FF7900" stroke-width="7" stroke-linecap="round"/><line x1="-29.000000000000025" y1="-50.22947341949743" x2="-39.000000000000036" y2="-67.5499814951862" stroke="#FF7900" stroke-width="7" stroke-linecap="round"/><line x1="-1.0654427152581972e-14" y1="-58" x2="-1.432836755002403e-14" y2="-78" stroke="#FF7900" stroke-width="7" stroke-linecap="round"/><line x1="29.000000000000007" y1="-50.22947341949744" x2="39.00000000000001" y2="-67.54998149518622" stroke="#FF7900" stroke-width="7" stroke-linecap="round"/><line x1="50.229473419497424" y1="-29.000000000000025" x2="67.54998149518619" y2="-39.000000000000036" stroke="#FF7900" stroke-width="7" stroke-linecap="round"/></g></g>
+      <g transform="translate(1008 60) scale(0.4)">
+    <path d="M250 235 L335 200 Q400 240 465 200 L550 235 L645 335 L578 392 L548 360 L548 772 Q400 790 252 772 L252 360 L222 392 L155 335 Z" fill="#F2EEE7"/>
+    <path d="M335 200 Q400 240 465 200 Q455 222 400 232 Q345 222 335 200 Z" fill="#000" fill-opacity="0.35"/>
+    <path d="M250 235 L335 200 Q400 240 465 200 L550 235 L645 335 L578 392 L548 360 L548 772 Q400 790 252 772 L252 360 L222 392 L155 335 Z" fill="url(#shade-aboutstudio)"/>
+    <path d="M300 520 Q330 600 310 700 M500 470 Q470 560 492 680" stroke="#000" stroke-opacity="0.12" stroke-width="5" fill="none"/>
+    <g transform="translate(400 380) scale(1)"><rect x="-70" y="-55" width="140" height="110" fill="#080808"/><text x="0" y="22" font-family="Impact, 'Anton', 'Arial Narrow Bold', 'Arial Black', sans-serif" font-size="66" fill="#080808" text-anchor="middle">A/H</text></g></g>
+      <g transform="translate(308 120) scale(0.72 0.72) translate(-400 0)">
+    <rect x="380" y="226" width="40" height="50" fill="#5A3824"/><ellipse cx="400" cy="186" rx="52" ry="62" fill="#5A3824"/><path d="M342 170 Q350 106 400 104 Q454 106 460 170 Q430 140 400 142 Q370 140 342 170Z" fill="#080808"/>
+    
+    <path d="M330 262 Q400 292 470 262 L548 286 Q592 306 602 372 L628 602 Q631 642 614 652 L586 657 Q572 647 570 612 L552 432 L556 652 Q400 672 244 652 L248 432 L230 612 Q228 647 214 657 L186 652 Q169 642 172 602 L198 372 Q208 306 252 286 Z" fill="#FF7900"/>
+    <path d="M330 262 Q400 292 470 262 L548 286 Q592 306 602 372 L628 602 Q631 642 614 652 L586 657 Q572 647 570 612 L552 432 L556 652 Q400 672 244 652 L248 432 L230 612 Q228 647 214 657 L186 652 Q169 642 172 602 L198 372 Q208 306 252 286 Z" fill="#fff" opacity="0.06"/>
+    <rect x="356" y="380" width="88" height="54" fill="#080808"/>
+    <ellipse cx="600" cy="672" rx="17" ry="22" fill="#5A3824"/><ellipse cx="200" cy="672" rx="17" ry="22" fill="#5A3824"/>
+    <path d="M258 640 L542 640 L566 912 L470 918 L410 712 L390 712 L330 918 L234 912 Z" fill="#080808"/>
+    <path d="M236 560 L236 560" />
+    <path d="M222 900 L338 904 Q356 934 336 946 L208 946 Q196 922 222 900 Z" fill="#F2EEE7"/>
+    <path d="M462 904 L578 900 Q604 922 592 946 L464 946 Q444 934 462 904 Z" fill="#F2EEE7"/>
+    <rect x="208" y="938" width="130" height="8" fill="#000" opacity="0.35"/><rect x="464" y="938" width="130" height="8" fill="#000" opacity="0.35"/>
+  </g>
+      <text x="1008" y="660" font-family="Impact, 'Anton', 'Arial Narrow Bold', 'Arial Black', sans-serif" font-size="120" fill="#F2EEE7">MADE</text>
+      <text x="1008" y="800" font-family="Impact, 'Anton', 'Arial Narrow Bold', 'Arial Black', sans-serif" font-size="120" fill="#FF7900">LOUD.</text>
+      <text x="40" y="964" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="18" letter-spacing="2" fill="#F2EEE7" text-anchor="start">STUDIO — TEMPORARY ARTWORK</text>
+  <rect width="1400" height="1000" filter="url(#grain-aboutstudio)" style="mix-blend-mode:overlay"/>
+  </svg>

@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AFROBIAN HUB
 
-## Getting Started
-
-First, run the development server:
+Streetwear & creator culture platform — Morocco to the world.
+Next.js 16 (App Router, Cache Components) · TypeScript · Tailwind CSS v4 · Framer Motion · Lucide.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build && npm start
+npm run lint
+node scripts/generate-media.mjs   # regenerate temporary artwork
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Routes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Route | What |
+| --- | --- |
+| `/` | Homepage: hero, drop grid, campaign, Men/Women split, manifesto, creators, culture, how-to-order |
+| `/shop` · `/men` · `/women` | Filterable / sortable product grids (unisex pieces appear in both edits) |
+| `/shop/[slug]` | Product detail: gallery, colour/size/qty, WhatsApp order with prefilled message, Instagram DM |
+| `/creators` · `/creators/[slug]` | Creator roster and profiles with social links |
+| `/culture` · `/culture/[slug]` | Editorial stories |
+| `/about` · `/contact` | Brand story; contact channels, WhatsApp contact form, FAQ |
+| `/sitemap.xml` · `/robots.txt` | SEO |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Unknown product/creator/story slugs return a real `404` via `proxy.ts`.
 
-## Learn More
+## ⚠️ Placeholders to replace before launch
 
-To learn more about Next.js, take a look at the following resources:
+| What | Where |
+| --- | --- |
+| WhatsApp number, Instagram/TikTok handles, email, site URL | `.env.local` (see `.env.example`) or `lib/site.ts` |
+| Product inventory, prices, sizes, copy | `lib/products.ts` |
+| Product & editorial images | `public/media/**` — generated temporary SVG art. Drop real photos in and update paths in the data files (JPG/WebP are optimised automatically by `next/image`). |
+| Creator profiles (currently placeholder *slots*, no real accounts) | `lib/creators.ts` — set `name`, `bio`, `portrait`, and `socials[].url`/`handle` (null = “link pending”) |
+| Culture stories | `lib/stories.ts` |
+| About page brand story | `app/about/page.tsx` |
+| Newsletter (UI only — nothing is sent or stored) | `components/layout/newsletter-form.tsx` → connect a provider and set `NEWSLETTER_LIVE = true` |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Design system
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Tokens in `app/globals.css` (`@theme`): `blaze #FF7900`, `ink #080808`, `bone #F2EEE7`, `coal #292929`.
+- Type: Anton (display), Instrument Serif (editorial accents), Archivo (body), JetBrains Mono (labels).
+- Primitives in `components/ui/` — `ButtonLink`, `Container`, `SectionHeading`, `Marquee`, `Sticker`, `Badge`, `Wordmark`, motion helpers (`Reveal`, `RevealLines`, `Parallax`), `Media`.
+- Utilities: `.display`, `.label`, `.text-outline-*`, `.grain`, `.edge-jag-bottom`, `.edge-slant-top`.
+- Motion respects `prefers-reduced-motion`.

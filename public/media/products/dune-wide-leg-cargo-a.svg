@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  
+  <defs>
+    <filter id="grain-dunewidelegc-a" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="n"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="table" tableValues="0 0.12"/></feComponentTransfer>
+    </filter>
+    <filter id="soft-dunewidelegc-a" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="blur-dunewidelegc-a" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60"/></filter>
+    <pattern id="dots-dunewidelegc-a" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="7" cy="7" r="3.2" fill="#ffffff"/>
+    </pattern>
+    <pattern id="lines-dunewidelegc-a" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
+      <rect width="4" height="10" fill="#ffffff"/>
+    </pattern>
+    <linearGradient id="shade-dunewidelegc-a" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.16"/>
+      <stop offset="0.55" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.32"/>
+    </linearGradient>
+    <radialGradient id="fade-dunewidelegc-a" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="halo-dunewidelegc-a"><rect width="100%" height="100%" fill="url(#fade-dunewidelegc-a)"/></mask>
+  </defs>
+  <rect width="800" height="1000" fill="#292929"/>
+  <rect width="800" height="1000" fill="url(#fade-dunewidelegc-a)" opacity="0.08"/>
+  
+  <ellipse cx="400" cy="900" rx="260" ry="34" fill="#000" opacity="0.6" filter="url(#soft-dunewidelegc-a)"/>
+  <g transform="">
+    <path d="M282 180 L518 180 L605 840 L460 852 L405 360 L395 360 L340 852 L195 840 Z" fill="#C9B79C"/>
+    <path d="M282 180 L518 180 L605 840 L460 852 L405 360 L395 360 L340 852 L195 840 Z" fill="url(#shade-dunewidelegc-a)"/>
+    <rect x="280" y="180" width="240" height="38" fill="#000" fill-opacity="0.25"/>
+    <rect x="295" y="176" width="10" height="46" fill="#000" fill-opacity="0.35"/><rect x="335" y="176" width="10" height="46" fill="#000" fill-opacity="0.35"/><rect x="455" y="176" width="10" height="46" fill="#000" fill-opacity="0.35"/><rect x="495" y="176" width="10" height="46" fill="#000" fill-opacity="0.35"/>
+    <path d="M232 470 L340 470 L338 600 L228 600 Z M568 470 L460 470 L462 600 L572 600 Z" fill="#000" fill-opacity="0.18" stroke="#000" stroke-opacity="0.3" stroke-width="3"/>
+    <path d="M232 470 L340 470 L340 500 L231 500 Z M568 470 L460 470 L460 500 L569 500 Z" fill="#000" fill-opacity="0.2"/>
+    <path d="M395 225 L395 340" stroke="#000" stroke-opacity="0.35" stroke-width="4"/>
+    <path d="M330 700 Q340 760 330 830 M470 700 Q460 760 470 830" stroke="#000" stroke-opacity="0.15" stroke-width="5" fill="none"/>
+    <rect x="205" y="815" width="110" height="12" fill="#080808"/></g>
+  <rect width="800" height="1000" filter="url(#grain-dunewidelegc-a)" style="mix-blend-mode:overlay"/>
+  <text x="36" y="52" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="15" letter-spacing="2" fill="#F2EEE7" text-anchor="start">AFROBIAN/HUB</text>
+  <text x="764" y="52" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="15" letter-spacing="2" fill="#F2EEE7" text-anchor="end">FRONT</text>
+  <text x="36" y="964" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="13" letter-spacing="2" fill="#F2EEE7" text-anchor="start">DUNE WIDE LEG CARGO</text>
+  <text x="764" y="964" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="13" letter-spacing="2" fill="#F2EEE7" text-anchor="end">TEMP SHOT</text>
+</svg>
