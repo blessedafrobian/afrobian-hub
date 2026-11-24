@@ -18,13 +18,13 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
             onClick={() => setActive(i)}
             aria-label={`Show view ${i + 1}`}
             aria-pressed={i === active}
-            className={cn("relative aspect-square w-16 overflow-hidden rounded-md bg-mist", i === active ? "ring-2 ring-ink" : "opacity-80 hover:opacity-100")}
+            className={cn("relative aspect-square w-16 overflow-hidden rounded-md bg-coal", i === active ? "ring-2 ring-blaze" : "opacity-80 hover:opacity-100")}
           >
             <Image src={src} alt="" fill sizes="64px" className="object-cover" />
           </button>
         ))}
       </div>
-      <div className="relative order-1 aspect-square flex-1 overflow-hidden rounded-lg bg-mist lg:order-2">
+      <div className="relative order-1 aspect-square flex-1 overflow-hidden rounded-lg bg-coal lg:order-2">
         {images.map((src, i) => (
           <Image
             key={src}
@@ -45,7 +45,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
             onClick={() => setActive(i)}
             aria-label={`Show view ${i + 1}`}
             aria-pressed={i === active}
-            className={cn("relative aspect-square w-16 overflow-hidden rounded-md bg-mist", i === active ? "ring-2 ring-ink" : "opacity-80")}
+            className={cn("relative aspect-square w-16 overflow-hidden rounded-md bg-coal", i === active ? "ring-2 ring-blaze" : "opacity-80")}
           >
             <Image src={src} alt="" fill sizes="64px" className="object-cover" />
           </button>

@@ -50,7 +50,7 @@ export default function ContactPage() {
                   href={href}
                   target={href.startsWith("mailto:") ? undefined : "_blank"}
                   rel="noopener noreferrer"
-                  className={`group flex h-full min-h-44 flex-col justify-between rounded-xl p-6 transition-colors ${primary ? "bg-ink text-white hover:bg-ink/85" : "bg-mist hover:bg-line"}`}
+                  className={`group flex h-full min-h-44 flex-col justify-between rounded-xl p-6 transition-colors ${primary ? "bg-blaze text-ink hover:bg-blaze-deep" : "bg-coal hover:bg-line"}`}
                 >
                   <div className="flex items-start justify-between">
                     <Icon size={28} />
@@ -58,7 +58,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-xl font-medium">{label}</p>
-                    <p className={`mt-1 break-all text-sm ${primary ? "text-white/70" : "text-mute"}`}>{sub}</p>
+                    <p className={`mt-1 break-all text-sm ${primary ? "text-white/70" : "text-white/50"}`}>{sub}</p>
                   </div>
                 </a>
               </li>
@@ -67,11 +67,11 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      <section className="border-t border-line py-16 sm:py-20">
+      <section className="border-t border-white/10 py-16 sm:py-20">
         <Container className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <h2 className="text-2xl font-medium tracking-tight sm:text-[1.75rem]">Send us a message</h2>
-            <p className="mt-3 text-mute">Fill this in and we&apos;ll open WhatsApp with your message ready to go.</p>
+            <p className="mt-3 text-white/50">Fill this in and we&apos;ll open WhatsApp with your message ready to go.</p>
           </div>
           <div className="lg:col-span-7 lg:col-start-6">
             <ContactForm />
@@ -79,19 +79,19 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      <section id="faq" className="scroll-mt-24 border-t border-line py-16 sm:py-20" aria-labelledby="faq-title">
+      <section id="faq" className="scroll-mt-24 border-t border-white/10 py-16 sm:py-20" aria-labelledby="faq-title">
         <Container className="grid gap-10 lg:grid-cols-12">
           <h2 id="faq-title" className="text-2xl font-medium tracking-tight sm:text-[1.75rem] lg:col-span-4">
             Frequently Asked Questions
           </h2>
-          <div className="border-t border-line lg:col-span-7 lg:col-start-6">
+          <div className="border-t border-white/10 lg:col-span-7 lg:col-start-6">
             {faq.map((f) => (
-              <details key={f.q} className="group border-b border-line py-5">
+              <details key={f.q} className="group border-b border-white/10 py-5">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-medium">
                   {f.q}
                   <ChevronDown className="size-5 shrink-0 transition-transform group-open:rotate-180" />
                 </summary>
-                <p className="mt-3 max-w-2xl text-ink/75">{f.a}</p>
+                <p className="mt-3 max-w-2xl text-bone/75">{f.a}</p>
               </details>
             ))}
           </div>

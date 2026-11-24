@@ -34,10 +34,10 @@ export function ShopBrowser({ products, title }: { products: Product[]; title: s
 
   return (
     <div>
-      <div className="sticky top-16 z-30 -mx-5 bg-white/95 px-5 py-4 backdrop-blur sm:-mx-9 sm:px-9 lg:-mx-12 lg:px-12">
+      <div className="sticky top-16 z-30 -mx-5 bg-ink/90 px-5 py-4 backdrop-blur sm:-mx-9 sm:px-9 lg:-mx-12 lg:px-12">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <h1 className="text-2xl font-medium tracking-tight">
-            {title} <span className="text-mute">({list.length})</span>
+            {title} <span className="text-white/50">({list.length})</span>
           </h1>
           <div className="flex items-center gap-5">
             <label className="flex cursor-pointer items-center gap-2 text-[0.95rem]">
@@ -49,7 +49,7 @@ export function ShopBrowser({ products, title }: { products: Product[]; title: s
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value as Sort)}
-                className="appearance-none bg-transparent pr-6 font-medium text-mute outline-none"
+                className="appearance-none bg-transparent pr-6 font-medium text-white/50 outline-none"
               >
                 {Object.entries(sortLabels).map(([v, l]) => (
                   <option key={v} value={v}>
@@ -70,7 +70,7 @@ export function ShopBrowser({ products, title }: { products: Product[]; title: s
               aria-pressed={category === c.id}
               className={cn(
                 "h-10 shrink-0 rounded-full px-5 text-[0.95rem] font-medium transition-colors",
-                category === c.id ? "bg-ink text-white" : "bg-mist hover:bg-line",
+                category === c.id ? "bg-blaze text-ink" : "bg-coal hover:bg-line",
               )}
             >
               {c.label}
@@ -87,7 +87,7 @@ export function ShopBrowser({ products, title }: { products: Product[]; title: s
         ))}
       </ul>
 
-      {list.length === 0 && <p className="py-24 text-center text-mute">Nothing here yet — try another filter.</p>}
+      {list.length === 0 && <p className="py-24 text-center text-white/50">Nothing here yet — try another filter.</p>}
     </div>
   );
 }

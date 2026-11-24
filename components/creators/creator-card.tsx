@@ -6,7 +6,7 @@ import { cn } from "@/components/ui/primitives";
 export function CreatorCard({ creator, className, sizes = "(max-width: 640px) 60vw, 22vw" }: { creator: Creator; className?: string; sizes?: string }) {
   return (
     <Link href={`/creators/${creator.slug}`} className={cn("group block", className)}>
-      <div className="relative aspect-[4/5] overflow-hidden bg-mist">
+      <div className="relative aspect-[4/5] overflow-hidden bg-coal">
         <Image
           src={creator.portrait}
           alt={`${creator.name} — ${creator.discipline} (placeholder portrait)`}
@@ -16,7 +16,7 @@ export function CreatorCard({ creator, className, sizes = "(max-width: 640px) 60
         />
       </div>
       <p className="mt-3 text-lg font-medium">{creator.name}</p>
-      <p className="text-mute">
+      <p className="text-white/50">
         {creator.discipline} · {creator.city}
       </p>
     </Link>

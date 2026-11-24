@@ -4,18 +4,18 @@
 /* AFROBIAN HUB — design tokens                                        */
 /* ------------------------------------------------------------------ */
 @theme {
-  --color-blaze: #ff7900;
-  --color-blaze-deep: #e06a00;
-  --color-ink: #080808;
-  --color-coal: #292929;
-  --color-bone: #f2eee7;
-  --color-sand: #c9b79c;
+  --color-blaze: #f25a1c;
+  --color-blaze-deep: #d94b10;
+  --color-ink: #0a0a0a;
+  --color-coal: #141414;
+  --color-bone: #ede6da;
+  --color-sand: #3a3a3a;
 
   /* neutral UI scale */
-  --color-paper: #ffffff;
-  --color-mist: #f5f5f4;
-  --color-line: #e5e5e5;
-  --color-mute: #707070;
+  --color-paper: #0a0a0a;
+  --color-mist: #141414;
+  --color-line: rgb(255 255 255 / 0.1);
+  --color-mute: rgb(237 230 218 / 0.55);
 
   --font-display: var(--font-anton), "Impact", "Arial Narrow Bold", sans-serif;
   --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
@@ -36,8 +36,8 @@
     -webkit-tap-highlight-color: transparent;
   }
   body {
-    background: var(--color-paper);
-    color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-bone);
     font-family: var(--font-sans);
     text-rendering: optimizeLegibility;
   }
@@ -58,6 +58,13 @@
     text-transform: uppercase;
     line-height: 0.9;
     letter-spacing: 0;
+  }
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--color-blaze);
+    font-weight: 500;
   }
   .no-scrollbar {
     scrollbar-width: none;

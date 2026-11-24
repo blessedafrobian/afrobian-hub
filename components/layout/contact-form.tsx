@@ -31,7 +31,7 @@ export function ContactForm() {
     window.open(whatsappLink(text), "_blank", "noopener,noreferrer");
   }
 
-  const field = "mt-2 h-12 w-full rounded-lg border border-line bg-white px-4 text-ink outline-none transition-colors placeholder:text-mute focus:border-ink";
+  const field = "mt-2 h-12 w-full rounded-lg border border-white/10 bg-ink px-4 text-bone outline-none transition-colors placeholder:text-white/50 focus:border-blaze";
 
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-6">
@@ -54,7 +54,7 @@ export function ContactForm() {
               type="button"
               onClick={() => setTopic(t)}
               aria-pressed={topic === t}
-              className={cn("h-10 rounded-full px-4 text-sm font-medium transition-colors", topic === t ? "bg-ink text-white" : "bg-mist hover:bg-line")}
+              className={cn("h-10 rounded-full px-4 text-sm font-medium transition-colors", topic === t ? "bg-blaze text-ink" : "bg-coal hover:bg-white/10")}
             >
               {t}
             </button>
@@ -67,21 +67,21 @@ export function ContactForm() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           rows={4}
-          className="mt-2 w-full resize-y rounded-lg border border-line bg-white px-4 py-3 text-ink outline-none transition-colors placeholder:text-mute focus:border-ink"
+          className="mt-2 w-full resize-y rounded-lg border border-white/10 bg-ink px-4 py-3 text-bone outline-none transition-colors placeholder:text-white/50 focus:border-blaze"
           placeholder="Tell us what you need…"
           required
         />
       </label>
       {error && (
-        <p role="alert" className="text-sm font-semibold text-blaze-deep">
+        <p role="alert" className="text-sm font-semibold text-blaze">
           {error}
         </p>
       )}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-        <button type="submit" className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ink px-7 font-medium text-white transition-colors hover:bg-ink/75">
+        <button type="submit" className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-blaze px-7 font-medium text-ink transition-colors hover:bg-blaze-deep">
           <WhatsAppIcon size={18} /> Send via WhatsApp
         </button>
-        <p className="text-sm text-mute">Opens WhatsApp with your message ready to send. Nothing is stored on this site.</p>
+        <p className="text-sm text-white/50">Opens WhatsApp with your message ready to send. Nothing is stored on this site.</p>
       </div>
     </form>
   );

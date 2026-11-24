@@ -25,15 +25,15 @@
       <stop offset="1" stop-color="#fff" stop-opacity="0"/>
     </radialGradient>
     <mask id="halo-culturecreatoreconomy"><rect width="100%" height="100%" fill="url(#fade-culturecreatoreconomy)"/></mask>
-  </defs><rect width="1200" height="900" fill="#E7E4DF"/><g transform="translate(480 450) rotate(-5) scale(0.8) translate(-400 -490)" filter="url(#drop-culturecreatoreconomy)">
-    <path d="M250 235 L335 200 Q400 240 465 200 L550 235 L645 335 L578 392 L548 360 L548 772 Q400 790 252 772 L252 360 L222 392 L155 335 Z" fill="#FF7900"/>
+  </defs><rect width="1200" height="900" fill="#141414"/><g transform="translate(480 450) rotate(-5) scale(0.8) translate(-400 -490)" filter="url(#drop-culturecreatoreconomy)">
+    <path d="M250 235 L335 200 Q400 240 465 200 L550 235 L645 335 L578 392 L548 360 L548 772 Q400 790 252 772 L252 360 L222 392 L155 335 Z" fill="#F25A1C"/>
     <path d="M335 200 Q400 240 465 200 Q455 222 400 232 Q345 222 335 200 Z" fill="#000" fill-opacity="0.35"/>
     <path d="M250 235 L335 200 Q400 240 465 200 L550 235 L645 335 L578 392 L548 360 L548 772 Q400 790 252 772 L252 360 L222 392 L155 335 Z" fill="url(#shade-culturecreatoreconomy)"/>
     <path d="M300 520 Q330 600 310 700 M500 470 Q470 560 492 680" stroke="#000" stroke-opacity="0.12" stroke-width="5" fill="none"/>
     <g transform="translate(400 380) scale(1)"><g transform="translate(0 -20)"><circle r="62" fill="none" stroke="#080808" stroke-width="16.12"/><line x1="-43.4" y1="43.4" x2="43.4" y2="-43.4" stroke="#080808" stroke-width="16.12" stroke-linecap="round"/></g><text x="-125" y="92" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="36" fill="#080808" textLength="250" lengthAdjust="spacingAndGlyphs">BLOOCK THAT GUYYY</text></g></g><g transform="translate(840 468) rotate(8) scale(0.65) translate(-400 -490)" filter="url(#drop-culturecreatoreconomy)">
-    <path d="M330 380 Q330 210 400 210 Q470 210 470 380" stroke="#F2EEE7" stroke-width="22" fill="none"/>
+    <path d="M330 380 Q330 210 400 210 Q470 210 470 380" stroke="#EDE6DA" stroke-width="22" fill="none"/>
     <path d="M330 380 Q330 210 400 210 Q470 210 470 380" stroke="#000" stroke-opacity="0.25" stroke-width="22" fill="none"/>
-    <rect x="235" y="360" width="330" height="420" fill="#F2EEE7"/>
+    <rect x="235" y="360" width="330" height="420" fill="#EDE6DA"/>
     <rect x="235" y="360" width="330" height="420" fill="url(#shade-culturecreatoreconomy)"/>
     <g transform="translate(400 490)"><text x="-125" y="0" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="82" fill="#080808" textLength="250" lengthAdjust="spacingAndGlyphs">BLOOCK</text><text x="-125" y="77.08" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="82" fill="#080808" textLength="250" lengthAdjust="spacingAndGlyphs">THAT</text><text x="-125" y="154.16" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="82" fill="#080808" textLength="250" lengthAdjust="spacingAndGlyphs">PITCH</text></g>
     <text x="400" y="700" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="15" letter-spacing="2" fill="#080808" text-anchor="middle">CARRY THE CULTURE</text></g></svg>

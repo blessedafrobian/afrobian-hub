@@ -11,7 +11,7 @@ export function Carousel({ title, action, children, itemClassName }: { title: st
   return (
     <div>
       <div className="mb-6 flex items-end justify-between gap-4 px-5 sm:px-9 lg:px-12">
-        <h2 className="text-2xl font-medium tracking-tight sm:text-[1.75rem]">{title}</h2>
+        <h2 className="display text-5xl sm:text-6xl">{title}</h2>
         <div className="flex items-center gap-3">
           {action}
           <div className="hidden gap-2 sm:flex">
@@ -21,7 +21,7 @@ export function Carousel({ title, action, children, itemClassName }: { title: st
                 type="button"
                 onClick={() => scroll(d as 1 | -1)}
                 aria-label={d === -1 ? "Scroll left" : "Scroll right"}
-                className="grid size-11 place-items-center rounded-full bg-mist transition-colors hover:bg-line"
+                className="grid size-11 place-items-center rounded-full bg-coal transition-colors hover:bg-line"
               >
                 {d === -1 ? <ChevronLeft className="size-5" /> : <ChevronRight className="size-5" />}
               </button>

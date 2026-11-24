@@ -17,7 +17,7 @@ export function SocialLinks({ socials }: { socials: Creator["socials"] }) {
         if (!s.url) {
           return (
             <li key={s.platform}>
-              <span aria-disabled="true" className="flex h-11 items-center gap-2 rounded-full border border-dashed border-line px-5 text-mute">
+              <span aria-disabled="true" className="flex h-11 items-center gap-2 rounded-full border border-dashed border-white/10 px-5 text-white/50">
                 <Icon size={18} />
                 <span className="font-medium">{platformLabel[s.platform]}</span>
                 <span className="flex items-center gap-1 text-xs">
@@ -33,7 +33,7 @@ export function SocialLinks({ socials }: { socials: Creator["socials"] }) {
               href={s.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-11 items-center gap-2 rounded-full bg-ink px-5 font-medium text-white transition-colors hover:bg-ink/75"
+              className="flex h-11 items-center gap-2 rounded-full bg-blaze px-5 font-medium text-ink transition-colors hover:bg-blaze-deep"
             >
               <Icon size={18} />
               {platformLabel[s.platform]}

@@ -14,7 +14,7 @@ const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo", displa
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — Streetwear & Creator Culture`,
+    default: `${site.name} — Protect Your Peace. Streetwear from Morocco`,
     template: `%s — ${site.name}`,
   },
   description: site.description,
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: site.name,
-    title: `${site.name} — Streetwear & Creator Culture`,
+    title: `${site.name} — Protect Your Peace`,
     description: site.description,
     locale: "en_US",
     images: [{ url: "/media/editorial/hero-wide.svg", width: 2400, height: 1350, alt: site.name }],
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#0a0a0a",
   width: "device-width",
   initialScale: 1,
 };
@@ -51,8 +51,8 @@ const orgJsonLd = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${anton.variable} ${archivo.variable} antialiased`}>
-      <body className="min-h-dvh bg-white text-ink">
-        <a href="#main" className="sr-only z-[100] rounded-full bg-ink px-5 py-3 text-sm text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
+      <body className="min-h-dvh bg-ink text-bone">
+        <a href="#main" className="sr-only z-[100] rounded-full bg-blaze px-5 py-3 text-sm text-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
           Skip to content
         </a>
         <MotionProvider>

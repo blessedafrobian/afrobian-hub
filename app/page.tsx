@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Campaign, Categories, CreatorsRail, Featured, Hero, HowToOrder, JustIn, Stories } from "@/components/home/sections";
+import { Campaign, Categories, Community, Featured, Hero, HowToOrder, Identity, JustIn, QuoteBand, QuotesWall, Stories, Story } from "@/components/home/sections";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -9,11 +9,15 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <QuoteBand />
       <JustIn />
-      <Featured />
+      <Identity />
       <Campaign />
+      <QuotesWall />
+      <Featured />
+      <Story />
+      <Community />
       <Categories />
-      <CreatorsRail />
       <Stories />
       <HowToOrder />
     </>

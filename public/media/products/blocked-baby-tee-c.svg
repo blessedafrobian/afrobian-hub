@@ -27,11 +27,12 @@
     </radialGradient>
     <mask id="halo-blockedbabyt-c"><rect width="100%" height="100%" fill="url(#fade-blockedbabyt-c)"/></mask>
   </defs>
-  <rect width="800" height="1000" fill="#292929"/>
+  <rect width="800" height="1000" fill="#2A2A2A"/>
+  
   <ellipse cx="400" cy="905" rx="264.5" ry="26" fill="#000" opacity="0.55" filter="url(#soft-blockedbabyt-c)"/>
   <g transform="translate(400 500) rotate(-6) scale(1.058) translate(-400 -500)">
     <path d="M285 250 L350 222 Q400 255 450 222 L515 250 L585 320 L540 362 L515 342 Q505 470 520 640 Q400 662 280 640 Q295 470 285 342 L260 362 L215 320 Z" fill="#080808"/>
     <path d="M350 222 Q400 255 450 222 Q442 240 400 248 Q358 240 350 222 Z" fill="#000" fill-opacity="0.35"/>
     <path d="M285 250 L350 222 Q400 255 450 222 L515 250 L585 320 L540 362 L515 342 Q505 470 520 640 Q400 662 280 640 Q295 470 285 342 L260 362 L215 320 Z" fill="url(#shade-blockedbabyt-c)"/>
-    <g transform="translate(400 380) scale(0.72)"><g transform="translate(0 -20)"><circle r="62" fill="none" stroke="#FF7900" stroke-width="16.12"/><line x1="-43.4" y1="43.4" x2="43.4" y2="-43.4" stroke="#FF7900" stroke-width="16.12" stroke-linecap="round"/></g><text x="-125" y="92" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="36" fill="#FF7900" textLength="250" lengthAdjust="spacingAndGlyphs">BLOOCK THAT PITCH</text></g></g>
+    <g transform="translate(400 380) scale(0.72)"><g transform="translate(0 -20)"><circle r="62" fill="none" stroke="#F25A1C" stroke-width="16.12"/><line x1="-43.4" y1="43.4" x2="43.4" y2="-43.4" stroke="#F25A1C" stroke-width="16.12" stroke-linecap="round"/></g><text x="-125" y="92" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="36" fill="#F25A1C" textLength="250" lengthAdjust="spacingAndGlyphs">BLOOCK THAT PITCH</text></g></g>
 </svg>

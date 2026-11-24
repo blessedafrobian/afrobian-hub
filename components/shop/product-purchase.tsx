@@ -33,7 +33,7 @@ export function ProductPurchase({ product }: { product: Product }) {
     <div className="space-y-8">
       {product.colors.length > 1 && (
         <fieldset>
-          <legend className="mb-3 font-medium">Colour: <span className="font-normal text-mute">{color}</span></legend>
+          <legend className="mb-3 font-medium">Colour: <span className="font-normal text-white/50">{color}</span></legend>
           <div className="flex flex-wrap gap-2">
             {product.colors.map((c) => (
               <button
@@ -42,7 +42,7 @@ export function ProductPurchase({ product }: { product: Product }) {
                 onClick={() => setColor(c.name)}
                 aria-pressed={color === c.name}
                 aria-label={c.name}
-                className={cn("grid size-12 place-items-center rounded-md border", color === c.name ? "border-ink" : "border-line hover:border-mute")}
+                className={cn("grid size-12 place-items-center rounded-md border", color === c.name ? "border-blaze" : "border-white/10 hover:border-mute")}
               >
                 <span className="size-8 rounded-sm ring-1 ring-black/10" style={{ backgroundColor: c.hex }} />
               </button>
@@ -53,8 +53,8 @@ export function ProductPurchase({ product }: { product: Product }) {
 
       <fieldset>
         <legend className="mb-3 flex w-full justify-between font-medium">
-          <span className={cn(sizeError && !size && "text-blaze-deep")}>Select Size</span>
-          <a href="/contact#faq" className="font-normal text-mute underline-offset-4 hover:underline">
+          <span className={cn(sizeError && !size && "text-blaze")}>Select Size</span>
+          <a href="/contact#faq" className="font-normal text-white/50 underline-offset-4 hover:underline">
             Size Guide
           </a>
         </legend>
@@ -70,29 +70,29 @@ export function ProductPurchase({ product }: { product: Product }) {
               aria-pressed={size === s}
               disabled={product.soldOut}
               className={cn(
-                "h-12 rounded-md border text-[0.95rem] transition-colors disabled:bg-mist disabled:text-mute",
+                "h-12 rounded-md border text-[0.95rem] transition-colors disabled:bg-coal disabled:text-white/50",
                 product.sizes.length === 1 && "col-span-3",
-                size === s ? "border-ink" : "border-line hover:border-ink",
+                size === s ? "border-blaze" : "border-white/10 hover:border-white",
               )}
             >
               {s}
             </button>
           ))}
         </div>
-        {sizeError && !size && <p className="mt-3 text-sm text-blaze-deep">Pick a size ↓ to continue.</p>}
-        <p className="mt-3 text-sm text-mute">{product.fit}</p>
+        {sizeError && !size && <p className="mt-3 text-sm text-blaze">Pick a size ↓ to continue.</p>}
+        <p className="mt-3 text-sm text-white/50">{product.fit}</p>
       </fieldset>
 
       <div className="flex items-center justify-between">
         <span className="font-medium">Quantity</span>
-        <div className="flex items-center rounded-full border border-line">
-          <button type="button" aria-label="Decrease quantity" onClick={() => setQty((q) => Math.max(1, q - 1))} className="grid size-10 place-items-center rounded-full hover:bg-mist">
+        <div className="flex items-center rounded-full border border-white/10">
+          <button type="button" aria-label="Decrease quantity" onClick={() => setQty((q) => Math.max(1, q - 1))} className="grid size-10 place-items-center rounded-full hover:bg-white/10">
             <Minus className="size-4" />
           </button>
           <span className="w-10 text-center font-medium" aria-live="polite">
             {qty}
           </span>
-          <button type="button" aria-label="Increase quantity" onClick={() => setQty((q) => Math.min(10, q + 1))} className="grid size-10 place-items-center rounded-full hover:bg-mist">
+          <button type="button" aria-label="Increase quantity" onClick={() => setQty((q) => Math.min(10, q + 1))} className="grid size-10 place-items-center rounded-full hover:bg-white/10">
             <Plus className="size-4" />
           </button>
         </div>
@@ -103,7 +103,7 @@ export function ProductPurchase({ product }: { product: Product }) {
           href={whatsappLink(`Hi ${site.name} — please let me know if the ${product.name} (${product.sku}) gets restocked.`)}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex h-14 w-full items-center justify-center gap-2 rounded-full border border-line font-medium hover:border-ink"
+          className="flex h-14 w-full items-center justify-center gap-2 rounded-full border border-white/10 font-medium hover:border-white"
         >
           <WhatsAppIcon size={20} /> Notify me on restock
         </a>
@@ -119,7 +119,7 @@ export function ProductPurchase({ product }: { product: Product }) {
                 setSizeError(true);
               }
             }}
-            className="flex h-14 w-full items-center justify-center gap-2 rounded-full bg-ink font-medium text-white transition-colors hover:bg-ink/75"
+            className="flex h-14 w-full items-center justify-center gap-2 rounded-full bg-blaze font-medium text-ink transition-colors hover:bg-blaze-deep"
           >
             <WhatsAppIcon size={20} /> Order on WhatsApp — {formatPrice(product.price * qty)}
           </a>
@@ -128,7 +128,7 @@ export function ProductPurchase({ product }: { product: Product }) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={copyForInstagram}
-            className="flex h-14 w-full items-center justify-center gap-2 rounded-full border border-line font-medium transition-colors hover:border-ink"
+            className="flex h-14 w-full items-center justify-center gap-2 rounded-full border border-white/10 font-medium transition-colors hover:border-white"
           >
             <InstagramIcon size={20} /> {copied ? "Order details copied ✓" : "DM on Instagram"}
           </a>
@@ -136,14 +136,14 @@ export function ProductPurchase({ product }: { product: Product }) {
             href={whatsappLink(`Hi ${site.name} — I have a question about the ${product.name} (${product.sku}).`)}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 pt-1 text-sm text-mute hover:text-ink"
+            className="flex items-center justify-center gap-2 pt-1 text-sm text-white/50 hover:text-bone"
           >
             <MessageCircle className="size-4" /> Ask a question about this product
           </a>
         </div>
       )}
 
-      <ul className="space-y-3 border-t border-line pt-6 text-[0.95rem]">
+      <ul className="space-y-3 border-t border-white/10 pt-6 text-[0.95rem]">
         <li className="flex items-start gap-3">
           <Truck className="mt-0.5 size-5 shrink-0" /> {site.shipping}
         </li>

@@ -8,21 +8,20 @@
 export const site = {
   name: "AFROBIAN HUB",
   shortName: "AFROBIAN",
-  tagline: "Streetwear & creator culture. Morocco to the world.",
+  tagline: "Protect your peace — out loud. Morocco to the world.",
   description:
     "AFROBIAN HUB is an independent streetwear and creator culture platform from Morocco. Shop men's and women's drops, meet the creators, read the culture — order directly on WhatsApp or Instagram.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://afrobianhub.example",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://afrobian-hub.vercel.app",
   locale: "en",
   currency: "MAD",
 
-  /** International format, digits only, no "+" — e.g. 2126XXXXXXXX. PLACEHOLDER. */
-  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "212600000000",
-  /** Brand Instagram handle without "@". PLACEHOLDER. */
-  instagramHandle: process.env.NEXT_PUBLIC_INSTAGRAM_HANDLE ?? "afrobianhub",
-  /** Brand TikTok handle without "@". PLACEHOLDER. */
-  tiktokHandle: process.env.NEXT_PUBLIC_TIKTOK_HANDLE ?? "afrobianhub",
-  /** PLACEHOLDER. */
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@afrobianhub.example",
+  /** International format, digits only, no "+". */
+  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "212634311130",
+  /** Brand Instagram handle without "@". */
+  instagramHandle: process.env.NEXT_PUBLIC_INSTAGRAM_HANDLE ?? "afrobian.hub",
+  /** Brand TikTok handle without "@". */
+  tiktokHandle: process.env.NEXT_PUBLIC_TIKTOK_HANDLE ?? "blessed.afrobian",
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "afrobian.travel@gmail.com",
 
   baseLocation: "Morocco",
   shipping: "Shipping across Morocco · Worldwide on request",
@@ -42,6 +41,7 @@ export const mainNav: NavItem[] = [
   { label: "Women", href: "/women", note: "Her rotation" },
   { label: "Creators", href: "/creators", note: "The crew" },
   { label: "Culture", href: "/culture", note: "Stories" },
+  { label: "Community", href: "/#community", note: "The 530K" },
   { label: "About", href: "/about", note: "Who we are" },
   { label: "Contact", href: "/contact", note: "Talk to us" },
 ];

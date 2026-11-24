@@ -22,8 +22,8 @@ export default function CreatorsPage() {
         title="The Crew"
         intro={<p>Dancers, stylists, photographers, DJs. Every creator gets a profile with their story, their picks from each drop and direct links to follow them.</p>}
       >
-        <p className="rounded-xl bg-mist p-5 text-[0.95rem] text-mute">
-          We&apos;re onboarding our first roster. The profiles below are <strong className="font-medium text-ink">placeholder slots</strong> — no real accounts are linked yet.
+        <p className="rounded-xl bg-coal p-5 text-[0.95rem] text-white/50">
+          We&apos;re onboarding our first roster. The profiles below are <strong className="font-medium text-bone">placeholder slots</strong> — no real accounts are linked yet.
         </p>
       </PageHero>
 
@@ -41,7 +41,7 @@ export default function CreatorsPage() {
 
       <section className="pb-20">
         <Container>
-          <div className="rounded-2xl bg-blaze px-6 py-12 sm:px-12 sm:py-16">
+          <div className="border border-line bg-coal px-6 py-12 sm:px-12 sm:py-16">
             <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
               <h2 className="display text-6xl sm:text-8xl lg:col-span-7">Join the roster</h2>
               <div className="lg:col-span-5">

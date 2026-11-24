@@ -18,10 +18,10 @@ export function Container({ className, children, ...props }: ComponentProps<"div
 type Variant = "dark" | "light" | "blaze" | "outline" | "outline-light";
 
 const variants: Record<Variant, string> = {
-  dark: "bg-ink text-white hover:bg-ink/75",
-  light: "bg-white text-ink hover:bg-white/80",
+  dark: "bg-blaze text-ink hover:bg-blaze-deep",
+  light: "bg-bone text-ink hover:bg-white",
   blaze: "bg-blaze text-ink hover:bg-blaze-deep",
-  outline: "border border-line bg-transparent text-ink hover:border-ink",
+  outline: "border border-white/25 bg-transparent text-bone hover:border-bone",
   "outline-light": "border border-white/60 bg-transparent text-white hover:border-white",
 };
 
@@ -89,14 +89,14 @@ export function Button({ variant = "dark", size = "md", icon, className, childre
 export function SectionHeader({ title, action, className }: { title: ReactNode; action?: ReactNode; className?: string }) {
   return (
     <div className={cn("mb-6 flex items-end justify-between gap-4 sm:mb-8", className)}>
-      <h2 className="text-2xl font-medium tracking-tight sm:text-[1.75rem]">{title}</h2>
+      <h2 className="display text-4xl sm:text-5xl">{title}</h2>
       {action}
     </div>
   );
 }
 
 export function Badge({ children, tone = "blaze", className }: { children: ReactNode; tone?: "blaze" | "ink" | "white"; className?: string }) {
-  const tones = { blaze: "bg-blaze text-ink", ink: "bg-ink text-white", white: "bg-white text-ink" };
+  const tones = { blaze: "bg-blaze text-ink", ink: "bg-ink text-bone", white: "bg-bone text-ink" };
   return <span className={cn("inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium", tones[tone], className)}>{children}</span>;
 }
 
@@ -126,9 +126,10 @@ export function Marquee({ items, className, duration = 30, separator = "·" }: {
 /* ------------------------------------------------------------------ */
 export function Wordmark({ className }: { className?: string }) {
   return (
-    <span className={cn("display inline-flex items-center gap-1 text-[1.5rem] leading-none", className)}>
-      AFROBIAN
-      <span className="rounded-[3px] bg-blaze px-1 py-0.5 text-[0.6em] leading-none text-ink">HUB</span>
+    <span className={cn("inline-flex flex-col items-center leading-none", className)} aria-label="AFROBIAN HUB">
+      <span className="pl-[0.42em] text-[0.95em] font-medium tracking-[0.42em]">AFROBIAN</span>
+      <span aria-hidden className="mt-[0.35em] block h-px w-[3.4em] bg-blaze" />
+      <span className="mt-[0.35em] pl-[0.4em] text-[0.55em] tracking-[0.4em] text-bone/55">HUB</span>
     </span>
   );
 }

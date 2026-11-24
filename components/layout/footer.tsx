@@ -8,10 +8,10 @@ import { CurrentYear } from "./current-year";
 
 export function Footer() {
   return (
-    <footer className="bg-ink text-white">
+    <footer className="border-t border-line bg-ink text-bone">
       <Container className="grid gap-12 py-14 lg:grid-cols-12 lg:py-16">
         <div className="lg:col-span-4">
-          <Wordmark className="text-3xl" />
+          <Wordmark className="text-xl" />
           <p className="mt-4 max-w-xs text-sm text-white/60">{site.tagline}</p>
           <div className="mt-6 flex gap-2">
             {[
@@ -25,7 +25,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${site.name} on ${label}`}
-                className="grid size-10 place-items-center rounded-full bg-white/10 transition-colors hover:bg-white hover:text-ink"
+                className="grid size-10 place-items-center rounded-full bg-white/10 transition-colors hover:bg-blaze hover:text-ink"
               >
                 <Icon size={18} />
               </a>

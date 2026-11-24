@@ -11,7 +11,7 @@ import { cn, Marquee, Wordmark } from "@/components/ui/primitives";
 import { InstagramIcon, TikTokIcon, WhatsAppIcon } from "@/components/ui/brand-icons";
 
 const ease = [0.22, 1, 0.36, 1] as const;
-const desktopNav = mainNav.filter((n) => ["/men", "/women", "/shop", "/creators", "/culture"].includes(n.href));
+const desktopNav = mainNav.filter((n) => ["/shop", "/men", "/women", "/culture", "/#community"].includes(n.href));
 
 function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(href + "/");
@@ -28,8 +28,8 @@ function DesktopNav({ activePath }: { activePath?: string }) {
               href={item.href}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "relative py-2 text-[0.95rem] font-medium transition-colors hover:text-mute",
-                active && "after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:bg-ink",
+                "relative py-2 text-[0.95rem] font-medium transition-colors hover:text-white/60",
+                active && "after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:bg-blaze",
               )}
             >
               {item.label}
@@ -76,7 +76,7 @@ export function Header() {
   return (
     <>
       {/* promo bar */}
-      <div className="bg-mist py-2 text-center text-[0.8rem] font-medium">
+      <div className="bg-blaze py-2 text-center text-[0.75rem] font-medium tracking-[0.18em] text-ink uppercase">
         <Marquee
           className="sm:hidden"
           items={["Order on WhatsApp or Instagram", "Delivery across Morocco", "Worldwide on request"]}
@@ -87,7 +87,7 @@ export function Header() {
         </p>
       </div>
 
-      <header className="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-ink/90 backdrop-blur">
         <nav aria-label="Main" className="mx-auto grid h-16 max-w-[1920px] grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-9 lg:px-12">
           <Link href="/" aria-label={`${site.name} — home`} className="justify-self-start">
             <Wordmark />
@@ -103,7 +103,7 @@ export function Header() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="AFROBIAN HUB on Instagram"
-              className="hidden size-10 place-items-center rounded-full transition-colors hover:bg-mist sm:grid"
+              className="hidden size-10 place-items-center rounded-full transition-colors hover:bg-white/10 sm:grid"
             >
               <InstagramIcon size={22} />
             </a>
@@ -111,7 +111,7 @@ export function Header() {
               href={generalWhatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-1 hidden h-10 items-center gap-2 rounded-full bg-ink px-4 text-sm font-medium text-white transition-colors hover:bg-ink/75 sm:inline-flex"
+              className="ml-1 hidden h-10 items-center gap-2 rounded-full bg-blaze px-4 text-sm font-medium text-ink transition-colors hover:bg-blaze-deep sm:inline-flex"
             >
               <WhatsAppIcon size={18} /> Order
             </a>
@@ -121,7 +121,7 @@ export function Header() {
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label="Open menu"
-              className="grid size-10 place-items-center rounded-full transition-colors hover:bg-mist lg:hidden"
+              className="grid size-10 place-items-center rounded-full transition-colors hover:bg-white/10 lg:hidden"
             >
               <Menu className="size-6" />
             </button>
@@ -149,14 +149,14 @@ export function Header() {
               role="dialog"
               aria-modal="true"
               aria-label="Menu"
-              className="fixed inset-y-0 right-0 z-[70] flex w-[88vw] max-w-sm flex-col bg-white lg:hidden"
+              className="fixed inset-y-0 right-0 z-[70] flex w-[88vw] max-w-sm flex-col bg-ink lg:hidden"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.45, ease }}
             >
               <div className="flex h-16 items-center justify-end px-5">
-                <button type="button" onClick={closeMenu} aria-label="Close menu" className="grid size-10 place-items-center rounded-full hover:bg-mist">
+                <button type="button" onClick={closeMenu} aria-label="Close menu" className="grid size-10 place-items-center rounded-full hover:bg-white/10">
                   <X className="size-6" />
                 </button>
               </div>
@@ -171,16 +171,16 @@ export function Header() {
                 ))}
               </ul>
               <div className="space-y-3 px-7 pb-8 pt-6">
-                <p className="text-mute">Order straight from the chat — we reply fast.</p>
+                <p className="text-white/50">Order straight from the chat — we reply fast.</p>
                 <div className="flex gap-2">
-                  <a href={generalWhatsappLink} target="_blank" rel="noopener noreferrer" className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full bg-ink text-sm font-medium text-white">
+                  <a href={generalWhatsappLink} target="_blank" rel="noopener noreferrer" className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full bg-blaze text-sm font-medium text-ink">
                     <WhatsAppIcon size={18} /> WhatsApp
                   </a>
-                  <a href={socials.instagramDm} target="_blank" rel="noopener noreferrer" className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full border border-line text-sm font-medium">
+                  <a href={socials.instagramDm} target="_blank" rel="noopener noreferrer" className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full border border-white/10 text-sm font-medium">
                     <InstagramIcon size={18} /> Instagram
                   </a>
                 </div>
-                <a href={socials.tiktok} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 pt-2 text-sm text-mute">
+                <a href={socials.tiktok} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 pt-2 text-sm text-white/50">
                   <TikTokIcon size={16} /> Follow on TikTok
                 </a>
               </div>

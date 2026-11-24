@@ -27,19 +27,19 @@
     <mask id="halo-campaignwide"><rect width="100%" height="100%" fill="url(#fade-campaignwide)"/></mask>
   </defs><rect width="2400" height="1100" fill="#080808"/>
   <g transform="translate(2160 572) rotate(8) scale(0.95) translate(-400 -490)" filter="url(#drop-campaignwide)">
-    <path d="M330 380 Q330 210 400 210 Q470 210 470 380" stroke="#F2EEE7" stroke-width="22" fill="none"/>
+    <path d="M330 380 Q330 210 400 210 Q470 210 470 380" stroke="#EDE6DA" stroke-width="22" fill="none"/>
     <path d="M330 380 Q330 210 400 210 Q470 210 470 380" stroke="#000" stroke-opacity="0.25" stroke-width="22" fill="none"/>
-    <rect x="235" y="360" width="330" height="420" fill="#F2EEE7"/>
+    <rect x="235" y="360" width="330" height="420" fill="#EDE6DA"/>
     <rect x="235" y="360" width="330" height="420" fill="url(#shade-campaignwide)"/>
     <g transform="translate(400 490)"><text x="-125" y="0" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="82" fill="#080808" textLength="250" lengthAdjust="spacingAndGlyphs">BLOOCK</text><text x="-125" y="77.08" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="82" fill="#080808" textLength="250" lengthAdjust="spacingAndGlyphs">THAT</text><text x="-125" y="154.16" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="82" fill="#080808" textLength="250" lengthAdjust="spacingAndGlyphs">PITCH</text></g>
     <text x="400" y="700" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="15" letter-spacing="2" fill="#080808" text-anchor="middle">CARRY THE CULTURE</text></g>
   <g transform="translate(1752 572) rotate(-4) scale(1.25) translate(-400 -490)" filter="url(#drop-campaignwide)">
-    <path d="M318 248 Q298 128 400 112 Q502 128 482 248 Z" fill="#F2EEE7"/>
+    <path d="M318 248 Q298 128 400 112 Q502 128 482 248 Z" fill="#EDE6DA"/>
     <path d="M318 248 Q298 128 400 112 Q502 128 482 248 Z" fill="#000" fill-opacity="0.2"/>
     <path d="M345 245 Q345 170 400 160 Q455 170 455 245 Q400 262 345 245 Z" fill="#000" fill-opacity="0.55"/>
-    <path d="M330 235 Q400 268 470 235 L560 268 Q612 300 626 380 L662 690 L600 706 L560 430 L555 775 Q400 793 245 775 L240 430 L200 706 L138 690 L174 380 Q188 300 240 268 Z" fill="#F2EEE7"/>
+    <path d="M330 235 Q400 268 470 235 L560 268 Q612 300 626 380 L662 690 L600 706 L560 430 L555 775 Q400 793 245 775 L240 430 L200 706 L138 690 L174 380 Q188 300 240 268 Z" fill="#EDE6DA"/>
     <path d="M330 235 Q400 268 470 235 L560 268 Q612 300 626 380 L662 690 L600 706 L560 430 L555 775 Q400 793 245 775 L240 430 L200 706 L138 690 L174 380 Q188 300 240 268 Z" fill="url(#shade-campaignwide)"/>
-    <path d="M138 690 L200 706 L196 740 L134 724 Z M662 690 L600 706 L604 740 L666 724 Z" fill="#F2EEE7"/>
+    <path d="M138 690 L200 706 L196 740 L134 724 Z M662 690 L600 706 L604 740 L666 724 Z" fill="#EDE6DA"/>
     <path d="M138 690 L200 706 L196 740 L134 724 Z M662 690 L600 706 L604 740 L666 724 Z" fill="#000" fill-opacity="0.25"/>
     <line x1="145" y1="700" x2="145" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="156" y1="700" x2="156" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="167" y1="700" x2="167" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="178" y1="700" x2="178" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="189" y1="700" x2="189" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="611" y1="700" x2="611" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="622" y1="700" x2="622" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="633" y1="700" x2="633" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="644" y1="700" x2="644" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/><line x1="655" y1="700" x2="655" y2="735" stroke="#000" stroke-opacity="0.25" stroke-width="2"/>
     <rect x="245" y="735" width="310" height="44" fill="#000" fill-opacity="0.22"/>
@@ -49,10 +49,10 @@
     <line x1="422" y1="255" x2="430" y2="345" stroke="#080808" stroke-width="6" stroke-linecap="round"/>
     <g transform="translate(400 372) scale(1)"><text x="-110" y="0" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="66" fill="#080808" textLength="220" lengthAdjust="spacingAndGlyphs">BLOOCK</text><text x="-110" y="62.04" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="66" fill="#080808" textLength="220" lengthAdjust="spacingAndGlyphs">THAT</text><text x="-110" y="124.08" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="66" fill="#080808" textLength="220" lengthAdjust="spacingAndGlyphs">PITCH</text></g></g>
   <g transform="translate(1416 880) rotate(-10) scale(0.8) translate(-400 -490)" filter="url(#drop-campaignwide)">
-    <path d="M230 560 Q236 340 400 322 Q564 340 570 560 Z" fill="#F2EEE7"/>
+    <path d="M230 560 Q236 340 400 322 Q564 340 570 560 Z" fill="#EDE6DA"/>
     <path d="M230 560 Q236 340 400 322 Q564 340 570 560 Z" fill="url(#shade-campaignwide)"/>
     <path d="M400 322 L400 560 M318 340 Q300 450 300 560 M482 340 Q500 450 500 560" stroke="#000" stroke-opacity="0.22" stroke-width="4" fill="none"/>
-    <circle cx="400" cy="326" r="14" fill="#F2EEE7" stroke="#000" stroke-opacity="0.3" stroke-width="3"/>
-    <path d="M210 562 Q400 520 590 562 Q610 610 560 640 Q400 600 240 640 Q190 610 210 562 Z" fill="#F2EEE7"/>
+    <circle cx="400" cy="326" r="14" fill="#EDE6DA" stroke="#000" stroke-opacity="0.3" stroke-width="3"/>
+    <path d="M210 562 Q400 520 590 562 Q610 610 560 640 Q400 600 240 640 Q190 610 210 562 Z" fill="#EDE6DA"/>
     <path d="M210 562 Q400 520 590 562 Q610 610 560 640 Q400 600 240 640 Q190 610 210 562 Z" fill="#000" fill-opacity="0.3"/>
     <g transform="translate(400 402)"><text x="-75" y="0" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="46" fill="#080808" textLength="150" lengthAdjust="spacingAndGlyphs">BLOOCK</text><text x="-75" y="43.239999999999995" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="46" fill="#080808" textLength="150" lengthAdjust="spacingAndGlyphs">THAT</text><text x="-75" y="86.47999999999999" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="46" fill="#080808" textLength="150" lengthAdjust="spacingAndGlyphs">PITCH</text></g></g></svg>

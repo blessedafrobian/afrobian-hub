@@ -28,11 +28,12 @@
     <mask id="halo-bloockthatpi-c"><rect width="100%" height="100%" fill="url(#fade-bloockthatpi-c)"/></mask>
   </defs>
   <rect width="800" height="1000" fill="#080808"/>
+  
   <ellipse cx="400" cy="905" rx="253.00000000000003" ry="26" fill="#000" opacity="0.55" filter="url(#soft-bloockthatpi-c)"/>
   <g transform="translate(400 500) rotate(-6) scale(1.0120000000000002) translate(-400 -500)">
-    <path d="M330 380 Q330 210 400 210 Q470 210 470 380" stroke="#F2EEE7" stroke-width="22" fill="none"/>
+    <path d="M330 380 Q330 210 400 210 Q470 210 470 380" stroke="#EDE6DA" stroke-width="22" fill="none"/>
     <path d="M330 380 Q330 210 400 210 Q470 210 470 380" stroke="#000" stroke-opacity="0.25" stroke-width="22" fill="none"/>
-    <rect x="235" y="360" width="330" height="420" fill="#F2EEE7"/>
+    <rect x="235" y="360" width="330" height="420" fill="#EDE6DA"/>
     <rect x="235" y="360" width="330" height="420" fill="url(#shade-bloockthatpi-c)"/>
     <g transform="translate(400 490)"><text x="-125" y="0" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="82" fill="#080808" textLength="250" lengthAdjust="spacingAndGlyphs">BLOOCK</text><text x="-125" y="77.08" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="82" fill="#080808" textLength="250" lengthAdjust="spacingAndGlyphs">THAT</text><text x="-125" y="154.16" font-family="'AFB Display', Impact, 'Arial Narrow Bold', sans-serif" font-size="82" fill="#080808" textLength="250" lengthAdjust="spacingAndGlyphs">PITCH</text></g>
     <text x="400" y="700" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="15" letter-spacing="2" fill="#080808" text-anchor="middle">CARRY THE CULTURE</text></g>

@@ -54,7 +54,7 @@ export function NewsletterForm({ className }: { className?: string }) {
           aria-describedby={`${id}-msg`}
           className="h-full min-w-0 flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/50"
         />
-        <button type="submit" aria-label="Get on the list" className="grid size-9 shrink-0 place-items-center rounded-full bg-white text-ink transition-colors hover:bg-blaze">
+        <button type="submit" aria-label="Get on the list" className="grid size-9 shrink-0 place-items-center rounded-full bg-bone text-ink transition-colors hover:bg-blaze">
           <ArrowRight className="size-4" />
         </button>
       </div>

@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: PageProps<"/shop/[slug]">): P
 
 function Accordion({ title, children, open }: { title: string; children: React.ReactNode; open?: boolean }) {
   return (
-    <details className="group border-b border-line py-5" open={open}>
+    <details className="group border-b border-white/10 py-5" open={open}>
       <summary className="flex cursor-pointer list-none items-center justify-between text-lg font-medium">
         {title}
         <ChevronDown className="size-5 transition-transform group-open:rotate-180" />
@@ -71,16 +71,16 @@ export default async function ProductPage({ params }: PageProps<"/shop/[slug]">)
   return (
     <>
       <Container className="pb-16 pt-6 sm:pt-10">
-        <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-1.5 text-sm text-mute">
-          <Link href="/shop" className="hover:text-ink">
+        <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-1.5 text-sm text-white/50">
+          <Link href="/shop" className="hover:text-bone">
             Shop
           </Link>
           <span>/</span>
-          <Link href={product.gender === "women" ? "/women" : "/men"} className="hover:text-ink">
+          <Link href={product.gender === "women" ? "/women" : "/men"} className="hover:text-bone">
             {genderLabel[product.gender]}
           </Link>
           <span>/</span>
-          <span className="text-ink" aria-current="page">
+          <span className="text-bone" aria-current="page">
             {product.name}
           </span>
         </nav>
@@ -93,7 +93,7 @@ export default async function ProductPage({ params }: PageProps<"/shop/[slug]">)
           </div>
 
           <div className="lg:col-span-5 xl:col-span-4 xl:col-start-9">
-            {highlight && <p className={product.soldOut ? "font-medium text-mute" : "font-medium text-blaze-deep"}>{highlight}</p>}
+            {highlight && <p className={product.soldOut ? "font-medium text-white/50" : "font-medium text-blaze"}>{highlight}</p>}
             <h1 className="mt-1 text-3xl font-medium leading-tight tracking-tight">{product.name}</h1>
             <p className="mt-1 text-lg">{productSubtitle(product)}</p>
             <p className="mt-4 text-xl font-medium">{formatPrice(product.price)}</p>
@@ -109,7 +109,7 @@ export default async function ProductPage({ params }: PageProps<"/shop/[slug]">)
               <li>• {product.collection}</li>
             </ul>
 
-            <div className="mt-8 border-t border-line">
+            <div className="mt-8 border-t border-white/10">
               <Accordion title="Details" open>
                 <ul className="space-y-1.5">
                   {product.details.map((d) => (

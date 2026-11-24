@@ -38,25 +38,25 @@ export default async function CreatorPage({ params }: PageProps<"/creators/[slug
   return (
     <>
       <Container className="pb-16 pt-6 sm:pt-10">
-        <Link href="/creators" className="mb-6 inline-flex items-center gap-2 text-sm text-mute hover:text-ink">
+        <Link href="/creators" className="mb-6 inline-flex items-center gap-2 text-sm text-white/50 hover:text-bone">
           <ArrowLeft className="size-4" /> All creators
         </Link>
 
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
           <div className="lg:col-span-5">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-mist">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-coal">
               <Image src={creator.portrait} alt={`${creator.name} — placeholder portrait`} fill preload sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover" />
             </div>
           </div>
 
           <div className="lg:col-span-6 lg:col-start-7">
-            <p className="font-medium text-mute">
+            <p className="font-medium text-white/50">
               {creator.slot} · {creator.discipline} · {creator.city}
             </p>
             <h1 className="display mt-2 text-[clamp(3.5rem,9vw,7rem)]">{creator.name}</h1>
             <p className="mt-4 text-2xl">“{creator.tagline}”</p>
 
-            <div className="mt-6 space-y-4 text-lg leading-relaxed text-ink/80">
+            <div className="mt-6 space-y-4 text-lg leading-relaxed text-bone/80">
               {creator.bio.map((p) => (
                 <p key={p}>{p}</p>
               ))}
@@ -64,16 +64,16 @@ export default async function CreatorPage({ params }: PageProps<"/creators/[slug
 
             <div className="mt-6 flex flex-wrap gap-2">
               {creator.tags.map((t) => (
-                <span key={t} className="rounded-full bg-mist px-4 py-1.5 text-sm font-medium">
+                <span key={t} className="rounded-full bg-coal px-4 py-1.5 text-sm font-medium">
                   {t}
                 </span>
               ))}
             </div>
 
-            <dl className="mt-8 grid grid-cols-3 gap-4 border-y border-line py-5">
+            <dl className="mt-8 grid grid-cols-3 gap-4 border-y border-white/10 py-5">
               {creator.stats.map((s) => (
                 <div key={s.label}>
-                  <dt className="text-sm text-mute">{s.label}</dt>
+                  <dt className="text-sm text-white/50">{s.label}</dt>
                   <dd className="mt-1 font-medium">{s.value}</dd>
                 </div>
               ))}
@@ -82,7 +82,7 @@ export default async function CreatorPage({ params }: PageProps<"/creators/[slug
             <div className="mt-8">
               <p className="mb-3 font-medium">Follow</p>
               <SocialLinks socials={creator.socials} />
-              {creator.isPlaceholder && <p className="mt-3 text-sm text-mute">Placeholder profile — social links will be added once the creator joins.</p>}
+              {creator.isPlaceholder && <p className="mt-3 text-sm text-white/50">Placeholder profile — social links will be added once the creator joins.</p>}
             </div>
           </div>
         </div>
@@ -103,18 +103,18 @@ export default async function CreatorPage({ params }: PageProps<"/creators/[slug
         </section>
       )}
 
-      <nav aria-label="More creators" className="border-t border-line">
+      <nav aria-label="More creators" className="border-t border-white/10">
         <Container className="grid grid-cols-2 py-8">
           <Link href={`/creators/${prev.slug}`} className="group flex items-center gap-3">
             <ArrowLeft className="size-5 transition-transform group-hover:-translate-x-1" />
             <span>
-              <span className="block text-sm text-mute">Previous</span>
+              <span className="block text-sm text-white/50">Previous</span>
               <span className="text-lg font-medium">{prev.name}</span>
             </span>
           </Link>
           <Link href={`/creators/${next.slug}`} className="group flex items-center justify-end gap-3 text-right">
             <span>
-              <span className="block text-sm text-mute">Next</span>
+              <span className="block text-sm text-white/50">Next</span>
               <span className="text-lg font-medium">{next.name}</span>
             </span>
             <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />

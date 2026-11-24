@@ -38,7 +38,7 @@ export const stories: Story[] = [
       { type: "h", text: "1. Weight is everything" },
       { type: "p", text: "Swap 450 GSM fleece for a 240 GSM boxy tee. A heavy jersey still drapes like premium cotton but breathes far better than a hoodie ever will." },
       { type: "h", text: "2. Go light on top, loud at the bottom" },
-      { type: "p", text: "Let a wide nylon short or a sand cargo carry the silhouette. A clean bone tee on top keeps you cool and lets the proportions do the talking." },
+      { type: "p", text: "Let a wide nylon short or a graphite cargo carry the silhouette. A clean bone tee on top keeps you cool and lets the proportions do the talking." },
       { type: "quote", text: "The fit doesn't take a day off. It just changes fabric." },
       { type: "h", text: "3. One accent, not five" },
       { type: "list", items: ["A blaze-orange cap", "A single bold graphic", "A tote instead of a backpack — less heat on your back"] },

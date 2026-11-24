@@ -16,13 +16,13 @@ import { fileURLToPath } from "node:url";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "public", "media");
 
 const C = {
-  blaze: "#FF7900",
+  blaze: "#F25A1C",
   ink: "#080808",
-  bone: "#F2EEE7",
-  coal: "#292929",
-  sand: "#C9B79C",
-  clay: "#9C4A2A",
-  olive: "#4B5137",
+  bone: "#EDE6DA",
+  coal: "#2A2A2A",
+  sand: "#3A3A3A",
+  clay: "#B8441A",
+  olive: "#222222",
   sky: "#8FA6B2",
   smoke: "#6B6B6B",
   cream: "#E6DCCB",
@@ -271,7 +271,7 @@ const GARMENTS = {
 /* ------------------------------------------------------------------ */
 /* product shots                                                       */
 /* ------------------------------------------------------------------ */
-const STUDIO = "#F2F2F0";
+const STUDIO = "#171717";
 const SCALE = { cap: 1.35, beanie: 1.35, tote: 1.1, babytee: 1.15, shorts: 1.15 };
 
 /** Clean studio product shot: light backdrop, soft floor shadow, no overlays. */
@@ -289,6 +289,7 @@ function productShot({ id, garment, fill, accent, print, bg, cropped, wide, vari
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
   ${defs(sid)}
   <rect width="${W}" height="${H}" fill="${back}"/>
+  ${back === STUDIO ? `<radialGradient id="spot-${sid}" cx="50%" cy="46%" r="55%"><stop offset="0" stop-color="#2B2B2B"/><stop offset="1" stop-color="${STUDIO}"/></radialGradient><rect width="${W}" height="${H}" fill="url(#spot-${sid})"/>` : ""}
   ${variant !== "b" ? `<ellipse cx="400" cy="${garment === "cap" || garment === "beanie" ? 760 : 905}" rx="${230 * k}" ry="26" fill="#000" opacity="${dark ? 0.55 : 0.16}" filter="url(#soft-${sid})"/>` : ""}
   <g transform="${transform}">${g}</g>
 </svg>`;
@@ -366,24 +367,24 @@ const O = {
 
 /* hero — wide (desktop) and tall (mobile) */
 comp("hero-wide", 2400, 1350, C.blaze, (id, w, h) => `
-  ${fitWord("BLOOCK", w * 0.04, h * 0.47, w * 0.92, 520, "#EE7200")}
-  ${fitWord("THAT GUYYY", w * 0.04, h * 0.95, w * 0.92, 520, "#EE7200")}
+  ${fitWord("BLOOCK", w * 0.04, h * 0.47, w * 0.92, 520, "#DC4C12")}
+  ${fitWord("THAT GUYYY", w * 0.04, h * 0.95, w * 0.92, 520, "#DC4C12")}
   ${piece("tee", O.guyTee, w * 0.85, h * 0.46, 1.05, 9, id)}
   ${piece("hoodie", O.guyHoodie, w * 0.67, h * 0.52, 1.45, -5, id)}
   ${piece("cap", O.guyCap, w * 0.52, h * 0.8, 0.9, -12, id)}`);
 comp("hero-tall", 1200, 1600, C.blaze, (id, w, h) => `
-  ${fitWord("BLOOCK", w * 0.05, h * 0.3, w * 0.9, 420, "#EE7200")}
-  ${fitWord("THAT", w * 0.05, h * 0.6, w * 0.9, 420, "#EE7200")}
-  ${fitWord("GUYYY", w * 0.05, h * 0.9, w * 0.9, 420, "#EE7200")}
+  ${fitWord("BLOOCK", w * 0.05, h * 0.3, w * 0.9, 420, "#DC4C12")}
+  ${fitWord("THAT", w * 0.05, h * 0.6, w * 0.9, 420, "#DC4C12")}
+  ${fitWord("GUYYY", w * 0.05, h * 0.9, w * 0.9, 420, "#DC4C12")}
   ${piece("hoodie", O.guyHoodie, w * 0.55, h * 0.44, 1.4, -5, id)}
   ${piece("cap", O.guyCap, w * 0.3, h * 0.72, 0.85, -12, id)}`);
 
 /* men / women edits */
-comp("panel-men", 1000, 1250, "#E7E4DF", (id, w, h) => `
+comp("panel-men", 1000, 1250, "#141414", (id, w, h) => `
   ${piece("cargo", O.cargo, w * 0.5, h * 0.66, 1.0, 4, id)}
   ${piece("hoodie", O.guyHoodie, w * 0.47, h * 0.36, 0.95, -6, id)}
   ${piece("cap", O.guyCap, w * 0.8, h * 0.17, 0.62, 14, id)}`);
-comp("panel-women", 1000, 1250, "#1E1E1E", (id, w, h) => `
+comp("panel-women", 1000, 1250, "#1A1A1A", (id, w, h) => `
   ${piece("cargo", O.wideCargo, w * 0.5, h * 0.68, 1.0, -4, id)}
   ${piece("hoodie", O.guyCrop, w * 0.5, h * 0.33, 0.95, 5, id)}
   ${piece("babytee", { fill: C.bone, accent: C.blaze, print: "pitch" }, w * 0.18, h * 0.2, 0.5, -14, id)}`);
@@ -400,7 +401,7 @@ comp("campaign-tall", 1200, 1500, C.ink, (id, w, h) => `
 
 /* lookbook outfits */
 const outfits = [
-  { name: "lookbook-01", bg: "#D9D4CB", top: ["hoodie", O.pitchHoodie], bottom: ["cargo", O.cargo], acc: ["cap", O.pitchCap] },
+  { name: "lookbook-01", bg: "#121212", top: ["hoodie", O.pitchHoodie], bottom: ["cargo", O.cargo], acc: ["cap", O.pitchCap] },
   { name: "lookbook-02", bg: C.blaze, top: ["vest", O.vest], under: ["tee", O.pitchTee], bottom: ["cargo", { ...O.cargo, fill: C.ink }], acc: ["beanie", O.beanie] },
   { name: "lookbook-03", bg: C.coal, top: ["jacket", O.track], bottom: ["cargo", O.wideCargo], acc: ["cap", O.guyCap] },
 ];
@@ -413,7 +414,7 @@ outfits.forEach((o) =>
 );
 
 /* studio flat-lay grid (about) */
-comp("about-studio", 1600, 1000, "#ECE9E4", (id, w, h) => `
+comp("about-studio", 1600, 1000, "#141414", (id, w, h) => `
   ${piece("hoodie", O.guyHoodie, w * 0.2, h * 0.5, 0.82, -6, id)}
   ${piece("tee", O.guyTee, w * 0.43, h * 0.42, 0.62, 5, id)}
   ${piece("hoodie", O.pitchHoodie, w * 0.64, h * 0.52, 0.82, -3, id)}
@@ -427,12 +428,12 @@ comp("manifesto", 1600, 900, C.blaze, (id, w, h) => `
 
 /* culture covers */
 const covers = [
-  { name: "culture-heat-layering", bg: "#E9E4DC", items: [["tee", O.guyTee, 0.42, 0.5, 0.75, -6], ["cap", O.guyCap, 0.7, 0.42, 0.6, 10]] },
+  { name: "culture-heat-layering", bg: "#141414", items: [["tee", O.guyTee, 0.42, 0.5, 0.75, -6], ["cap", O.guyCap, 0.7, 0.42, 0.6, 10]] },
   { name: "culture-night-market", bg: C.ink, items: [["vest", O.vest, 0.42, 0.52, 0.8, -5], ["beanie", O.beanie, 0.72, 0.5, 0.6, 10]] },
   { name: "culture-inside-drop", bg: C.blaze, items: [["hoodie", O.guyHoodie, 0.38, 0.52, 0.85, -5], ["hoodie", O.pitchHoodie, 0.64, 0.52, 0.85, 5]] },
-  { name: "culture-read-a-fit", bg: "#D9D4CB", items: [["cargo", O.wideCargo, 0.62, 0.55, 0.75, 4], ["babytee", { fill: C.ink, accent: C.blaze, print: "blocked-pitch" }, 0.34, 0.45, 0.75, -6]] },
+  { name: "culture-read-a-fit", bg: "#121212", items: [["cargo", O.wideCargo, 0.62, 0.55, 0.75, 4], ["babytee", { fill: C.ink, accent: C.blaze, print: "blocked-pitch" }, 0.34, 0.45, 0.75, -6]] },
   { name: "culture-sound-block", bg: C.coal, items: [["jacket", O.track, 0.45, 0.52, 0.8, -4], ["cap", O.pitchCap, 0.74, 0.62, 0.55, 12]] },
-  { name: "culture-creator-economy", bg: "#E7E4DF", items: [["tee", O.iconTee, 0.4, 0.5, 0.8, -5], ["tote", O.tote, 0.7, 0.52, 0.65, 8]] },
+  { name: "culture-creator-economy", bg: "#141414", items: [["tee", O.iconTee, 0.4, 0.5, 0.8, -5], ["tote", O.tote, 0.7, 0.52, 0.65, 8]] },
 ];
 covers.forEach((c) =>
   comp(c.name, 1200, 900, c.bg, (id, w, h) => c.items.map(([t, o, x, y, s, r]) => piece(t, o, w * x, h * y, s, r, id)).join("")),
@@ -443,11 +444,11 @@ covers.forEach((c) =>
 /* ================================================================== */
 const creatorCards = [
   { name: "creator-01", bg: C.blaze, fg: C.ink },
-  { name: "creator-02", bg: "#E7E4DF", fg: C.ink },
+  { name: "creator-02", bg: "#141414", fg: C.ink },
   { name: "creator-03", bg: C.coal, fg: C.bone },
   { name: "creator-04", bg: C.sand, fg: C.ink },
   { name: "creator-05", bg: C.ink, fg: C.blaze },
-  { name: "creator-06", bg: "#D9D4CB", fg: C.ink },
+  { name: "creator-06", bg: "#121212", fg: C.ink },
 ];
 creatorCards.forEach((c, i) =>
   comp(`../creators/${c.name}`, 800, 1000, c.bg, (id, w, h) => `

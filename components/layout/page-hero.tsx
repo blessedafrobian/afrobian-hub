@@ -6,11 +6,11 @@ export function PageHero({ eyebrow, title, intro, children, className }: { eyebr
   return (
     <section className={cn("pb-10 pt-12 sm:pb-14 sm:pt-16", className)}>
       <Container>
-        {eyebrow && <p className="font-medium text-mute">{eyebrow}</p>}
+        {eyebrow && <p className="font-medium text-white/50">{eyebrow}</p>}
         <h1 className="display mt-2 text-[clamp(3rem,9vw,7.5rem)]">{title}</h1>
         {(intro || children) && (
           <div className="mt-6 grid gap-8 lg:grid-cols-12">
-            {intro && <div className="text-lg leading-relaxed text-ink/80 lg:col-span-6">{intro}</div>}
+            {intro && <div className="text-lg leading-relaxed text-bone/80 lg:col-span-6">{intro}</div>}
             {children && <div className="lg:col-span-5 lg:col-start-8">{children}</div>}
           </div>
         )}
