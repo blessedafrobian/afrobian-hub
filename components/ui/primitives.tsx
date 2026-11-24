@@ -126,10 +126,9 @@ export function Marquee({ items, className, duration = 30, separator = "·" }: {
 /* ------------------------------------------------------------------ */
 export function Wordmark({ className }: { className?: string }) {
   return (
-    <span className={cn("inline-flex flex-col items-center leading-none", className)} aria-label="AFROBIAN HUB">
-      <span className="pl-[0.42em] text-[0.95em] font-medium tracking-[0.42em]">AFROBIAN</span>
-      <span aria-hidden className="mt-[0.35em] block h-px w-[3.4em] bg-blaze" />
-      <span className="mt-[0.35em] pl-[0.4em] text-[0.55em] tracking-[0.4em] text-bone/55">HUB</span>
+    <span className={cn("display inline-flex items-center gap-1 text-[1.5rem] leading-none", className)}>
+      AFROBIAN
+      <span className="rounded-[3px] bg-blaze px-1 py-0.5 text-[0.6em] leading-none text-ink">HUB</span>
     </span>
   );
 }

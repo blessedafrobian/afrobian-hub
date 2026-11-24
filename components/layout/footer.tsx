@@ -11,7 +11,7 @@ export function Footer() {
     <footer className="border-t border-line bg-ink text-bone">
       <Container className="grid gap-12 py-14 lg:grid-cols-12 lg:py-16">
         <div className="lg:col-span-4">
-          <Wordmark className="text-xl" />
+          <Wordmark className="text-3xl" />
           <p className="mt-4 max-w-xs text-sm text-white/60">{site.tagline}</p>
           <div className="mt-6 flex gap-2">
             {[

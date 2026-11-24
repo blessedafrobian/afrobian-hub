@@ -38,6 +38,7 @@ export function Hero() {
           <p className="max-w-md text-lg text-bone/70">
             Heavyweight pieces for people who stopped explaining themselves. Designed in Morocco, worn by a community of 530K+.
           </p>
+          <p className="mt-3 text-lg font-medium text-blaze">Rahtek 9bel kolchi.</p>
           <div className="mt-8 flex flex-wrap gap-2">
             <ButtonLink href="/shop" size="lg">Shop the drop</ButtonLink>
             <ButtonLink href="#identity" variant="outline" size="lg">
@@ -55,10 +56,11 @@ export function Hero() {
 /* ------------------------------------------------------------------ */
 export const QUOTES = [
   "Bloock that guyyy",
-  "Protect your peace",
+  "Rahtek 9bel kolchi",
   "Soft is not weak",
-  "Standards are not too much",
+  "Nta kafi · Nti kafya",
   "Choose yourself first",
+  "Ma tsghrch rasek",
   "Morocco to the world",
 ];
 
@@ -173,12 +175,12 @@ export function Campaign() {
 /* Quotes wall — the words, and where they're printed                 */
 /* ------------------------------------------------------------------ */
 const wall = [
-  { q: "Bloock that guyyy.", note: "For the one who keeps coming back with “wyd”.", href: "/shop/bloock-that-guyyy-heavy-hoodie", on: "Heavy Hoodie" },
-  { q: "Protect your peace.", note: "Silence is also an answer.", href: "/shop/bloock-that-pitch-heavy-hoodie", on: "Pitch Hoodie", hot: true },
-  { q: "Soft is not weak.", note: "Staying gentle after everything is the flex.", href: "/shop/bloock-that-guyyy-tee", on: "Heavy Tee" },
-  { q: "Standards are not too much.", note: "The right one won't call them a problem.", href: "/shop/blocked-baby-tee", on: "Baby Tee" },
-  { q: "Choose yourself first.", note: "Not selfish. Just finally on your own side.", href: "/shop/bloock-that-guyyy-cropped-hoodie", on: "Cropped Hoodie" },
-  { q: "Morocco to the world.", note: "Where we're from is the point, not the footnote.", href: "/shop/bloock-that-guyyy-cap", on: "Cap" },
+  { q: "Bloock that guyyy.", dj: "Li ma 3refch l9ima dyalek… bloki.", note: "For the one who keeps coming back with “wyd”.", href: "/shop/bloock-that-guyyy-heavy-hoodie", on: "Heavy Hoodie" },
+  { q: "Protect your peace.", dj: "Rahtek 9bel kolchi.", note: "Silence is also an answer.", href: "/shop/bloock-that-pitch-heavy-hoodie", on: "Pitch Hoodie", hot: true },
+  { q: "Soft is not weak.", dj: "B9iti 7nin mor kolchi? Hadi hiya l9owa.", note: "Staying gentle after everything is the flex.", href: "/shop/bloock-that-guyyy-tee", on: "Heavy Tee" },
+  { q: "Standards are not too much.", dj: "Ma katbalghch. Nti 3arfa chno katsta7li.", note: "The right one won't call them a problem.", href: "/shop/blocked-baby-tee", on: "Baby Tee" },
+  { q: "Choose yourself first.", dj: "Khtar rasek… machi ananiya, ghir 3a9el.", note: "Not selfish. Just finally on your own side.", href: "/shop/bloock-that-guyyy-cropped-hoodie", on: "Cropped Hoodie" },
+  { q: "Morocco to the world.", dj: "Mn lblad… l d-dounya kamla.", note: "Where we're from is the point, not the footnote.", href: "/shop/bloock-that-guyyy-cap", on: "Cap" },
 ];
 
 export function QuotesWall() {
@@ -201,7 +203,10 @@ export function QuotesWall() {
                 href={w.href}
                 className={`group flex h-full min-h-[18rem] flex-col justify-between p-8 transition-colors sm:p-10 ${w.hot ? "bg-blaze text-ink" : "bg-ink hover:bg-coal"}`}
               >
-                <p className="display text-[clamp(2.5rem,4vw,3.75rem)]">{w.q}</p>
+                <div>
+                  <p className="display text-[clamp(2.5rem,4vw,3.75rem)]">{w.q}</p>
+                  <p className={`mt-4 text-xl font-medium ${w.hot ? "text-ink" : "text-blaze"}`}>{w.dj}</p>
+                </div>
                 <div className="mt-10">
                   <p className={w.hot ? "text-ink/70" : "text-bone/55"}>{w.note}</p>
                   <p className={`mt-4 text-sm font-medium tracking-wide ${w.hot ? "text-ink" : "text-blaze"}`}>
@@ -294,6 +299,12 @@ export function Story() {
 /* ------------------------------------------------------------------ */
 /* Community                                                           */
 /* ------------------------------------------------------------------ */
+const promise = [
+  { t: "Hna m3ak", d: "F l-hbat w f t-tal3at. Ma kat9rach had l-contenu bo7dek — 530K wa7d 3ayech nfs l-7aja." },
+  { t: "Kanchjj3ouk", d: "Kol post, kol drop, kol message: bach twli a7sen version mnk. Machi kamel, walakin kol nhar a7sen." },
+  { t: "Kandfe3 b ba3dna", d: "Community katsnned b ba3dha. Tag, partagi, w 3awen li jay mn b3dek." },
+];
+
 const stats = [
   { v: "530K+", l: "People in the community" },
   { v: "25M+", l: "Views every month" },
@@ -316,8 +327,9 @@ export function Community() {
           </Reveal>
           <Reveal className="lg:col-span-5">
             <p className="text-lg text-bone/70">
-              Wear it, post it, tag <span className="font-medium text-bone">#AFROBIANHUB</span>. Every week we feature the community on our pages — your fit could be next.
+              We don&apos;t just sell clothes. We&apos;re building the best version of ourselves — together. Wear it, post it, tag <span className="font-medium text-bone">#AFROBIANHUB</span> and your fit could be next on our pages.
             </p>
+            <p className="mt-4 text-xl font-medium text-blaze">Ma bghinach nbi3ou lik ghir 7wayej. Bghinak twli a7sen version mnk.</p>
             <div className="mt-8 flex flex-wrap gap-2">
               <ButtonLink href={socials.instagram} icon={<InstagramIcon size={18} />}>
                 Join on Instagram
@@ -329,7 +341,17 @@ export function Community() {
           </Reveal>
         </div>
 
-        <dl className="mt-16 grid border-y border-line sm:grid-cols-3">
+        <div className="mt-16 grid gap-px border border-line bg-line sm:grid-cols-3">
+          {promise.map((p, i) => (
+            <Reveal key={p.t} delay={i * 0.06} className="bg-ink p-8 sm:p-10">
+              <span className="text-sm tracking-widest text-blaze">0{i + 1}</span>
+              <h3 className="display mt-4 text-4xl">{p.t}</h3>
+              <p className="mt-3 text-bone/65">{p.d}</p>
+            </Reveal>
+          ))}
+        </div>
+
+        <dl className="mt-12 grid border-y border-line sm:grid-cols-3">
           {stats.map((s, i) => (
             <div key={s.l} className={`py-8 sm:px-8 ${i ? "border-t border-line sm:border-l sm:border-t-0" : "sm:pl-0"}`}>
               <dt className="sr-only">{s.l}</dt>
