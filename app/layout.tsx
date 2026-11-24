@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Archivo } from "next/font/google";
+import { Anton, Archivo, Noto_Kufi_Arabic } from "next/font/google";
 import "./globals.css";
 import { site, socials } from "@/lib/site";
 import { Header } from "@/components/layout/header";
@@ -10,6 +10,7 @@ import { JsonLd } from "@/components/ui/json-ld";
 
 const anton = Anton({ weight: "400", subsets: ["latin"], variable: "--font-anton", display: "swap" });
 const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo", display: "swap" });
+const kufi = Noto_Kufi_Arabic({ subsets: ["arabic"], weight: ["500", "800"], variable: "--font-kufi", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -50,7 +51,7 @@ const orgJsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${anton.variable} ${archivo.variable} antialiased`}>
+    <html lang="en" className={`${anton.variable} ${archivo.variable} ${kufi.variable} antialiased`}>
       <body className="min-h-dvh bg-ink text-bone">
         <a href="#main" className="sr-only z-[100] rounded-full bg-blaze px-5 py-3 text-sm text-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
           Skip to content
