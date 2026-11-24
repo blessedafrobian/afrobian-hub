@@ -128,7 +128,7 @@ export function Wordmark({ className }: { className?: string }) {
   return (
     <span className={cn("display inline-flex items-center gap-1 text-[1.5rem] leading-none", className)}>
       AFROBIAN
-      <span className="rounded-[3px] bg-blaze px-1 py-0.5 text-[0.6em] leading-none text-ink">HUB</span>
+      <span className="rounded-[3px] bg-[#ff7900] px-1 py-0.5 text-[0.6em] leading-none text-ink">HUB</span>
     </span>
   );
 }
